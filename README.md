@@ -11,6 +11,7 @@
 ![Tests](https://img.shields.io/badge/Tests-pytest-blue)
 
 ---
+![Coverage](https://img.shields.io/badge/Coverage-Enabled-brightgreen)
 
 AI-OS is a **production-grade agentic monitoring architecture** designed to evaluate and govern the runtime stability of enterprise AI systems.
 
