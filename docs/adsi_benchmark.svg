@@ -1,0 +1,42 @@
+<svg width="900" height="450" xmlns="http://www.w3.org/2000/svg">
+
+  <style>
+    .title { font: bold 26px sans-serif; fill: #111; }
+    .label { font: 16px sans-serif; fill: #333; }
+    .value { font: bold 14px sans-serif; fill: #111; }
+  </style>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="450" y="40" text-anchor="middle" class="title">
+    AI-OS Deployment Stability Benchmark (ADSI)
+  </text>
+
+  <!-- Axis Line -->
+  <line x1="100" y1="380" x2="820" y2="380" stroke="#444" stroke-width="2"/>
+
+  <!-- Bars -->
+  
+  <!-- Healthy -->
+  <rect x="140" y="80" width="100" height="300" fill="#2ecc71"/>
+  <text x="190" y="405" text-anchor="middle" class="label">Healthy</text>
+  <text x="190" y="70" text-anchor="middle" class="value">0.92</text>
+
+  <!-- Minor Drift -->
+  <rect x="300" y="140" width="100" height="240" fill="#3498db"/>
+  <text x="350" y="405" text-anchor="middle" class="label">Minor Drift</text>
+  <text x="350" y="130" text-anchor="middle" class="value">0.78</text>
+
+  <!-- Retrieval Degradation -->
+  <rect x="460" y="190" width="100" height="190" fill="#f39c12"/>
+  <text x="510" y="405" text-anchor="middle" class="label">Retrieval Degradation</text>
+  <text x="510" y="180" text-anchor="middle" class="value">0.64</text>
+
+  <!-- Critical -->
+  <rect x="620" y="230" width="100" height="150" fill="#e74c3c"/>
+  <text x="670" y="405" text-anchor="middle" class="label">Critical</text>
+  <text x="670" y="220" text-anchor="middle" class="value">0.51</text>
+
+</svg>
