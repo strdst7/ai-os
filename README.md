@@ -1,4 +1,19 @@
-🧠 AI-OS
+# 🧠 AI-OS  
+### AI Deployment Stability Monitoring System  
+#### Built for Enterprise AI Governance
+
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Production%20Ready-009688)
+![Status](https://img.shields.io/badge/Status-Production--Grade-success)
+![Release](https://img.shields.io/badge/Release-v1.0.0-black)
+![Tests](https://img.shields.io/badge/Tests-pytest-blue)
+
+---
+
+AI-OS is a **production-grade agentic monitoring architecture** designed to evaluate and govern the runtime stability of enterprise AI systems.
+
+It introduces a composite **AI Deployment Stability Index (ADSI)**, enforces runtime guardrails, detects degradation patterns, and performs statistical anomaly detection — bridging model performance and enterprise governance discipline.🧠 AI-OS
 
 A Production-Grade AI Deployment Stability Monitoring System
 
