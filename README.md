@@ -1,127 +1,137 @@
-<p align="center">
-  <img src="docs/architecture.png" width="100%" style="max-width:1100px; border-radius:12px;">
-</p>
+🚀 AI-OS
 
-<h1 align="center">AI-OS</h1>
-<h3 align="center">
-Production-Grade Agentic Monitoring Architecture  
-for Enterprise AI Deployment Stability
-</h3>
+Production-Grade Agentic Monitoring Architecture for Enterprise AI Deployment Stability
+
+
+
 
 <p align="center">
-  <a href="https://github.com/strdst7/ai-os/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/strdst7/ai-os/ci.yml?label=Build&logo=github">
-  </a>
-  <img src="https://img.shields.io/badge/License-MIT-blue.svg">
-  <img src="https://img.shields.io/badge/Status-Production%20Ready-success">
-  <img src="https://img.shields.io/badge/Architecture-Service%20Layer%20Design-purple">
-  <img src="https://img.shields.io/badge/Governance-Enterprise%20Grade-black">
+  <img src="docs/cover.png" width="100%" style="max-width:1200px;">
 </p>
-<img src="https://img.shields.io/badge/ADSI-Formalized%20Metric-black?style=for-the-badge">
----
 
-## 🧠 What Is AI-OS?
 
-AI-OS is a production-grade monitoring system that formalizes AI deployment stability into measurable governance-aligned metrics.
+<p align="center">
+  <img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge">
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Architecture-Service%20Layer-purple?style=for-the-badge">
+  <img src="https://img.shields.io/badge/ADSI-Formalized%20Metric-black?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Governance-Enterprise%20Grade-darkgreen?style=for-the-badge">
+</p>
 
-Unlike traditional MLOps dashboards, AI-OS introduces a structured stability index that integrates:
 
-- Alignment resilience  
-- Infrastructure health  
-- Drift sensitivity  
-- Runtime guardrails  
-- Autonomous degradation detection  
-- Observability endpoints  
 
-AI-OS bridges research rigor with enterprise production architecture.
+⸻
 
----
+🧠 Executive Overview
 
-## 🏗 System Architecture
+AI-OS is a production-grade agentic monitoring system that formalizes AI deployment stability into measurable, governance-aligned indices.
+
+It transforms enterprise AI systems from opaque experimentation layers into observable, auditable, stability-scored infrastructures.
+
+Unlike traditional dashboards, AI-OS introduces a mathematically grounded Deployment Stability Index (ADSI) integrating:
+	•	Alignment integrity
+	•	Infrastructure resilience
+	•	Drift sensitivity
+	•	Runtime guardrails
+	•	Anomaly detection
+	•	Autonomous monitoring
+
+AI-OS bridges research rigor with enterprise production engineering.
+
+⸻
+
+🏗 System Architecture
 
 <p align="center">
   <img src="docs/architecture.png" width="100%" style="max-width:1100px;">
 </p>
 
-**Figure 1.** AI-OS Enterprise Deployment Stability Monitoring Architecture integrating ADSI computation, runtime guardrails, anomaly detection, and service-layer observability.
 
----
+Figure 1. AI-OS Enterprise Deployment Stability Monitoring Architecture integrating stability scoring, runtime guardrails, anomaly detection, service-layer orchestration, and observability endpoints.
 
-## 📐 Formal Stability Model
+⸻
 
-**Alignment Health Index (AHI)**  
-AHI = 1 − Kₑ  
+🧱 Architecture Layer Breakdown
 
-**Infrastructure Health Index (IHI)**  
-IHI = Rₛ  
+Layer	Responsibility	Design Principle
+Stability Engine	Computes AHI, IHI, DHI, ADSI	Deterministic metric formalization
+Guardrail Layer	Threshold enforcement & degradation detection	Runtime safety boundaries
+Monitoring Service	Rolling history & anomaly scoring	Autonomous oversight
+FastAPI Interface	Secure API exposure	Clean service boundary
+Observability Endpoint	Real-time deployment health	Governance transparency
+External Visualization	Decision support layer	Executive clarity
 
-**Drift Health Index (DHI)**  
-DHI = 1 − (L_d + E_s) / 2  
+AI-OS follows strict separation of concerns aligned with enterprise deployment architecture standards.
 
-**AI Deployment Stability Index (ADSI)**  
-ADSI = (AHI + IHI + DHI) / 3  
+⸻
+
+📐 Formal Stability Model
+
+Alignment Health Index (AHI)
+AHI = 1 − Kₑ
+
+Infrastructure Health Index (IHI)
+IHI = Rₛ
+
+Drift Health Index (DHI)
+DHI = 1 − (L_d + E_s) / 2
+
+AI Deployment Stability Index (ADSI)
+ADSI = (AHI + IHI + DHI) / 3
 
 Where:
+	•	Kₑ = KPI alignment error
+	•	Rₛ = Retrieval quality score
+	•	L_d = Latency deviation
+	•	E_s = Embedding shift
 
-- Kₑ = KPI alignment error  
-- Rₛ = Retrieval quality score  
-- L_d = Latency deviation  
-- E_s = Embedding shift  
+This model enables quantifiable governance over AI deployment health.
 
----
+⸻
 
-## 🔍 Core Capabilities
+📊 Performance Benchmark
 
-### Stability Engine
-- ADSI computation
-- Component health scoring (AHI / IHI / DHI)
-- Weighted governance calibration
-
-### Runtime Guardrails
-- Threshold enforcement
-- Stability degradation detection
-- Z-score anomaly scoring
-
-### Monitoring Service
-- Rolling history memory
-- Autonomous evaluation agent
-- Observability state exposure
-
-### API Layer (FastAPI)
-- `/health`
-- `/agent/evaluate`
-- `/observability`
-
----
-
-## 🛡 Enterprise Design Principles
-
-- Separation of concerns (service-layer architecture)
-- Immutable stability scoring logic
-- Guardrail isolation
-- Deployment-safe API boundaries
-- Observability-first design
-- Research-formalized metric model
-
----
-## 📊 Performance Benchmark
-
-| Scenario                     | ADSI | Stability Tier |
-|------------------------------|------|----------------|
-| Healthy Deployment           | 0.92 | Stable         |
-| Minor Latency Drift          | 0.78 | Warning        |
-| Retrieval Degradation        | 0.64 | Degrading      |
-| Combined Drift + Latency     | 0.51 | Critical       |
-
-AI-OS detects compound degradation patterns earlier than traditional metric-isolated dashboards.
+Scenario	ADSI	Stability Tier
+Healthy Deployment	0.92	Stable
+Minor Latency Drift	0.78	Warning
+Retrieval Degradation	0.64	Degrading
+Compound Drift + Latency	0.51	Critical
 
 <p align="center">
   <img src="docs/adsi_benchmark.svg" width="85%">
 </p>
 
-## ⚙️ Quick Start
 
-```bash
+AI-OS detects compound degradation patterns earlier than isolated metric dashboards.
+
+⸻
+
+🛡 Core Capabilities
+
+Stability Engine
+	•	Component scoring (AHI / IHI / DHI)
+	•	ADSI computation
+	•	Weighted governance calibration
+
+Runtime Guardrails
+	•	Threshold enforcement
+	•	Stability degradation detection
+	•	Z-score anomaly scoring
+
+Autonomous Monitoring Agent
+	•	Rolling memory tracking
+	•	Periodic evaluation loop
+	•	Stability report generation
+
+Observability API
+	•	/health
+	•	/agent/evaluate
+	•	/observability
+
+⸻
+
+⚙️ Quick Start
+
 git clone https://github.com/strdst7/ai-os.git
 cd ai-os
 python -m venv venv
@@ -136,74 +146,65 @@ http://127.0.0.1:8000/docs
 
 ⸻
 
-📊 Observability Output Example
-
-{
-  "timestamp": "2026-03-03T12:30:01Z",
-  "ADSI": 0.83,
-  "stability_tier": "Stable",
-  "guardrail_flags": [],
-  "mode": "autonomous_monitor"
-}
-
-
-⸻
-
 🧪 Testing
 
 pytest
 
-	•	Stability scoring validation
-	•	Guardrail trigger simulation
-	•	API endpoint integrity
+Includes validation for:
+	•	Stability computation
+	•	Guardrail threshold triggers
+	•	API integrity
 	•	Monitoring service consistency
 
 ⸻
 
-📄 Research Publication
+🏛 Research & Publication
 
-AI-OS is accompanied by an IEEE-structured conference manuscript located in:
+AI-OS is accompanied by an IEEE-structured research manuscript formalizing:
+	•	Mathematical stability modeling
+	•	Calibration simulation methodology
+	•	Deployment resilience framework
+	•	Governance alignment architecture
+
+Located in:
 
 /paper
 
-Includes:
-	•	Formal mathematical model
-	•	Calibration simulation
-	•	Architecture formalization
-	•	Enterprise governance positioning
-
-⸻
-
-🧭 Roadmap
-	•	Drift vector analysis expansion
-	•	Adaptive ADSI weighting
-	•	Multi-model stability aggregation
-	•	Distributed telemetry ingestion
-	•	External dashboard UI
-
-⸻
-
-🤝 Contributing
-
-See CONTRIBUTING.md for development standards and governance model.
 
 ⸻
 
 🔐 Security
 
-See SECURITY.md for vulnerability reporting and disclosure policy.
+See SECURITY.md for responsible disclosure guidelines.
+
+⸻
+
+🤝 Contributing
+
+See CONTRIBUTING.md for development standards and architecture governance model.
 
 ⸻
 
 📜 License
 
-MIT License © 2026 AI-OS Initiative
+MIT License © 2026
 
 ⸻
 
-🏛 Positioning Statement
+🎯 Strategic Positioning
 
-AI-OS is built for enterprise AI governance, production reliability, and research-grade deployment stability modeling.
+AI-OS is not a dashboard.
+It is a deployment stability architecture.
 
-It is not a dashboard.
-It is a stability architecture.
+Built for enterprise AI governance, production reliability, and research-grade operational oversight.
+
+⸻
+
+<p align="center">
+  <sub>
+  Designed & Architected by  
+  <strong>Nur Amirah Mohd Kamil</strong>  
+  AI Product Systems Strategist | Enterprise AI Deployment Architecture
+  </sub>
+</p>
+
