@@ -31,18 +31,13 @@ Unlike traditional MLOps monitoring, AI-OS introduces deployment-alignment metri
 
 ⸻
 
----
-
-## 🏗 System Architecture Overview
-
-AI-OS follows a layered service-oriented monitoring architecture with an agentic stability evaluation loop.
+## 🏗 System Architecture
 
 <p align="center">
-  <img src="docs/AI_OS_Enterprise_With_Metrics_Overlay.png" width="900">
+  <img src="docs/architecture.png" width="900">
 </p>
 
-*Figure 1. Enterprise AI-OS monitoring architecture with metric overlay.*
-
+**Figure 1.** AI-OS Enterprise Monitoring Architecture.
 ⸻
 
 📐 Formal Stability Model
