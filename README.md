@@ -5,7 +5,8 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-Production%20Ready-009688)
-![Status](https://img.shields.io/badge/Status-Production--Grade-success)
+![Architecture](https://img.shields.io/badge/Architecture-Service%20Layered-blueviolet)
+![Monitoring](https://img.shields.io/badge/Monitoring-Agentic-orange)
 ![Release](https://img.shields.io/badge/Release-v1.0.0-black)
 ![Tests](https://img.shields.io/badge/Tests-pytest-blue)
 
