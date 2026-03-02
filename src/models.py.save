@@ -1,0 +1,10 @@
+Last login: Wed Feb 25 05:05:09 on ttys002from pydantic import BaseModel 
+vstrdvst@MIVA ai-os % nano src/models.py vstrdvst@MIVA ai-os % touch 
+src/__init__.py class Telemetry(BaseModel): vstrdvst@MIVA ai-os % nano 
+src/main.py latency_dev: float vstrdvst@MIVA ai-os % uvicorn src.main:app 
+--reload token_volatility: float zsh: command not found: uvicorn 
+retrieval_score: float vstrdvst@MIVA ai-os % python -m uvicorn 
+src.main:app --reload embedding_shift: float zsh: command not found: 
+python kpi_error: float vstrdvst@MIVA ai-os % python -m uvicorn 
+src.main:app --reload zsh: command not found: python vstrdvst@MIVA ai-os % 
+source venv/bin/activate
