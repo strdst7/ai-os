@@ -1,0 +1,52 @@
+from fastapi import FastAPI, Depends
+from src.auth import verify_api_key
+from src.stability_engine import calculate_ahi, calculate_ihi, calculate_dhi, calculate_adsi
+
+app = FastAPI()
+
+# Example in-memory storage (temporary for demo)
+latest_metfrom fastapi import FastAPI, Depends
+from src.models import Telemetry
+from src.stability_engine import (
+    calculate_ahi,
+    calculate_ihi,
+    calculate_dhi,
+    calculate_adsi
+)
+from src.guardrails import evaluate_guardrails
+from src.auth import verify_api_key
+
+app = FastAPI(title="AI-OS Deployment Stability Monitor")
+
+
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
+
+
+@app.post("/telemetry", dependencies=[Depends(verify_api_key)])
+def ingest_telemetry(data: Telemetry):
+    ahi = calculate_ahi(data.kpi_error)
+    ihi = calculate_ihi(
+        data.latency_dev,
+        data.token_volatility,
+        data.retrieval_score
+    )
+    dhi = calculate_dhi(data.embedding_shift)
+
+    adsi = calculate_adsi(ahi, ihi, dhi)
+
+    events = evaluate_guardrails(
+        adsi,
+        data.latency_dev,
+        data.embedding_shift,
+        data.token_volatility
+    )
+
+    return {
+        "AHI": ahi,
+        "IHI": ihi,
+        "DHI": dhi,
+        "ADSI": adsi,
+        "Triggered_Events": events
+    }
