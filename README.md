@@ -38,25 +38,28 @@ Unlike traditional MLOps monitoring, AI-OS introduces deployment-alignment metri
   <img src="docs/architecture.png" width="900">
 </p>
 
-**Figure 1.** AI-OS Enterprise Monitoring Architecture.
+**Figure 1.** AI-OS Enterprise Deployment Stability Monitoring Architecture integrating ADSI computation, runtime guardrails, and autonomous observability services.
 
+## 📐 Formal Stability Model
 
-📐 Formal Stability Model
+**Alignment Health Index (AHI)**  
+AHI = 1 − Kₑ  
 
-AHI = 1 - K_e
+**Infrastructure Health Index (IHI)**  
+IHI = Rₛ  
 
-IHI = R_s
+**Drift Health Index (DHI)**  
+DHI = 1 − (L_d + E_s) / 2  
 
-DHI = 1 - \frac{L_d + E_s}{2}
-
-ADSI = \frac{AHI + IHI + DHI}{3}
+**AI Deployment Stability Index (ADSI)**  
+ADSI = (AHI + IHI + DHI) / 3  
 
 Where:
-	•	K_e = KPI alignment error
-	•	R_s = Retrieval quality
-	•	L_d = Latency deviation
-	•	E_s = Embedding shift
 
+- Kₑ = KPI alignment error  
+- Rₛ = Retrieval quality score  
+- L_d = Latency deviation  
+- E_s = Embedding shift  
 ⸻
 
 🔎 Monitoring Capabilities
