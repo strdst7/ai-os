@@ -33,12 +33,13 @@ Unlike traditional MLOps monitoring, AI-OS introduces deployment-alignment metri
 
 ## 🏗 System Architecture
 
+
 <p align="center">
   <img src="docs/architecture.png" width="900">
 </p>
 
 **Figure 1.** AI-OS Enterprise Monitoring Architecture.
-⸻
+
 
 📐 Formal Stability Model
 
