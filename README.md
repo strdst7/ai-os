@@ -1,210 +1,317 @@
-🚀 AI-OS
-
-Production-Grade Agentic Monitoring Architecture for Enterprise AI Deployment Stability
-
-
-
-
 <p align="center">
   <img src="docs/cover.png" width="100%" style="max-width:1200px;">
 </p>
 
+<p align="center">
+
+# AI-OS  
+### Stability-Centric Supervisory Architecture for Enterprise AI Deployments
+
+</p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge">
-  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge">
-  <img src="https://img.shields.io/badge/Architecture-Service%20Layer-purple?style=for-the-badge">
-  <img src="https://img.shields.io/badge/ADSI-Formalized%20Metric-black?style=for-the-badge">
-  <img src="https://img.shields.io/badge/Governance-Enterprise%20Grade-darkgreen?style=for-the-badge">
+
+![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)
+![Python](https://img.shields.io/badge/python-3.9%2B-blue)
+![Build](https://img.shields.io/badge/build-passing-brightgreen)
+![API](https://img.shields.io/badge/API-FastAPI-green)
+![Research](https://img.shields.io/badge/research-AI%20deployment%20stability-purple)
+![Status](https://img.shields.io/badge/project-active-success)
+![DOI](https://img.shields.io/badge/DOI-coming%20soon-blue)
+
+</p>
+
+<p align="center">
+
+Enterprise-grade monitoring framework for evaluating the **operational stability of AI deployments** using telemetry-driven stability metrics, guardrail monitoring, and agentic evaluation loops.
+
 </p>
 
 
+AI-OS
+
+Stability-Centric Supervisory Architecture for Enterprise AI Deployments
+
+AI-OS is a monitoring and supervisory framework designed to evaluate and maintain the operational stability of production AI systems.
+
+Unlike traditional monitoring tools that focus only on infrastructure metrics, AI-OS introduces a stability-centric evaluation model combining alignment signals, infrastructure health, and deployment reliability into a unified stability score.
+
+The system enables continuous monitoring, guardrail-based risk detection, and agentic stability evaluation for deployed AI services.
 
 ⸻
 
-🧠 Executive Overview
+---
 
-AI-OS is a production-grade agentic monitoring system that formalizes AI deployment stability into measurable, governance-aligned indices.
-
-It transforms enterprise AI systems from opaque experimentation layers into observable, auditable, stability-scored infrastructures.
-
-Unlike traditional dashboards, AI-OS introduces a mathematically grounded Deployment Stability Index (ADSI) integrating:
-	•	Alignment integrity
-	•	Infrastructure resilience
-	•	Drift sensitivity
-	•	Runtime guardrails
-	•	Anomaly detection
-	•	Autonomous monitoring
-
-AI-OS bridges research rigor with enterprise production engineering.
-
-⸻
-
-🏗 System Architecture
+## System Architecture
 
 <p align="center">
-  <img src="docs/architecture.png" width="100%" style="max-width:1100px;">
+<img src="docs/architecture.png" width="900">
 </p>
 
+<p align="center">
+AI-OS supervises deployed AI systems by ingesting operational telemetry, evaluating stability metrics, and enforcing guardrail monitoring to detect deployment degradation.
+</p>
 
-Figure 1. AI-OS Enterprise Deployment Stability Monitoring Architecture integrating stability scoring, runtime guardrails, anomaly detection, service-layer orchestration, and observability endpoints.
-
-⸻
-
-🧱 Architecture Layer Breakdown
-
-Layer	Responsibility	Design Principle
-Stability Engine	Computes AHI, IHI, DHI, ADSI	Deterministic metric formalization
-Guardrail Layer	Threshold enforcement & degradation detection	Runtime safety boundaries
-Monitoring Service	Rolling history & anomaly scoring	Autonomous oversight
-FastAPI Interface	Secure API exposure	Clean service boundary
-Observability Endpoint	Real-time deployment health	Governance transparency
-External Visualization	Decision support layer	Executive clarity
-
-AI-OS follows strict separation of concerns aligned with enterprise deployment architecture standards.
+---
 
 ⸻
 
-📐 Formal Stability Model
+System Overview
 
-Alignment Health Index (AHI)
-AHI = 1 − Kₑ
+AI-OS operates as a supervisory monitoring layer positioned above deployed AI systems.
 
-Infrastructure Health Index (IHI)
-IHI = Rₛ
+The platform ingests operational telemetry and evaluates deployment health through a composite stability metric.
 
-Drift Health Index (DHI)
-DHI = 1 − (L_d + E_s) / 2
 
-AI Deployment Stability Index (ADSI)
+⸻
+
+Key Capabilities
+
+Stability Monitoring
+
+AI-OS evaluates deployment health using a composite metric:
+
 ADSI = (AHI + IHI + DHI) / 3
 
 Where:
-	•	Kₑ = KPI alignment error
-	•	Rₛ = Retrieval quality score
-	•	L_d = Latency deviation
-	•	E_s = Embedding shift
 
-This model enables quantifiable governance over AI deployment health.
+Metric	Description
+AHI	Alignment Health Index
+IHI	Infrastructure Health Index
+DHI	Deployment Health Index
+ADSI	AI Deployment Stability Index
 
-⸻
-
-📊 Performance Benchmark
-
-Scenario	ADSI	Stability Tier
-Healthy Deployment	0.92	Stable
-Minor Latency Drift	0.78	Warning
-Retrieval Degradation	0.64	Degrading
-Compound Drift + Latency	0.51	Critical
-
-<p align="center">
-  <img src="docs/adsi_benchmark.svg" width="85%">
-</p>
-
-
-AI-OS detects compound degradation patterns earlier than isolated metric dashboards.
+This metric enables continuous evaluation of deployment reliability.
 
 ⸻
 
-🛡 Core Capabilities
+Guardrail-Based Risk Detection
 
-Stability Engine
-	•	Component scoring (AHI / IHI / DHI)
-	•	ADSI computation
-	•	Weighted governance calibration
+AI-OS monitors operational thresholds including:
+	•	inference latency deviations
+	•	embedding drift signals
+	•	retrieval quality degradation
+	•	token usage volatility
+	•	infrastructure instability
 
-Runtime Guardrails
-	•	Threshold enforcement
-	•	Stability degradation detection
-	•	Z-score anomaly scoring
+When thresholds are exceeded, the system generates stability risk alerts.
 
-Autonomous Monitoring Agent
-	•	Rolling memory tracking
-	•	Periodic evaluation loop
-	•	Stability report generation
+⸻
+
+Agentic Monitoring Loop
+
+AI-OS introduces an autonomous evaluation cycle.
+
+The monitoring agent periodically:
+	1.	collects telemetry
+	2.	evaluates stability metrics
+	3.	detects anomalies
+	4.	generates stability reports
+
+This enables continuous supervision of AI deployments.
+
+⸻
 
 Observability API
-	•	/health
-	•	/agent/evaluate
-	•	/observability
+
+AI-OS exposes a monitoring API allowing external dashboards or orchestration tools to access stability metrics.
+
+Example endpoints:
+
+/health
+/agent/evaluate
+/observability
+
+These endpoints provide deployment telemetry, stability scores, and guardrail alerts.
 
 ⸻
 
-⚙️ Quick Start
+Architecture Layers
 
-git clone https://github.com/strdst7/ai-os.git
-cd ai-os
-python -m venv venv
-source venv/bin/activate
+Layer	Responsibility
+Telemetry Ingestion	Collect deployment metrics
+Stability Engine	Compute ADSI stability score
+Guardrail System	Detect operational risk signals
+Agent Monitoring	Evaluate stability autonomously
+Observability API	Expose monitoring metrics
+
+
+⸻
+
+Performance Evaluation
+
+AI-OS includes benchmark experiments demonstrating improvements in deployment monitoring efficiency.
+
+Detection Latency
+
+AI-OS reduces detection latency for deployment degradation events.
+
+⸻
+
+Anomaly Detection Performance
+
+Experimental results show strong anomaly detection performance with high AUC values.
+
+⸻
+
+Deployment Cost Impact
+
+Simulation experiments indicate that early detection of deployment instability can significantly reduce operational costs.
+
+⸻
+
+Stability Timeline Visualization
+
+The following visualization illustrates how AI-OS detects degradation events across a deployment lifecycle.
+
+The system detects early stability decline and triggers monitoring alerts before critical system failures occur.
+
+⸻
+
+System Design Principles
+
+AI-OS is built around several architectural principles.
+
+Stability-First Design
+
+The system prioritizes operational stability monitoring over purely model-centric evaluation metrics.
+
+⸻
+
+Observability-Driven Architecture
+
+Telemetry signals are continuously analyzed to detect:
+	•	deployment degradation
+	•	infrastructure anomalies
+	•	performance drift
+
+⸻
+
+Guardrail-Based Monitoring
+
+Operational thresholds ensure AI systems remain within safe deployment boundaries.
+
+⸻
+
+Agentic Evaluation
+
+The monitoring service performs continuous automated evaluation of system health.
+
+⸻
+
+Modular Architecture
+
+AI-OS is designed as a modular platform composed of:
+
+Telemetry ingestion
+Stability engine
+Guardrail evaluation
+Monitoring service
+Observability API
+
+This architecture allows the system to integrate with multiple AI deployment stacks.
+
+⸻
+
+Reproducibility
+
+The repository includes artifacts enabling reproducible evaluation.
+
+Artifact	Description
+Telemetry dataset	Synthetic deployment metrics
+Benchmark charts	Evaluation results
+Reproducibility notebook	Experimental analysis
+API service	Monitoring interface
+Unit tests	System validation
+
+These artifacts support independent verification of the stability monitoring methodology.
+
+⸻
+
+Getting Started
+
+Install Dependencies
+
 pip install -r requirements.txt
-uvicorn src.main:app --reload
-
-Access:
-
-http://127.0.0.1:8000/docs
 
 
 ⸻
 
-🧪 Testing
+Run the API
 
-pytest
-
-Includes validation for:
-	•	Stability computation
-	•	Guardrail threshold triggers
-	•	API integrity
-	•	Monitoring service consistency
-
-⸻
-
-🏛 Research & Publication
-
-AI-OS is accompanied by an IEEE-structured research manuscript formalizing:
-	•	Mathematical stability modeling
-	•	Calibration simulation methodology
-	•	Deployment resilience framework
-	•	Governance alignment architecture
-
-Located in:
-
-/paper
+python -m uvicorn src.main:app --reload
 
 
 ⸻
 
-🔐 Security
+Open API Documentation
 
-See SECURITY.md for responsible disclosure guidelines.
+http://127.0.0.1:8050/docs
 
-⸻
-
-🤝 Contributing
-
-See CONTRIBUTING.md for development standards and architecture governance model.
 
 ⸻
 
-📜 License
+Development Roadmap
 
-MIT License © 2026
+AI-OS is evolving toward a full enterprise AI deployment control layer.
+
+Phase 1 — Stability Monitoring
+
+Core stability evaluation and observability features.
+
+Phase 2 — Advanced Observability
+
+Multi-deployment monitoring and historical stability analysis.
+
+Phase 3 — Autonomous Governance
+
+Automated mitigation and deployment risk scoring.
+
+Phase 4 — Enterprise AI Operating Layer
+
+Integration with enterprise AI infrastructure ecosystems.
 
 ⸻
 
-🎯 Strategic Positioning
+Research Direction
 
-AI-OS is not a dashboard.
-It is a deployment stability architecture.
+AI-OS explores new directions in AI system reliability engineering, including:
+	•	stability metrics for AI deployments
+	•	agentic monitoring architectures
+	•	anomaly detection in AI infrastructure
+	•	deployment risk governance frameworks
 
-Built for enterprise AI governance, production reliability, and research-grade operational oversight.
+The ADSI metric introduced in this project represents an early step toward standardized evaluation of AI deployment stability.
 
 ⸻
 
-<p align="center">
-  <sub>
-  Designed & Architected by  
-  <strong>Nur Amirah Mohd Kamil</strong>  
-  AI Product Systems Strategist | Enterprise AI Deployment Architecture
-  </sub>
-</p>
+Citation
 
+If you reference this work, please cite:
+
+Nur Amirah Mohd Kamil. 
+AI-OS: Stability-Centric Supervisory Architecture for Enterprise AI Deployments.
+2026.
+
+
+⸻
+
+Author
+
+Nur Amirah Mohd Kamil
+
+AI-OS is developed as a research and engineering exploration into stability-centric AI system operations.
+
+⸻
+
+License
+
+MIT License.
+
+⸻
+
+Acknowledgement
+
+This project was developed as part of a broader exploration into enterprise AI deployment reliability and monitoring architectures.
+
+⸻
