@@ -27,14 +27,4 @@ jobs:
       - name: Run Tests with Coverage
         run: |
           pytest --cov=src --cov-report=term
-          
-          - name: Set PYTHONPATH
-          
-          run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV
-
-             - name: Set PYTHONPATH
-                      
-              run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV
-
-      - name: Run Tests with Coverage
-        run: pytest --cov=src --cov-report=term
+       
