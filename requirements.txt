@@ -3,4 +3,8 @@ uvicorn
 pydantic
 pytest
 pytest-cov
-python-dotenv
+httpx
+numpy
+pandas
+matplotlib
+scikit-learn
