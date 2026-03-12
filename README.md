@@ -340,5 +340,7 @@ MIT License
 If you use AI-OS in research, please cite:
 
 AI-OS: Stability-Centric Supervisory Architecture for Enterprise AI Deployments
+
 Nur Amirah Mohd Kamil
+
 2026
