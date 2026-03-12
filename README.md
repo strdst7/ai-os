@@ -25,7 +25,23 @@ AI-OS introduces a stability-centric supervisory architecture that provides earl
 ## Why AI-OS Matters
 
 Enterprise AI systems often degrade silently before failure due to infrastructure instability, retrieval quality drift, or latency deviations.
+---
 
+## Quick Navigation
+
+| Section | Description |
+|-------|-------------|
+| [Why AI-OS Matters](#why-ai-os-matters) | Motivation behind stability-centric AI monitoring |
+| [Research Contributions](#research-contributions) | Key innovations introduced by AI-OS |
+| [System Architecture](#system-architecture) | Overview of the AI-OS monitoring architecture |
+| [Stability Model](#stability-model) | Mathematical formulation of ADSI |
+| [Monitoring Capabilities](#monitoring-capabilities) | Runtime monitoring features |
+| [Deployment Failure Case Study](#deployment-failure-case-study) | Example of stability degradation detection |
+| [Benchmark Comparison](#benchmark-comparison) | Comparison with existing monitoring tools |
+| [Installation](#installation) | Setup instructions |
+| [API Endpoints](#api-endpoints) | Available monitoring APIs |
+| [Reproducibility](#reproducibility) | Dataset and reproducibility assets |
+| [Future Work](#future-work) | Research directions |
 ---
 ## Contents
 
@@ -299,6 +315,16 @@ Supplementary materials include:
 • Sample telemetry dataset
 
 ---
+## Future Work
+
+Future development of AI-OS will focus on:
+
+- Multi-agent orchestration for adaptive monitoring
+- Self-healing deployment pipelines
+- Reinforcement-learning-driven guardrails
+- Cross-deployment stability benchmarking
+---
+
 **License**
 
 MIT License
