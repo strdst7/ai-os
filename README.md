@@ -1,39 +1,58 @@
-<p align="center">
-  <img src="docs/cover.png" width="100%" style="max-width:1200px;">
-</p>
+# AI-OS
 
-<p align="center">
-
-# AI-OS  
 ### Stability-Centric Supervisory Architecture for Enterprise AI Deployments
 
-</p>
-
 <p align="center">
 
-![Python](https://img.shields.io/badge/python-3.9%2B-blue)
-![Build](https://img.shields.io/badge/build-passing-brightgreen)
-![API](https://img.shields.io/badge/API-FastAPI-green)
-![Research](https://img.shields.io/badge/research-AI%20deployment%20stability-purple)
-![Status](https://img.shields.io/badge/project-active-success)
-![DOI](https://img.shields.io/badge/DOI-coming%20soon-blue)
+![CI](https://github.com/strdst7/ai-os/actions/workflows/ci.yml/badge.svg)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Python](https://img.shields.io/badge/python-3.10+-blue)
+![Framework](https://img.shields.io/badge/framework-FastAPI-green)
+![Status](https://img.shields.io/badge/status-production_ready-brightgreen)
 
 </p>
-
 <p align="center">
-
-Enterprise-grade monitoring framework for evaluating the **operational stability of AI deployments** using telemetry-driven stability metrics, guardrail monitoring, and agentic evaluation loops.
-
+<img src="docs/cover.png" width="850">
 </p>
+<p align="center">
+Production-grade monitoring architecture for detecting instability and operational drift in deployed AI systems.
+</p>
+Enterprise-grade monitoring framework for evaluating the operational stability of AI deployments using telemetry-driven stability metrics, guardrail monitoring, and agentic evaluation loops.
+</p>
+
+AI-OS introduces a stability-centric supervisory architecture that provides early warning signals through the AI Deployment Stability Index (ADSI), enabling proactive detection and recovery of unstable AI deployments.
+---
+## Why AI-OS Matters
+
+Enterprise AI systems often degrade silently before failure due to infrastructure instability, retrieval quality drift, or latency deviations.
+
+---
+## Contents
+
+- Project Highlights
+- Architecture
+- Stability Model
+- Monitoring Capabilities
+- Deployment Case Study
+- Installation
+- API Usage
+- Testing
+- License
+  
 ---
 
-## System Overview
+# Project Highlights
 
-AI-OS introduces a supervisory architecture for monitoring the **stability of AI systems deployed in production environments**.
+AI-OS introduces a supervisory architecture designed to monitor **AI system stability in production environments**.
 
-The framework integrates telemetry analysis, guardrail enforcement, and runtime observability to detect and mitigate deployment instability.
+Key capabilities include:
 
-AI-OS proposes a unified stability metric called the **AI Deployment Stability Index (ADSI)**, which evaluates deployment health by combining alignment, infrastructure, and data integrity signals.
+• **AI Deployment Stability Index (ADSI)** — unified stability metric  
+• **Runtime Guardrails** — automatic anomaly detection  
+• **Observability API** — monitoring telemetry endpoints  
+• **Deployment Drift Detection** — identify system degradation  
+• **Autonomous Monitoring Agents** — evaluate system health  
+• **CI-tested architecture** — production-ready infrastructure
 
 ---
 
@@ -88,13 +107,25 @@ AI-OS enables:
 • Deployment drift monitoring  
 • Guardrail-based mitigation triggers  
 • Observability dashboards for production AI systems  
-
-Example monitoring output:‘
+Example monitoring output:
 
 ```json
 {
- "ADSI": 0.83,
- "AHI": 0.90,
- "IHI": 0.75,
- "DHI": 0.85,
-	 "status": "Stable"}
+  "ADSI": 0.83,
+  "AHI": 0.90,
+  "IHI": 0.75,
+  "DHI": 0.85,
+  "status": "Stable"
+}
+```
+
+---
+
+## Deployment Failure Case Study
+
+Enterprise AI deployments rarely fail instantly.  
+Instead, degradation occurs gradually through latency drift, retrieval quality degradation, or infrastructure instability.
+
+AI-OS detects these instability signals early through the **ADSI stability score**.
+
+**Failure → Early Detection → Recovery**
