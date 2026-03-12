@@ -11,7 +11,6 @@
 
 <p align="center">
 
-![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![Build](https://img.shields.io/badge/build-passing-brightgreen)
 ![API](https://img.shields.io/badge/API-FastAPI-green)
@@ -211,7 +210,65 @@ Observability API
 
 This architecture allows the system to integrate with multiple AI deployment stacks.
 
+## Live Observability Preview
+
+AI-OS exposes real-time deployment stability metrics through its observability endpoint.
+
+Example response from `/observability`:
+
+```json
+{
+  "ADSI": 0.83,
+  "AHI": 0.90,
+  "IHI": 0.75,
+  "DHI": 0.85,
+  "status": "Stable",
+  "alerts": []
+}
+
+---
+
+# 2️⃣ Animated Stability Timeline Visualization
+
+Add a **timeline chart** section.
+
+```markdown
+## Stability Timeline Analysis
+
+AI-OS tracks stability degradation patterns across telemetry signals.
+
+Example timeline:
+
+| Time Step | ADSI | Status |
+|----------|------|-------|
+| 1 | 0.91 | Stable |
+| 25 | 0.86 | Stable |
+| 50 | 0.81 | Warning |
+| 75 | 0.72 | Degradation |
+| 100 | 0.65 | Critical |
+
+This allows AI-OS to detect deployment instability before service failure occurs.
+
 ⸻
+## Benchmark Comparison
+
+AI-OS introduces deployment-level stability monitoring compared to traditional ML observability tools.
+
+| System | Monitoring Scope | Drift Detection | Deployment Stability Metric |
+|------|------|------|------|
+| Prometheus | Infrastructure | No | No |
+| Arize AI | Model Drift | Yes | No |
+| Evidently AI | Data Drift | Yes | No |
+| AI-OS | End-to-End Deployment | Yes | ADSI |
+
+AI-OS uniquely introduces the **AI Deployment Stability Index (ADSI)**, which integrates:
+
+• alignment reliability  
+• infrastructure stability  
+• data drift signals
+
+into a unified deployment health metric.
+______
 
 Reproducibility
 
