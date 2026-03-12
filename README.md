@@ -134,6 +134,57 @@ Monitoring Service | Tracks telemetry and historical stability |
 Observability Dashboard | Visualizes deployment health |
 
 ---
+AI-OS System Overview
+                   ┌──────────────────────────────┐
+                   │        AI Application        │
+                   │  (LLM / Agentic Workflow)   │
+                   └──────────────┬───────────────┘
+                                  │
+                                  ▼
+                   ┌──────────────────────────────┐
+                   │      FastAPI Interface       │
+                   │  /health /evaluate /metrics  │
+                   └──────────────┬───────────────┘
+                                  │
+                                  ▼
+                   ┌──────────────────────────────┐
+                   │        Stability Engine      │
+                   │                              │
+                   │  AHI – Alignment Health      │
+                   │  IHI – Infrastructure Health │
+                   │  DHI – Data Health           │
+                   │                              │
+                   │  ADSI = (AHI + IHI + DHI)/3  │
+                   └──────────────┬───────────────┘
+                                  │
+                    Stability Metrics & Scores
+                                  │
+                                  ▼
+                   ┌──────────────────────────────┐
+                   │        Guardrail Layer       │
+                   │                              │
+                   │  • Threshold enforcement     │
+                   │  • Drift detection           │
+                   │  • Anomaly scoring (Z-score) │
+                   └──────────────┬───────────────┘
+                                  │
+                         Alert / Recovery
+                                  │
+                                  ▼
+                   ┌──────────────────────────────┐
+                   │      Monitoring Service      │
+                   │                              │
+                   │  • Rolling telemetry memory  │
+                   │  • Autonomous evaluation     │
+                   │  • Stability reporting       │
+                   └──────────────┬───────────────┘
+                                  │
+                                  ▼
+                   ┌──────────────────────────────┐
+                   │  External Observability UI   │
+                   │                              │
+                   │   ADSI Dashboard & Alerts    │
+                   └──────────────────────────────┘
 
 ## Core Stability Model
 
@@ -178,7 +229,15 @@ Example monitoring output:
   "status": "Stable"
 }
 ```
+Failure Detection Timeline
 
+ADSI
+1.0 ┤ ███████████████ Stable
+0.8 ┤ ██████████ Warning
+0.6 ┤ █████ Degradation
+0.4 ┤ █ Critical
+      └────────────────────────
+       T0   T20   T40   T60   T80
 ---
 
 ## Deployment Failure Case Study
