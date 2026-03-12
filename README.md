@@ -22,9 +22,10 @@ Enterprise-grade monitoring framework for evaluating the operational stability o
 
 AI-OS introduces a stability-centric supervisory architecture that provides early warning signals through the AI Deployment Stability Index (ADSI), enabling proactive detection and recovery of unstable AI deployments.
 ---
-## Why AI-OS Matters
 
+## Why AI-OS Matters
 Enterprise AI systems often degrade silently before failure due to infrastructure instability, retrieval quality drift, or latency deviations.
+
 ---
 
 ## Quick Navigation
