@@ -72,23 +72,25 @@ Through 𝗮𝗴𝗲𝗻𝘁𝗶𝗰 𝗺𝗼𝗻𝗶𝘁𝗼𝗿𝗶𝗻𝗴 �
 This approach demonstrates how 𝘀𝘁𝗮𝗯𝗶𝗹𝗶𝘁𝘆-𝗰𝗲𝗻𝘁𝗿𝗶𝗰 𝗼𝗯𝘀𝗲𝗿𝘃𝗮𝗯𝗶𝗹𝗶𝘁𝘆 𝗰𝗮𝗻 𝘀𝗶𝗴𝗻𝗶𝗳𝗶𝗰𝗮𝗻𝘁𝗹𝘆 𝗶𝗺𝗽𝗿𝗼𝘃𝗲 𝘁𝗵𝗲 𝗿𝗲𝗹𝗶𝗮𝗯𝗶𝗹𝗶𝘁𝘆 𝗼𝗳 𝗲𝗻𝘁𝗲𝗿𝗽𝗿𝗶𝘀𝗲 𝗔𝗜 𝗱𝗲𝗽𝗹𝗼𝘆𝗺𝗲𝗻𝘁𝘀
 
 ---  
-## Quick Navigation
+## Table of Contents
 
-| Section | Description |
-|------|------|
-| Why AI-OS Exists | Motivation for stability monitoring |
-| Research Contributions | Core innovations introduced |
-| System Architecture	| AI-OS system design |
-| Stability Model	| Mathematical formulation of ADSI |
-| Monitoring Pipeline | Stability monitoring loop |
-| Deployment Failure Case Study	| Example degradation detection |
-| Benchmark Comparison	| Comparison with monitoring tools |
-| Installation	| Setup instructions |
-| API Endpoints	| Monitoring APIs |
-| Reproducibility	| Dataset and notebooks |
-| Future Work	| Research roadmap |
+- [Why AI-OS Exists](#why-ai-os-exists)
+- [Research Contributions](#research-contributions)
+- [System Architecture](#system-architecture)
+- [Architecture Legend](#architecture-legend)
+- [Stability Model](#stability-model)
+- [AI-OS Monitoring Pipeline](#ai-os-monitoring-pipeline)
+- [Deployment Failure Case Study](#deployment-failure-case-study)
+- [Benchmark Comparison](#benchmark-comparison)
+- [Installation](#installation)
+- [API Endpoints](#api-endpoints)
+- [Reproducibility](#reproducibility)
+- [Enterprise Impact](#enterprise-impact)
+- [System Performance Benchmarks](#system-performance-benchmarks)
+- [Future Work](#future-work)
+- [Key Takeaways](#key-takeaways)
 
----  
+---
 ## Why AI-OS Exists
 
 Enterprise AI deployments often fail 𝐠𝐫𝐚𝐝𝐮𝐚𝐥𝐥𝐲 𝐚𝐧𝐝 𝐬𝐢𝐥𝐞𝐧𝐭𝐥𝐲.
