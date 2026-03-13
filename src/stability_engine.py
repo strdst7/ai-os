@@ -14,7 +14,6 @@ def calculate_dhi(latency_dev, embedding_shift):
 
 
 def calculate_adsi(metrics):
-
     ahi = calculate_ahi(metrics.get("kpi_error", 0))
     ihi = calculate_ihi(metrics.get("retrieval_score", 0))
     dhi = calculate_dhi(
@@ -26,7 +25,6 @@ def calculate_adsi(metrics):
 
 
 def detect_anomaly(history):
-
     if len(history) < 3:
         return False
 
@@ -37,12 +35,10 @@ def detect_anomaly(history):
         return False
 
     z = (history[-1] - mean) / std
-
     return abs(z) > 2
 
 
 def detect_degradation(adsi):
-
     if adsi >= 0.85:
         return "stable"
     elif adsi >= 0.75:
