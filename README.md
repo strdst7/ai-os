@@ -19,13 +19,6 @@
 Production-grade monitoring architecture for detecting instability and operational drift in deployed AI systems.
 </p>
 
-
-## System Architecture
-
-AI-OS implements a stability-centric supervisory architecture designed to monitor deployed AI systems and detect operational degradation early.
-
-The architecture operates through a telemetry-driven feedback loop that continuously evaluates system health across multiple dimensions.
-
 ---
 ## Core Capabilities
 
