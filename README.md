@@ -135,7 +135,6 @@ Monitoring Service | Tracks telemetry and historical stability |
 Observability Dashboard | Visualizes deployment health |
 
 ---
-AI-OS System Overview
                    ┌──────────────────────────────┐
                    │        AI Application        │
                    │  (LLM / Agentic Workflow)   │
@@ -186,6 +185,8 @@ AI-OS System Overview
                    │                              │
                    │   ADSI Dashboard & Alerts    │
                    └──────────────────────────────┘
+
+
 
 ## Core Stability Model
 
