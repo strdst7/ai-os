@@ -45,7 +45,14 @@ def calculate_adsi(*args):
     else:
         raise ValueError("Invalid ADSI inputs")
 
-    return (ahi + ihi + dhi) / 3
+   adsi = (ahi + ihi + dhi) / 3
+
+return {
+    "AHI": ahi,
+    "IHI": ihi,
+    "DHI": dhi,
+    "ADSI": adsi
+}
 
 
 def detect_anomaly(adsi_history):
