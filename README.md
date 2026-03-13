@@ -43,8 +43,7 @@ The system proposes the **AI Deployment Stability Index (ADSI)**, a unified metr
 Through **agentic monitoring loops and guardrail mechanisms**, AI-OS enables early detection of operational degradation before production failure occurs.
 
 This work demonstrates how **stability-centric observability can significantly improve the reliability of enterprise AI deployments.**
-...
-}
+
 ---
 ## AI-OS Monitoring Pipeline
 
@@ -68,6 +67,10 @@ F --> G[Mitigation Action]
 G --> H[Deployment Recovery]
 
 H --> A
+
+
+```
+}
 ⸻
 
 Why AI-OS Exists
@@ -108,7 +111,6 @@ Installation	Setup instructions
 API Endpoints	Monitoring interface
 Reproducibility	Dataset and experiment artifacts
 Future Work	Research roadmap
-
 
 ⸻
 
