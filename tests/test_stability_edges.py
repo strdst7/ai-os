@@ -12,7 +12,7 @@ def test_adsi_upper_bound():
 
     result = calculate_adsi(metrics)
 
-    assert result["ADSI"] <= 1.0
+    assert result <= 1.0
 
 
 def test_adsi_lower_bound():
@@ -26,4 +26,4 @@ def test_adsi_lower_bound():
 
     result = calculate_adsi(metrics)
 
-    assert result["ADSI"] >= 0.0
+    assert result >= 0.0
