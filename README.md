@@ -4,7 +4,6 @@
 
 <p align="center">
   
-![CI](https://github.com/strdst7/ai-os/actions/workflows/ci.yml/badge.svg)  
 ![coverage](https://img.shields.io/badge/coverage-75%25-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Python](https://img.shields.io/badge/python-3.10+-blue)
