@@ -318,59 +318,68 @@ AI-OS uniquely introduces **deployment-level stability monitoring**.
 
 Clone repository
 
-git clone https://github.com/strdst7/ai-os.git
-cd ai-os
+𝚐𝚒𝚝 𝚌𝚕𝚘𝚗𝚎 𝚑𝚝𝚝𝚙𝚜://𝚐𝚒𝚝𝚑𝚞𝚋.𝚌𝚘𝚖/𝚜𝚝𝚛𝚍𝚜𝚝𝟽/𝚊𝚒-𝚘𝚜.𝚐𝚒𝚝
+𝚌𝚍 𝚊𝚒-𝚘𝚜
 
 Create virtual environment
 
-python -m venv venv
-source venv/bin/activate
+𝚙𝚢𝚝𝚑𝚘𝚗 -𝚖 𝚟𝚎𝚗𝚟 𝚟𝚎𝚗𝚟
+𝚜𝚘𝚞𝚛𝚌𝚎 𝚟𝚎𝚗𝚟/𝚋𝚒𝚗/𝚊𝚌𝚝𝚒𝚟𝚊𝚝𝚎
 
 Install dependencies
 
-pip install -r requirements.txt
+𝚙𝚒𝚙 𝚒𝚗𝚜𝚝𝚊𝚕𝚕 -𝚛 𝚛𝚎𝚚𝚞𝚒𝚛𝚎𝚖𝚎𝚗𝚝𝚜.𝚝𝚡𝚝
 
 Run the server
 
-uvicorn src.main:app --reload
-Prerequisites
+𝚞𝚟𝚒𝚌𝚘𝚛𝚗 𝚜𝚛𝚌.𝚖𝚊𝚒𝚗:𝚊𝚙𝚙 --𝚛𝚎𝚕𝚘𝚊𝚍
 
-Python 3.10+
+---  
+## Prerequisites
 
-FastAPI
+• Python 3.10+
 
-Uvicorn
+• FastAPI
 
-NumPy
+• Uvicorn
 
-Pandas
+• NumPy
 
-Matplotlib
+• Pandas
 
-Pytest
+• Matplotlib
 
-API Endpoints
-Endpoint	Description
-/health	system health check
-/agent/evaluate	evaluate deployment stability
-/observability	deployment telemetry metrics
-Reproducibility
+• Pytest
+
+---  
+## API Endpoints
+
+| Endpoint 	| Description |
+|---------- |------------ |
+| /health	| system health check |
+| /agent/evaluate	| evaluate deployment stability |
+| /observability	| deployment telemetry metrics |
+
+---  
+## Reproducibility
 
 Example telemetry dataset:
 
-data/sample_telemetry.json
+𝚍𝚊𝚝𝚊/𝚜𝚊𝚖𝚙𝚕𝚎_𝚝𝚎𝚕𝚎𝚖𝚎𝚝𝚛𝚢.𝚓𝚜𝚘𝚗
 
 Experiment notebook:
 
-notebooks/reproducibility_analysis.ipynb
+𝚗𝚘𝚝𝚎𝚋𝚘𝚘𝚔𝚜/𝚛𝚎𝚙𝚛𝚘𝚍𝚞𝚌𝚒𝚋𝚒𝚕𝚒𝚝𝚢_𝚊𝚗𝚊𝚕𝚢𝚜𝚒𝚜.𝚒𝚙𝚢𝚗𝚋
 
 Supplementary materials include:
 
-benchmark charts
+• benchmark charts
 
-stability timeline visualizations
+• stability timeline visualizations
 
-reproducibility notebooks
+• reproducibility notebooks
+
+---
 # Enterprise Impact
 
 AI-OS is designed to support **production AI systems operating in high-reliability environments** where stability and observability are critical.
@@ -405,35 +414,38 @@ The stability evaluation engine is designed to operate with **minimal computatio
 This enables AI-OS to function as a **lightweight supervisory layer across multiple AI deployments**.
 
 ---
-
-Future Work
+## Future Work
 
 Future development of AI-OS will focus on:
 
-multi-agent monitoring orchestration
+• multi-agent monitoring orchestration
 
-reinforcement learning guardrails
+• reinforcement learning guardrails
 
-automated deployment self-healing
+• automated deployment self-healing
 
-cross-deployment stability benchmarking
+• cross-deployment stability benchmarking
 
-License
+---
+## License
 
-MIT License
+**MIT License**
 
-Citation
+---
+## Citation
 
 If you use AI-OS in research:
 
-AI-OS: Stability-Centric Supervisory Architecture for Enterprise AI Deployments
-Nur Amirah Mohd Kamil
+ᴀɪ-ᴏꜱ: ꜱᴛᴀʙɪʟɪᴛʏ-ᴄᴇɴᴛʀɪᴄ ꜱᴜᴘᴇʀᴠɪꜱᴏʀʏ ᴀʀᴄʜɪᴛᴇᴄᴛᴜʀᴇ ꜰᴏʀ ᴇɴᴛᴇʀᴘʀɪꜱᴇ ᴀɪ ᴅᴇᴘʟᴏʏᴍᴇɴᴛꜱ
+ɴᴜʀ ᴀᴍɪʀᴀʜ ᴍᴏʜᴅ ᴋᴀᴍɪʟ
 2026
-Author
 
-Nur Amirah Mohd Kamil
 ---
+## Author
 
+𝐍𝐮𝐫 𝐀𝐦𝐢𝐫𝐚𝐡 𝐌𝐨𝐡𝐝 𝐊𝐚𝐦𝐢𝐥
+
+---
 # Key Takeaways
 
 • AI-OS introduces a **stability-centric supervisory architecture** for monitoring deployed AI systems.
@@ -445,9 +457,8 @@ Nur Amirah Mohd Kamil
 • The system illustrates a practical approach toward **stability-aware AI operations for enterprise deployments**.
 
 ---
+## Final Project Summary
 
-Final Project Summary
-
-AI-OS demonstrates how stability-centric monitoring architectures can significantly improve the reliability of enterprise AI deployments by detecting operational degradation before production failure occurs.
+AI-OS demonstrates how **stability-centric monitoring architectures can significantly improve the reliability of enterprise AI deployments** by detecting operational degradation before production failure occurs.
 
 
