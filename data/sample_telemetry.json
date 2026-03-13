@@ -1,0 +1,70 @@
+Dataset Description
+
+This dataset contains synthetic telemetry records used to simulate stability monitoring in enterprise AI deployments. The dataset was created to reproduce the stability evaluation experiments described in the AI-OS framework.
+
+Each record represents a monitoring cycle and contains normalized system metrics used to compute the AI Deployment Stability Index (ADSI).
+
+The dataset enables evaluation of:
+
+• stability degradation detection
+• anomaly detection using rolling statistics
+• composite stability modeling across subsystems
+
+⸻
+
+Dataset Structure
+
+Each telemetry record includes:
+
+Field	Description
+timestamp	Monitoring cycle timestamp
+kpi_error	KPI misalignment error rate
+retrieval_score	Retrieval system quality score
+latency_deviation	Infrastructure latency variation
+embedding_shift	Embedding drift magnitude
+
+All values are normalized between 0 and 1.
+
+⸻
+
+Dataset Size
+	•	500 simulated monitoring cycles
+	•	3 degradation phases
+
+1️⃣ Stable phase
+2️⃣ Warning phase
+3️⃣ Critical degradation phase
+
+This progression enables controlled evaluation of stability tier transitions.
+
+⸻
+
+Dataset Purpose
+
+The dataset is designed to:
+	•	reproduce ADSI calculations
+	•	validate stability tier classification
+	•	simulate compound degradation scenarios
+	•	demonstrate early failure detection compared to isolated metric monitoring
+
+⸻
+
+Example Record
+
+{
+  "timestamp": "2026-01-01T00:00:01Z",
+  "kpi_error": 0.05,
+  "retrieval_score": 0.92,
+  "latency_deviation": 0.08,
+  "embedding_shift": 0.04
+}
+
+
+⸻
+
+Dataset Location
+
+data/sample_telemetry.json
+
+GitHub Repository:
+https://github.com/strdst7/ai-os
