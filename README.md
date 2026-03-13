@@ -233,7 +233,9 @@ Example monitoring output:
 ```
 Failure Detection Timeline
 
-Failure Detection Timeline
+
+}
+```
 
 ADSI
 1.0 ┤ ███████████████ Stable
@@ -242,6 +244,7 @@ ADSI
 0.4 ┤ █ Critical
       └────────────────────────
        T0   T20   T40   T60   T80
+
 }
 ```
 ---
