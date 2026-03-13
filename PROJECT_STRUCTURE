@@ -1,0 +1,7 @@
+ # AI-OS Project Structure
+
+src/ — core monitoring system  
+docs/ — architecture diagrams and visuals  
+data/ — example telemetry datasets  
+notebooks/ — reproducibility experiments  
+tests/ — system validation tests
