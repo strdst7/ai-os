@@ -1,33 +1,29 @@
-def calculate_ahi(events: list, sleep_hours: float) -> float:
-    """Apnea-Hypopnea Index = total events / hours of sleep."""
-    if sleep_hours <= 0:
-        return 0.0
-    return len(events) / sleep_hours
-def calculate_adsi(*args):
+from src.stability_engine import calculate_adsi
 
-    if len(args) == 1 and isinstance(args[0], dict):
 
-        metrics = args[0]
+def test_adsi_upper_bound():
 
-        ahi = calculate_ahi(metrics.get("kpi_error", 0))
-        ihi = calculate_ihi(metrics.get("retrieval_score", 0))
-        dhi = calculate_dhi(
-            metrics.get("latency_dev", 0),
-            metrics.get("embedding_shift", 0),
-        )
-
-    elif len(args) == 3:
-
-        ahi, ihi, dhi = args
-
-    else:
-        raise ValueError("Invalid ADSI inputs")
-
-    adsi = (ahi + ihi + dhi) / 3
-
-    return {
-        "AHI": ahi,
-        "IHI": ihi,
-        "DHI": dhi,
-        "ADSI": adsi
+    metrics = {
+        "kpi_error": 0.0,
+        "embedding_shift": 0.0,
+        "retrieval_score": 1.0,
+        "latency_dev": 0.0
     }
+
+    result = calculate_adsi(metrics)
+
+    assert result <= 1.0
+
+
+def test_adsi_lower_bound():
+
+    metrics = {
+        "kpi_error": 1.0,
+        "embedding_shift": 1.0,
+        "retrieval_score": 0.0,
+        "latency_dev": 1.0
+    }
+
+    result = calculate_adsi(metrics)
+
+    assert result >= 0.0
