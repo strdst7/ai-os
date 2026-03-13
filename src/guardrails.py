@@ -1,23 +1,16 @@
-from src.config import GuardrailConfig
-
-
-def evaluate_guardrails(metrics: dict) -> dict:
+def evaluate_guardrails(adsi):
     """
-    Evaluate runtime stability guardrails
-    using configurable thresholds.
+    Evaluate deployment stability and return guardrail state.
     """
 
-    latency_dev = metrics.get("latency_dev", 0.0)
-    drift = metrics.get("embedding_shift", 0.0)
-    token_volatility = metrics.get("token_volatility", 0.0)
+    if adsi >= 0.85:
+        return "stable"
 
-    flags = {
-        "latency_breach": latency_dev > GuardrailConfig.LATENCY_THRESHOLD,
-        "drift_breach": drift > GuardrailConfig.DRIFT_THRESHOLD,
-        "cost_volatility_breach": token_volatility > GuardrailConfig.COST_VOLATILITY_THRESHOLD,
-    }
+    elif adsi >= 0.75:
+        return "warning"
 
-    return {
-        "flags": flags,
-        "overall_risk": any(flags.values())
-    }
+    elif adsi >= 0.65:
+        return "degrading"
+
+    else:
+        return "critical"
