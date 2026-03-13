@@ -1,40 +1,33 @@
-import numpy as np
-
-
-def calculate_ahi(kpi_error):
+def calculate_adsi(*args):
     """
-    Alignment Health Index
-    """
-    return 1 - kpi_error
+    Calculate AI Deployment Stability Index (ADSI)
 
-
-def calculate_ihi(retrieval_score):
-    """
-    Infrastructure Health Index
-    """
-    return retrieval_score
-
-
-def calculate_dhi(latency_dev, embedding_shift):
-    """
-    Drift Health Index
-    """
-    return 1 - ((latency_dev + embedding_shift) / 2)
-
-
-def calculate_adsi(metrics):
-    """
-    Composite AI Deployment Stability Index
+    Supports two formats:
+    1) calculate_adsi(metrics_dict)
+    2) calculate_adsi(ahi, ihi, dhi)
     """
 
-    kpi_error = metrics.get("kpi_error", 0)
-    retrieval_score = metrics.get("retrieval_score", 0)
-    latency_dev = metrics.get("latency_dev", 0)
-    embedding_shift = metrics.get("embedding_shift", 0)
+    # Case 1: metrics dictionary
+    if len(args) == 1 and isinstance(args[0], dict):
 
-    ahi = calculate_ahi(kpi_error)
-    ihi = calculate_ihi(retrieval_score)
-    dhi = calculate_dhi(latency_dev, embedding_shift)
+        metrics = args[0]
+
+        kpi_error = metrics.get("kpi_error", 0)
+        retrieval_score = metrics.get("retrieval_score", 0)
+        latency_dev = metrics.get("latency_dev", 0)
+        embedding_shift = metrics.get("embedding_shift", 0)
+
+        ahi = 1 - kpi_error
+        ihi = retrieval_score
+        dhi = 1 - ((latency_dev + embedding_shift) / 2)
+
+    # Case 2: ahi, ihi, dhi provided directly
+    elif len(args) == 3:
+
+        ahi, ihi, dhi = args
+
+    else:
+        raise ValueError("Invalid arguments for calculate_adsi")
 
     adsi = (ahi + ihi + dhi) / 3
 
@@ -44,37 +37,3 @@ def calculate_adsi(metrics):
         "IHI": ihi,
         "DHI": dhi
     }
-
-
-def detect_anomaly(adsi_history):
-    """
-    Detect anomaly using Z-score
-    """
-
-    if len(adsi_history) < 3:
-        return False
-
-    mean = np.mean(adsi_history)
-    std = np.std(adsi_history)
-
-    if std == 0:
-        return False
-
-    z = (adsi_history[-1] - mean) / std
-
-    return abs(z) > 2
-
-
-def detect_degradation(adsi):
-    """
-    Classify stability tier
-    """
-
-    if adsi >= 0.85:
-        return "stable"
-    elif adsi >= 0.75:
-        return "warning"
-    elif adsi >= 0.65:
-        return "degrading"
-    else:
-        return "critical"
