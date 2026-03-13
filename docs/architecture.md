@@ -36,3 +36,12 @@ Maintains telemetry history and detects anomalies.
 FastAPI exposes monitoring endpoints.
 
 ## Observability Flow
+Telemetry → Stability Engine → Guardrails → Monitoring → API
+
+## CI Validation
+
+GitHub Actions automatically runs:
+
+- pytest
+- coverage analysis
+- API integration tests
