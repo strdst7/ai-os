@@ -3,7 +3,8 @@
 ### Stability-Centric Supervisory Architecture for Enterprise AI Deployments
 
 <p align="center">
-
+  
+![coverage](https://img.shields.io/badge/coverage-75%25-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Python](https://img.shields.io/badge/python-3.10+-blue)
 ![Framework](https://img.shields.io/badge/framework-FastAPI-green)
