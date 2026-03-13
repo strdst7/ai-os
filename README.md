@@ -1,6 +1,6 @@
-AI-OS
+**AI-OS**
 
-Stability-Centric Supervisory Architecture for Enterprise AI Deployments
+**Stability-Centric Supervisory Architecture for Enterprise AI Deployments**
 
 <p align="center">
 
