@@ -1,3 +1,8 @@
+def calculate_ahi(events: list, sleep_hours: float) -> float:
+    """Apnea-Hypopnea Index = total events / hours of sleep."""
+    if sleep_hours <= 0:
+        return 0.0
+    return len(events) / sleep_hours
 def calculate_adsi(*args):
 
     if len(args) == 1 and isinstance(args[0], dict):
