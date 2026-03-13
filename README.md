@@ -123,41 +123,44 @@ The **AI Deployment Stability Index (ADSI)** aggregates multiple health indicato
 
 Where:
 
-AHI — Alignment Health Index
+• **AHI** — Alignment Health Index
 
-IHI — Infrastructure Health Index
+• **IHI** — Infrastructure Health Index
 
-DHI — Drift Health Index
+• **DHI** — Drift Health Index
 
-Agentic Monitoring Architecture
+---  
+## Agentic Monitoring Architecture
 
 AI-OS integrates monitoring agents capable of evaluating deployment health and triggering guardrail responses.
 
 Capabilities include:
 
-runtime telemetry monitoring
+• runtime telemetry monitoring
 
-anomaly detection
+• anomaly detection
 
-guardrail mitigation triggers
+• guardrail mitigation triggers
 
-stability trend evaluation
+• stability trend evaluation
 
-Deployment-Level Observability
+---  
+## Deployment-Level Observability
 
-AI-OS monitors entire AI deployment pipelines, including:
+AI-OS monitors entire **AI deployment pipelines**, including:
 
-retrieval systems
+• retrieval systems
 
-latency behavior
+• latency behavior
 
-embedding distribution shifts
+• embedding distribution shifts
 
-system response quality
+• system response quality
 
-This provides true deployment-level monitoring.
+This provides **true deployment-level monitoring**.
 
-System Architecture
+---  
+## System Architecture
 <p align="center"> <img src="docs/architecture.png" width="900"> </p>
 
 AI-OS integrates monitoring, evaluation, and guardrail mechanisms into a unified architecture.
@@ -179,15 +182,32 @@ The AI-OS architecture consists of several modular components responsible for mo
 
 These components operate together to provide **continuous monitoring, anomaly detection, and recovery orchestration** for deployed AI systems.
 
----
-Layer	Function
-Telemetry Layer	Collect runtime system metrics
-Stability Engine	Compute ADSI stability score
-Guardrail System	Detect anomaly thresholds
-Monitoring Service	Evaluate system telemetry
-FastAPI Interface	Expose monitoring APIs
-Observability Layer	Provide deployment insights
-Stability Model
+---  
+## AI-OS Stability Monitoring Pipeline
+
+```mermaid
+flowchart LR
+
+A[AI Deployment] --> B[Telemetry Monitoring]
+
+B --> C[Stability Engine]
+
+C --> D{ADSI Healthy?}
+
+D -- Yes --> A
+
+D -- No --> E[Guardrail Trigger]
+
+E --> F[Agent Evaluation]
+
+F --> G[Mitigation Action]
+
+G --> H[System Recovery]
+
+H --> A
+```
+---  
+## Stability Model
 
 AI-OS evaluates deployment health across three stability dimensions.
 
