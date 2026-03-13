@@ -1,13 +1,12 @@
 def calculate_adsi(*args):
     """
-    Calculate AI Deployment Stability Index (ADSI)
-
-    Supports two formats:
-    1) calculate_adsi(metrics_dict)
-    2) calculate_adsi(ahi, ihi, dhi)
+    Calculate ADSI score
+    Supports:
+    calculate_adsi(metrics_dict)
+    calculate_adsi(ahi, ihi, dhi)
     """
 
-    # Case 1: metrics dictionary
+    # case 1: metrics dict
     if len(args) == 1 and isinstance(args[0], dict):
 
         metrics = args[0]
@@ -21,19 +20,12 @@ def calculate_adsi(*args):
         ihi = retrieval_score
         dhi = 1 - ((latency_dev + embedding_shift) / 2)
 
-    # Case 2: ahi, ihi, dhi provided directly
+    # case 2: ahi, ihi, dhi directly
     elif len(args) == 3:
 
         ahi, ihi, dhi = args
 
     else:
-        raise ValueError("Invalid arguments for calculate_adsi")
+        raise ValueError("Invalid ADSI inputs")
 
-    adsi = (ahi + ihi + dhi) / 3
-
-    return {
-        "ADSI": adsi,
-        "AHI": ahi,
-        "IHI": ihi,
-        "DHI": dhi
-    }
+    return (ahi + ihi + dhi) / 3
