@@ -240,6 +240,36 @@ ADSI
       └────────────────────────
        T0   T20   T40   T60   T80
 ---
+ ---
+
+## AI Deployment Stability Lifecycle
+
+AI-OS continuously evaluates deployment stability through a closed monitoring loop.
+
+The system detects degradation signals early and activates guardrails to maintain system health.
+
+```mermaid
+flowchart LR
+
+A[Stable AI Deployment] --> B[Telemetry Monitoring]
+
+B --> C[Stability Evaluation]
+
+C --> D{ADSI Score Healthy?}
+
+D -- Yes --> A
+
+D -- No --> E[Guardrail Trigger]
+
+E --> F[Agent Evaluation]
+
+F --> G[Mitigation Action]
+
+G --> H[System Recovery]
+
+H --> A
+
+---
 
 ## Deployment Failure Case Study
 
