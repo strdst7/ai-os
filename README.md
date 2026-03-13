@@ -302,17 +302,19 @@ System Recovery
 𝕋𝟙𝟘𝟘 𝕊𝕪𝕤𝕥𝕖𝕞 𝕤𝕥𝕒𝕓𝕚𝕝𝕚𝕫𝕖𝕕        𝔸𝔻𝕊𝕀 = 𝟘.𝟡𝟘
 
 ---  
-## 
-Benchmark Comparison
-System	Monitoring Scope	Drift Detection	Stability Metric	Infrastructure Monitoring
-Prometheus	Infrastructure	No	No	Yes
-Evidently AI	Data Drift	Yes	No	No
-Model Monitoring Tools	Model Metrics	Yes	No	No
-AI-OS	End-to-End AI Deployment	Yes	ADSI	Yes
+## Benchmark Comparison
 
-AI-OS uniquely introduces deployment-level stability monitoring.
+| **System** | **Monitoring Scope** | **Drift Detection**  |	**Stability Metric** |	**Infrastructure Monitoring**  |
+|------------|----------------------|----------------------|-----------------------|---------------------------------|
+| Prometheus  | Infrastructure	 | No | 	No	 | Yes
+| Evidently AI  |	Data Drift  |	Yes	 | No | 	No
+| Model Monitoring Tools  |	Model Metrics	 | Yes	 | No	 | No
+| **AI-OS** | 	**End-to-End AI Deployment** |	**Yes** | **ADSI**	 | **Yes**
 
-Installation
+AI-OS uniquely introduces **deployment-level stability monitoring**.
+
+---  
+## Installation
 
 Clone repository
 
