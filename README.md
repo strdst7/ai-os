@@ -22,7 +22,6 @@ Production-grade monitoring architecture for detecting instability and operation
 
 
 ---
-
 ## Core Capabilities
 
 <p align="center">
