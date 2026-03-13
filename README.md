@@ -183,7 +183,46 @@ The AI-OS architecture consists of several modular components responsible for mo
 These components operate together to provide **continuous monitoring, anomaly detection, and recovery orchestration** for deployed AI systems.
 
 ---  
-## AI-OS Stability Monitoring Pipeline
+## Stability Model
+
+AI-OS evaluates deployment health across three stability dimensions.
+
+**Alignment Health Index**
+
+𝙰𝙷𝙸 = 𝟷 − 𝙺_𝚎
+
+𝚆𝚑𝚎𝚛𝚎:
+
+𝙺_𝚎 = 𝙺𝙿𝙸 𝚊𝚕𝚒𝚐𝚗𝚖𝚎𝚗𝚝 𝚎𝚛𝚛𝚘𝚛
+
+---  
+## Infrastructure Health Index
+
+𝙸𝙷𝙸 = 𝚁_𝚜
+
+𝚆𝚑𝚎𝚛𝚎:
+
+𝚁_𝚜 = 𝚛𝚎𝚝𝚛𝚒𝚎𝚟𝚊𝚕 𝚚𝚞𝚊𝚕𝚒𝚝𝚢 𝚜𝚌𝚘𝚛𝚎
+---  
+## Drift Health Index
+
+𝙳𝙷𝙸 = 𝟷 − (𝙻_𝚍 + 𝙴_𝚜)/𝟸
+
+𝚆𝚑𝚎𝚛𝚎:
+
+𝙻_𝚍 = 𝚕𝚊𝚝𝚎𝚗𝚌𝚢 𝚍𝚎𝚟𝚒𝚊𝚝𝚒𝚘𝚗
+𝙴_𝚜 = 𝚎𝚖𝚋𝚎𝚍𝚍𝚒𝚗𝚐 𝚍𝚛𝚒𝚏𝚝
+
+---  
+## AI Deployment Stability Index
+
+𝙰𝙳𝚂𝙸 = (𝙰𝙷𝙸 + 𝙸𝙷𝙸 + 𝙳𝙷𝙸) / 𝟹
+
+ADSI provides a **single interpretable stability signal for deployment health**.
+
+---  
+## AI-OS Monitoring Pipeline
+
 
 ```mermaid
 flowchart LR
@@ -206,74 +245,64 @@ G --> H[System Recovery]
 
 H --> A
 ```
+This loop **enables early instability detection and automated recovery**.
+
 ---  
-## Stability Model
-
-AI-OS evaluates deployment health across three stability dimensions.
-
-Alignment Health Index
-AHI = 1 − K_e
-
-Where:
-
-K_e = KPI alignment error
-
-Infrastructure Health Index
-IHI = R_s
-
-Where:
-
-R_s = retrieval quality score
-
-Drift Health Index
-DHI = 1 − (L_d + E_s)/2
-
-Where:
-
-L_d = latency deviation
-E_s = embedding drift
-
-AI Deployment Stability Index
-ADSI = (AHI + IHI + DHI) / 3
-
-ADSI provides a single interpretable stability signal for deployment health.
-
-AI-OS Monitoring Pipeline
-Diagram tidak disokong.
-
-This loop enables early instability detection and automated recovery.
-
-Deployment Failure Case Study
+## Deployment Failure Case Study
 
 Enterprise AI deployments degrade gradually rather than failing instantly.
 
-AI-OS detects early instability signals through ADSI monitoring.
+AI-OS detects early instability signals through **ADSI monitoring**.
 
-Failure Progression Example
+**Failure Progression Example**
 
 Stable Deployment
+
 ↓
+
 Embedding Drift Detected
+
 ↓
+
 Latency Degradation
+
 ↓
+
 ADSI Score Drop
+
 ↓
+
 Guardrail Trigger
+
 ↓
+
 Agent Evaluation
+
 ↓
+
 Mitigation Action
+
 ↓
+
 System Recovery
 
-Example Telemetry Timeline
-T0   Stable system              ADSI = 0.92
-T20  Latency deviation detected ADSI = 0.86
-T40  Embedding drift observed   ADSI = 0.79
-T60  Guardrail triggered        ADSI = 0.72
-T80  Recovery initiated         ADSI = 0.84
-T100 System stabilized          ADSI = 0.90
+---  
+## Example Telemetry Timeline
+
+𝕋𝟘 𝕊𝕥𝕒𝕓𝕝𝕖 𝕤𝕪𝕤𝕥𝕖𝕞              𝔸𝔻𝕊𝕀 = 𝟘.𝟡𝟚
+
+𝕋𝟚𝟘 𝕃𝕒𝕥𝕖𝕟𝕔𝕪 𝕕𝕖𝕧𝕚𝕒𝕥𝕚𝕠𝕟 𝕕𝕖𝕥𝕖𝕔𝕥𝕖𝕕   𝔸𝔻𝕊𝕀 = 𝟘.𝟠𝟞
+
+𝕋𝟜𝟘 𝔼𝕞𝕓𝕖𝕕𝕕𝕚𝕟𝕘 𝕕𝕣𝕚𝕗𝕥 𝕠𝕓𝕤𝕖𝕣𝕧𝕖𝕕   𝔸𝔻𝕊𝕀 = 𝟘.𝟟𝟡
+
+𝕋𝟞𝟘 𝔾𝕦𝕒𝕣𝕕𝕣𝕒𝕚𝕝 𝕥𝕣𝕚𝕘𝕘𝕖𝕣𝕖𝕕        𝔸𝔻𝕊𝕀 = 𝟘.𝟟𝟚
+
+𝕋𝟠𝟘 ℝ𝕖𝕔𝕠𝕧𝕖𝕣𝕪 𝕚𝕟𝕚𝕥𝕚𝕒𝕥𝕖𝕕         𝔸𝔻𝕊𝕀 = 𝟘.𝟠𝟜
+
+𝕋𝟙𝟘𝟘 𝕊𝕪𝕤𝕥𝕖𝕞 𝕤𝕥𝕒𝕓𝕚𝕝𝕚𝕫𝕖𝕕        𝔸𝔻𝕊𝕀 = 𝟘.𝟡𝟘
+
+---  
+## 
 Benchmark Comparison
 System	Monitoring Scope	Drift Detection	Stability Metric	Infrastructure Monitoring
 Prometheus	Infrastructure	No	No	Yes
