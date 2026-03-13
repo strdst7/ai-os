@@ -70,10 +70,9 @@ H --> A
 
 
 ```
-}
 ⸻
 
-Why AI-OS Exists
+**Why AI-OS Exists**
 
 Enterprise AI deployments often fail gradually and silently.
 
@@ -96,25 +95,25 @@ ADSI provides an interpretable signal of system health across alignment, infrast
 
 ⸻
 
-Quick Navigation
+**Quick Navigation**
 
-Section	Description
-Why AI-OS Exists	Motivation behind stability monitoring
-Research Contributions	Key innovations introduced by AI-OS
-System Architecture	Overview of the AI-OS monitoring system
-Stability Model	Mathematical formulation of ADSI
-Monitoring Capabilities	Runtime monitoring architecture
-Stability Lifecycle	Guardrail-driven recovery loop
-Deployment Failure Case Study	Example degradation detection
-Benchmark Comparison	Comparison with existing monitoring tools
-Installation	Setup instructions
-API Endpoints	Monitoring interface
-Reproducibility	Dataset and experiment artifacts
-Future Work	Research roadmap
+Section	                   Description
+Why AI-OS Exists	          Motivation behind stability monitoring
+Research Contributions	    Key innovations introduced by AI-OS
+System Architecture	    Overview of the AI-OS monitoring system
+Stability Model	          Mathematical formulation of ADSI
+Monitoring Capabilities	    Runtime monitoring architecture
+Stability Lifecycle	    Guardrail-driven recovery loop
+Deployment Failure Case     Study	Example degradation detection
+Benchmark Comparison	    Comparison with existing monitoring tools
+Installation	          Setup instructions
+API Endpoints	          Monitoring interface
+Reproducibility	          Dataset and experiment artifacts
+Future Work	                Research roadmap
 
 ⸻
 
-Research Contributions
+**Research Contributions**
 
 AI-OS introduces a new paradigm for stability-centric AI operations.
 
@@ -371,8 +370,8 @@ Pytest
 
 API Endpoints
 
-Endpoint	Description
-/health	system health check
+Endpoint	           Description
+/health	      system health check
 /agent/evaluate	evaluate deployment stability
 /observability	deployment telemetry metrics
 
