@@ -275,7 +275,8 @@ Continue   Guardrail Trigger
         Stable Deployment
 
 This loop enables early instability detection and automated recovery.
-
+...
+}
 ⸻
 
 Deployment Failure Case Study
