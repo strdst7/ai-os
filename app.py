@@ -7,7 +7,37 @@ if "history" not in st.session_state:
 
 st.set_page_config(page_title="AI-OS Dashboard", layout="wide")
 
-st.title("AI-OS Monitoring Dashboard")
+st.title("AI-OS: Deployment Stability Monitoring System")
+st.markdown("""
+AI-OS evaluates enterprise AI system stability using the **Deployment Stability Index (ADSI)**.
+
+The system integrates:
+- Alignment health
+- Infrastructure reliability
+- Drift resilience
+
+to provide real-time stability assessment and anomaly detection.
+""")
+
+st.latex(r"ADSI = \frac{AHI + IHI + DHI}{3}")
+
+st.markdown("""
+### Stability Tiers
+
+- 🟢 Stable (≥ 0.85)
+- 🟡 Warning (0.75 – 0.85)
+- 🟠 Degrading (0.65 – 0.75)
+- 🔴 Critical (< 0.65)
+""")
+
+if st.button("Simulate Degradation"):
+    import random
+    metrics = {
+        "kpi_error": random.uniform(0.3, 1.0),
+        "retrieval_score": random.uniform(0.0, 0.7),
+        "latency_dev": random.uniform(0.3, 1.0),
+        "embedding_shift": random.uniform(0.3, 1.0),
+    }
 
 # Sidebar
 st.sidebar.header("Input Telemetry")
