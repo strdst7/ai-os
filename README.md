@@ -1,7 +1,9 @@
 # AI-OS
 
 ### Stability-Centric Supervisory Architecture for Enterprise AI Deployments
+## 🚀 Live Demo
 
+👉 https://ai-osdev.streamlit.app/
 <p align="center">
 
 ![coverage](https://img.shields.io/badge/coverage-75%25-brightgreen)
