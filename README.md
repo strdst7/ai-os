@@ -3,7 +3,7 @@
 ### Stability-Centric Supervisory Architecture for Enterprise AI Deployments
 
 <p align="center">
-  
+
 ![coverage](https://img.shields.io/badge/coverage-75%25-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Python](https://img.shields.io/badge/python-3.10+-blue)
@@ -20,6 +20,10 @@
 Production-grade monitoring architecture for detecting instability and operational drift in deployed AI systems.
 </p>
 
+
+  ## Live Demo
+
+[Launch AI-OS Dashboard](https://your-app-url.streamlit.app)
 ---
 ## Core Capabilities
 
