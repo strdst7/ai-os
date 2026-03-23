@@ -27,6 +27,25 @@ Production-grade monitoring architecture for detecting instability and operation
 
 [Launch AI-OS Dashboard](https://your-app-url.streamlit.app)
 ---
+
+## Dashboard Preview
+<img width="4480" height="2520" alt="docs:dashboard png" src="https://github.com/user-attachments/assets/6a646c49-a9e8-4c46-aa20-9907c4dae284" />
+
+## User Interface
+
+AI-OS includes an interactive monitoring dashboard built with Streamlit.
+
+The dashboard provides:
+
+• Real-time ADSI computation  
+• Stability tier classification  
+• Temporal stability trends  
+• Anomaly detection signals  
+
+Run locally:
+
+```bash
+streamlit run app.py
 ## Core Capabilities
 
 <p align="center">
