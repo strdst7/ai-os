@@ -46,6 +46,9 @@ Run locally:
 
 ```bash
 streamlit run app.py
+
+```
+---  
 ## Core Capabilities
 
 <p align="center">
