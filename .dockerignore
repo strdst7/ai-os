@@ -1,0 +1,36 @@
+# Git
+.git
+.gitignore
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+.cache/
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Tests & coverage
+tests/
+.pytest_cache/
+coverage.xml
+report.xml
+.coverage
+
+# CI/CD
+.gitlab-ci.yml
+
+# Local env & secrets
+.env
+.env.*
+
+# Editor
+.vscode/
+.idea/
+*.swp
