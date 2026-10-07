@@ -1,6 +1,7 @@
 stages:
   - test
   - build
+  - sync
 
 # Run pipelines for merge requests and branches, but avoid duplicate
 # branch pipelines when a merge request is open.
@@ -49,4 +50,21 @@ build:
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
     - docker push "$CI_REGISTRY_IMAGE:latest"
   rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+# Mirrors the repository to GitHub on every push to the default branch.
+# Requires a GITHUB_TOKEN CI/CD variable (masked + protected) with repo scope.
+# See: https://docs.gitlab.com/ci/secrets/
+sync-to-github:
+  stage: sync
+  image: alpine/git:latest
+  variables:
+    # GitHub repo URL — token is injected at runtime, never hardcoded
+    GITHUB_REPO: "https://github.com/strdst7/ai-os.git"
+  script:
+    - git remote add github "https://${GITHUB_TOKEN}@github.com/strdst7/ai-os.git"
+    - git fetch --unshallow || true
+    - git push github "HEAD:${CI_COMMIT_BRANCH}" --force
+  rules:
+    # Only sync on pushes to the default branch (same as build job)
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
