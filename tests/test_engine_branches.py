@@ -25,5 +25,5 @@ def test_adsi_three_inputs():
 
     result = calculate_adsi(0.9, 0.8, 0.85)
 
-    assert "ADSI" in result
-    assert result["ADSI"] <= 1.0
+    assert isinstance(result, float)
+    assert 0.0 <= result <= 1.0
