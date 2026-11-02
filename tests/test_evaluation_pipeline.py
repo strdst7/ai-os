@@ -29,8 +29,8 @@ def test_evaluation_pipeline(monkeypatch):
         assert client.get("/observability").json() == {
             "message": "No evaluations performed yet"
         }
-        for _ in range(5):
-            response = client.post("/agent/evaluate", json=stable)
+        for offset in range(5):
+            response = client.post("/agent/evaluate", json={**stable, "kpi_error": offset / 1000})
             assert response.status_code == 200
             assert response.json()["stability_tier"] == "Stable"
             assert response.json()["guardrail_flags"] == "stable"
@@ -53,8 +53,8 @@ def test_evaluation_pipeline(monkeypatch):
         observability = client.get("/observability")
         assert observability.status_code == 200
         assert observability.json()["current"]["ADSI"] == 0.0
-        assert [entry["ADSI"] for entry in observability.json()["history"]] == [
-            1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 0.0
+        assert [round(entry["ADSI"], 6) for entry in observability.json()["history"]] == [
+            1.0, 0.999667, 0.999333, 0.999, 0.998667, 0.9, 0.0
         ]
         assert observability.json()["degradation"] == "critical"
         assert observability.json()["anomaly"] is True

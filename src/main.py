@@ -17,7 +17,7 @@ def health():
 
 @app.post("/agent/evaluate", dependencies=[Depends(verify_api_key)])
 def agent_evaluate(metrics: Telemetry):
-    return monitor.evaluate(metrics.dict())
+    return monitor.evaluate(metrics.model_dump(mode="json"))
 
 
 @app.get("/observability", dependencies=[Depends(verify_api_key)])

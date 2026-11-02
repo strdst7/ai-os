@@ -1,9 +1,10 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from src.stability_engine import (
     calculate_ahi,
     calculate_ihi,
     calculate_dhi,
     calculate_adsi,
+    validate_metrics,
 )
 from src.guardrails import evaluate_guardrails
 
@@ -13,12 +14,14 @@ def generate_stability_report(metrics: dict) -> dict:
     Orchestrates stability score calculation + guardrail evaluation.
     """
 
+    validate_metrics(metrics)
+
     # --- Core Scores ---
-    ahi = calculate_ahi(metrics.get("kpi_error", 0.0))
-    ihi = calculate_ihi(metrics.get("retrieval_score", 0.0))
+    ahi = calculate_ahi(metrics["kpi_error"])
+    ihi = calculate_ihi(metrics["retrieval_score"])
     dhi = calculate_dhi(
-        metrics.get("latency_dev", 0.0),
-        metrics.get("embedding_shift", 0.0),
+        metrics["latency_dev"],
+        metrics["embedding_shift"],
     )
 
     adsi = calculate_adsi(ahi, ihi, dhi)
@@ -27,7 +30,7 @@ def generate_stability_report(metrics: dict) -> dict:
     guardrail_result = evaluate_guardrails(adsi)
 
     return {
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "scores": {
             "AHI": round(ahi, 3),
             "IHI": round(ihi, 3),
