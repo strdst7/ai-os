@@ -32,8 +32,13 @@ def test_private_endpoints_require_key(monkeypatch):
             assert client.get(path).status_code == 404
 
 
-def test_unconfigured_key_fails_closed(monkeypatch):
-    monkeypatch.delenv("AIOS_API_KEY", raising=False)
+def test_weak_server_keys_fail_closed(monkeypatch):
     with TestClient(app) as client:
-        assert client.get("/observability").status_code == 503
-        assert client.get("/observability", headers={"x-api-key": token_urlsafe(32)}).status_code == 503
+        for server_key in (None, "", "dev-key", "changeme", "a" * 31, " " * 32):
+            if server_key is None:
+                monkeypatch.delenv("AIOS_API_KEY", raising=False)
+            else:
+                monkeypatch.setenv("AIOS_API_KEY", server_key)
+            for headers in ({}, {"x-api-key": server_key or token_urlsafe(32)}):
+                assert client.get("/observability", headers=headers).status_code == 503
+                assert client.post("/agent/evaluate", headers=headers, json={}).status_code == 503

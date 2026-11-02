@@ -69,7 +69,8 @@ def test_evaluation_pipeline(monkeypatch):
         assert client.get("/observability").json()["degradation"] == "degrading"
 
 
-def test_dashboard_matches_api(monkeypatch):
+def test_dashboard_scoring_matches_api(monkeypatch):
+    """Compare shared scoring; the dashboard does not call the backend API."""
     key = token_urlsafe(32)
     monkeypatch.setenv("AIOS_API_KEY", key)
     monkeypatch.setattr("src.main.monitor", MonitoringService())
