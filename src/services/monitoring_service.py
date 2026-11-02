@@ -1,4 +1,6 @@
-from collections import deque
+import json
+import os
+import sqlite3
 from threading import Lock
 from uuid import uuid4
 
@@ -6,77 +8,117 @@ from fastapi import HTTPException
 
 from src.agent import generate_stability_report
 from src.config import MonitoringConfig
-from src.stability_engine import detect_degradation, detect_anomaly
+from src.stability_engine import detect_anomaly, detect_degradation
+
 
 class MonitoringService:
-
-    def __init__(self):
-        self.latest = None
-        self.last_telemetry = None
-        self.history = deque(maxlen=MonitoringConfig.HISTORY_LIMIT)
-        self.anomaly = False
-        self.recovery_count = 0
+    def __init__(self, db_path=None):
+        db_path = db_path if db_path is not None else os.environ.get("AIOS_OBSERVATION_DB", ":memory:")
+        if not db_path:
+            raise ValueError("AIOS_OBSERVATION_DB must be a persistent file path")
         self.lock = Lock()
-        self.observations = {}
+        self.db = sqlite3.connect(db_path, timeout=30, check_same_thread=False, isolation_level=None)
+        self.db.execute("""CREATE TABLE IF NOT EXISTS observations (
+            seq INTEGER PRIMARY KEY AUTOINCREMENT,
+            observation_id TEXT NOT NULL UNIQUE,
+            telemetry TEXT NOT NULL,
+            report TEXT NOT NULL,
+            entry TEXT NOT NULL
+        )""")
+        self.db.execute("""CREATE TABLE IF NOT EXISTS monitor_state (
+            id INTEGER PRIMARY KEY CHECK (id = 1),
+            anomaly INTEGER NOT NULL,
+            recovery_count INTEGER NOT NULL
+        )""")
+        self.db.execute("INSERT OR IGNORE INTO monitor_state VALUES (1, 0, 0)")
 
     def evaluate(self, telemetry: dict, mode="manual_trigger"):
         report = generate_stability_report(telemetry)
-        with self.lock:
-            return self._record(telemetry, report, mode)
-
-    def _record(self, telemetry: dict, report: dict, mode: str):
+        metrics = {key: value for key, value in telemetry.items() if key != "observation_id"}
+        fingerprint = json.dumps(metrics, sort_keys=True, separators=(",", ":"))
         observation_id = telemetry.get("observation_id")
-        if observation_id is not None and observation_id in self.observations:
-            previous_telemetry, previous_report = self.observations[observation_id]
-            if telemetry != previous_telemetry:
-                raise HTTPException(status_code=409, detail="Observation ID already used")
-            return previous_report
-        if observation_id is None and self.latest is not None and telemetry == self.last_telemetry:
-            return self.observations[self.latest["observation_id"]][1]
+        with self.lock:
+            try:
+                self.db.execute("BEGIN IMMEDIATE")
+                if observation_id is not None:
+                    previous = self.db.execute(
+                        "SELECT telemetry, report FROM observations WHERE observation_id = ?",
+                        (str(observation_id),),
+                    ).fetchone()
+                    if previous:
+                        if previous[0] != fingerprint:
+                            raise HTTPException(status_code=409, detail="Observation ID already used")
+                        self.db.commit()
+                        return json.loads(previous[1])
+                else:
+                    previous = self.db.execute(
+                        "SELECT telemetry, report FROM observations ORDER BY seq DESC LIMIT 1"
+                    ).fetchone()
+                    if previous and previous[0] == fingerprint:
+                        self.db.commit()
+                        return json.loads(previous[1])
 
-        observation_id = str(observation_id or uuid4())
-        self.last_telemetry = telemetry.copy() if telemetry.get("observation_id") is None else None
-        self.latest = {
-            "observation_id": observation_id,
-            "timestamp": report["timestamp"],
-            "ADSI": report["scores"]["ADSI"],
-            "stability_tier": report["stability_tier"],
-            "guardrail_flags": report["guardrail_flags"],
-            "mode": mode
-        }
-
-        self.history.append(self.latest)
-        # ponytail: process-local ID map grows; use durable storage for unbounded retention.
-        self.observations[observation_id] = (telemetry.copy(), report)
-        scores = [entry["ADSI"] for entry in self.history]
-        if self.anomaly and report["stability_tier"] == "Stable":
-            # ponytail: two distinct healthy samples clear an alert; calibrate recovery for production.
-            self.recovery_count += 1
-            if self.recovery_count >= 2:
-                self.anomaly = False
-                self.recovery_count = 0
-        elif detect_anomaly(scores) or report["stability_tier"] == "Critical":
-            self.anomaly = True
-            self.recovery_count = 0
-        else:
-            self.recovery_count = 0
-
-        return report
+                observation_id = str(observation_id or uuid4())
+                entry = {
+                    "observation_id": observation_id,
+                    "timestamp": report["timestamp"],
+                    "ADSI": report["scores"]["ADSI"],
+                    "stability_tier": report["stability_tier"],
+                    "guardrail_flags": report["guardrail_flags"],
+                    "mode": mode,
+                }
+                self.db.execute(
+                    "INSERT INTO observations (observation_id, telemetry, report, entry) VALUES (?, ?, ?, ?)",
+                    (observation_id, fingerprint, json.dumps(report), json.dumps(entry)),
+                )
+                scores = [json.loads(row[0])["ADSI"] for row in self.db.execute(
+                    "SELECT entry FROM observations ORDER BY seq DESC LIMIT ?",
+                    (MonitoringConfig.HISTORY_LIMIT,),
+                ).fetchall()][::-1]
+                anomaly, recovery_count = self.db.execute(
+                    "SELECT anomaly, recovery_count FROM monitor_state WHERE id = 1"
+                ).fetchone()
+                if anomaly and report["stability_tier"] == "Stable":
+                    # ponytail: two fresh Stable observations clear an alert; calibrate before production.
+                    recovery_count += 1
+                    if recovery_count >= 2:
+                        anomaly, recovery_count = 0, 0
+                elif detect_anomaly(scores) or report["stability_tier"] == "Critical":
+                    anomaly, recovery_count = 1, 0
+                else:
+                    recovery_count = 0
+                self.db.execute(
+                    "UPDATE monitor_state SET anomaly = ?, recovery_count = ? WHERE id = 1",
+                    (anomaly, recovery_count),
+                )
+                self.db.commit()
+                return report
+            except Exception:
+                self.db.rollback()
+                raise
 
     def get_observability(self):
         with self.lock:
-            if self.latest is None:
+            rows = self.db.execute(
+                "SELECT entry FROM observations ORDER BY seq DESC LIMIT ?",
+                (MonitoringConfig.HISTORY_LIMIT,),
+            ).fetchall()
+            if not rows:
                 return {"message": "No evaluations performed yet"}
-
-            degradation = detect_degradation(self.latest["ADSI"])
+            history = [json.loads(row[0]) for row in rows[::-1]]
+            anomaly = bool(self.db.execute(
+                "SELECT anomaly FROM monitor_state WHERE id = 1"
+            ).fetchone()[0])
             return {
-                "current": self.latest,
-                "history": list(self.history),
-                "degradation": degradation,
-                "anomaly": self.anomaly
+                "current": history[-1],
+                "history": history,
+                "degradation": detect_degradation(history[-1]["ADSI"]),
+                "anomaly": anomaly,
             }
 
     def autonomous_check(self):
         # No new observation arrives here; replay must not change history or alerts.
-        with self.lock:
-            return self.latest
+        return self.get_observability()
+
+    def close(self):
+        self.db.close()

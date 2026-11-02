@@ -45,4 +45,10 @@ Send the key in the `x-api-key` header. Never commit it.
 Only `/health` is public. API documentation routes are disabled.
 Do not publish the service before a security review.
 
+For a single-host, single-replica deployment, set `AIOS_OBSERVATION_DB` to a file on a persistent volume.
+The default in-memory store is for tests and local development; it loses observations on restart.
+Keep the database file private. Back it up and monitor disk space.
+SQLite transactions and a unique observation ID prevent concurrent retries from creating duplicate records.
+Do not run multiple hosts or replicas against a shared SQLite file. Use a shared transactional store when that deployment exists.
+
 The maintainers are not responsible for insecure deployments.

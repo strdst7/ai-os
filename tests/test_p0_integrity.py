@@ -1,3 +1,4 @@
+import sqlite3
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from math import nan
@@ -166,3 +167,51 @@ def test_stale_id_replay_cannot_replace_evicted_observation():
     assert monitor.get_observability() == before
     with pytest.raises(HTTPException, match="Observation ID already used"):
         monitor.evaluate({**STABLE, "observation_id": observation_id})
+
+
+def test_file_store_survives_restart_and_replay(tmp_path):
+    path = tmp_path / "observations.db"
+    first = MonitoringService(path)
+    observation_id = str(uuid4())
+    critical = {**CRITICAL, "observation_id": observation_id}
+    report = first.evaluate(critical)
+    before = first.get_observability()
+    assert before["anomaly"] is True
+    first.close()
+
+    restarted = MonitoringService(path)
+    assert restarted.get_observability() == before
+    assert restarted.evaluate(critical) == report
+    assert restarted.get_observability() == before
+    with pytest.raises(HTTPException) as conflict:
+        restarted.evaluate({**STABLE, "observation_id": observation_id})
+    assert conflict.value.status_code == 409
+    assert restarted.get_observability() == before
+    stable_id = str(uuid4())
+    restarted.evaluate({**STABLE, "observation_id": stable_id})
+    assert restarted.get_observability()["anomaly"] is True
+    restarted.close()
+
+    recovered = MonitoringService(path)
+    assert recovered.get_observability()["anomaly"] is True
+    recovered.evaluate({**STABLE, "kpi_error": 0.01, "observation_id": str(uuid4())})
+    assert recovered.get_observability()["anomaly"] is False
+    recovered.close()
+
+
+def test_two_connections_share_atomic_idempotency(tmp_path):
+    path = tmp_path / "shared.db"
+    first, second = MonitoringService(path), MonitoringService(path)
+    observation = {**CRITICAL, "observation_id": str(uuid4())}
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        results = list(executor.map(lambda service: service.evaluate(observation), (first, second)))
+    assert results[0] == results[1]
+    assert len(second.get_observability()["history"]) == 1
+    assert second.get_observability()["anomaly"] is True
+    first.close()
+    second.close()
+
+
+def test_unwritable_store_path_fails_closed(tmp_path):
+    with pytest.raises(sqlite3.OperationalError):
+        MonitoringService(tmp_path / "missing-directory" / "observations.db")
