@@ -1,8 +1,39 @@
+from secrets import token_urlsafe
+
 from fastapi.testclient import TestClient
 from src.main import app
+from src.services.monitoring_service import MonitoringService
 
-client = TestClient(app)
 
-def test_auth_required():
-    response = client.get("/stability")
-    assert response.status_code in [401,404, 422]
+def test_private_endpoints_require_key(monkeypatch):
+    key = token_urlsafe(32)
+    monkeypatch.setenv("AIOS_API_KEY", key)
+    monitor = MonitoringService()
+    monkeypatch.setattr("src.main.monitor", monitor)
+    telemetry = {"kpi_error": 0.0, "retrieval_score": 1.0,
+                 "latency_dev": 0.0, "embedding_shift": 0.0}
+
+    with TestClient(app) as client:
+        assert client.get("/health").status_code == 200
+        for method, path, kwargs in (
+            ("post", "/agent/evaluate", {"json": telemetry}),
+            ("get", "/observability", {}),
+        ):
+            request = getattr(client, method)
+            for headers in ({}, {"x-api-key": token_urlsafe(32)},
+                            {"x-api-key": "dev-key"}):
+                response = request(path, headers=headers, **kwargs)
+                assert response.status_code == 401
+            response = request(path, headers={"x-api-key": key}, **kwargs)
+            assert response.status_code == 200
+
+        assert len(client.get("/observability", headers={"x-api-key": key}).json()["history"]) == 1
+        for path in ("/docs", "/redoc", "/openapi.json"):
+            assert client.get(path).status_code == 404
+
+
+def test_unconfigured_key_fails_closed(monkeypatch):
+    monkeypatch.delenv("AIOS_API_KEY", raising=False)
+    with TestClient(app) as client:
+        assert client.get("/observability").status_code == 503
+        assert client.get("/observability", headers={"x-api-key": token_urlsafe(32)}).status_code == 503

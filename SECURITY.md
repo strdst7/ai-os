@@ -39,4 +39,9 @@ AI-OS must be deployed:
 - With secure environment variables
 - In a monitored production environment
 
+Set `AIOS_API_KEY` through the deployment environment or secret manager before calling private routes.
+Send its value in the `x-api-key` header. Never commit the key or use `dev-key`.
+Only `/health` is public. API documentation routes are disabled.
+Do not publish the service before a security review.
+
 The maintainers are not responsible for insecure deployments.

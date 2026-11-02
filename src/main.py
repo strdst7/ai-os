@@ -1,10 +1,11 @@
 from src.config import MonitoringConfig
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
+from src.auth import verify_api_key
 from src.models import Telemetry
 from src.services.monitoring_service import MonitoringService
 import asyncio
 
-app = FastAPI()
+app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 
 monitor = MonitoringService()
 
@@ -14,12 +15,12 @@ def health():
     return {"status": "AI-OS running"}
 
 
-@app.post("/agent/evaluate")
+@app.post("/agent/evaluate", dependencies=[Depends(verify_api_key)])
 def agent_evaluate(metrics: Telemetry):
     return monitor.evaluate(metrics.dict())
 
 
-@app.get("/observability")
+@app.get("/observability", dependencies=[Depends(verify_api_key)])
 def observability():
     return monitor.get_observability()
 

@@ -1,10 +1,13 @@
 from fastapi.testclient import TestClient
+from secrets import token_urlsafe
 
 from src.main import app
 from src.services.monitoring_service import MonitoringService
 
 
 def test_evaluation_pipeline(monkeypatch):
+    api_key = token_urlsafe(32)
+    monkeypatch.setenv("AIOS_API_KEY", api_key)
     monitor = MonitoringService()
     monkeypatch.setattr("src.main.monitor", monitor)
     stable = {
@@ -20,7 +23,7 @@ def test_evaluation_pipeline(monkeypatch):
         "embedding_shift": 1.0,
     }
 
-    with TestClient(app) as client:
+    with TestClient(app, headers={"x-api-key": api_key}) as client:
         assert client.get("/observability").json() == {
             "message": "No evaluations performed yet"
         }
