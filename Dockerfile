@@ -1,11 +1,11 @@
 # Build stage: install dependencies separately for better layer caching
-FROM python:3.10-slim AS builder
+FROM python:3.11-slim AS builder
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Final stage: lean production image running the FastAPI backend
-FROM python:3.10-slim
+FROM python:3.11-slim
 WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
