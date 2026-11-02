@@ -1,5 +1,7 @@
 from fastapi.testclient import TestClient
 from secrets import token_urlsafe
+from pathlib import Path
+from streamlit.testing.v1 import AppTest
 
 from src.main import app
 from src.services.monitoring_service import MonitoringService
@@ -65,3 +67,29 @@ def test_evaluation_pipeline(monkeypatch):
         assert response.json()["stability_tier"] == "Degrading"
         assert response.json()["guardrail_flags"] == "degrading"
         assert client.get("/observability").json()["degradation"] == "degrading"
+
+
+def test_dashboard_matches_api(monkeypatch):
+    key = token_urlsafe(32)
+    monkeypatch.setenv("AIOS_API_KEY", key)
+    monkeypatch.setattr("src.main.monitor", MonitoringService())
+    dashboard = AppTest.from_file(
+        Path(__file__).resolve().parents[1] / "app.py", default_timeout=30
+    ).run()
+    assert not dashboard.exception
+
+    with TestClient(app, headers={"x-api-key": key}) as client:
+        for values in ((0.1, 0.9, 0.1, 0.05), (1.0, 0.0, 1.0, 1.0)):
+            for slider, value in zip(dashboard.sidebar.slider, values):
+                slider.set_value(value)
+            dashboard.run()
+            assert not dashboard.exception
+            metrics = dict(zip(
+                ("kpi_error", "retrieval_score", "latency_dev", "embedding_shift"),
+                values,
+            ))
+            response = client.post("/agent/evaluate", json=metrics)
+            assert response.status_code == 200
+            report = response.json()
+            assert dashboard.metric[0].value == str(round(report["scores"]["ADSI"], 3))
+            assert dashboard.metric[1].value == report["stability_tier"].upper()
