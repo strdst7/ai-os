@@ -1,6 +1,5 @@
 from src.config import MonitoringConfig
 from collections import deque
-from datetime import datetime
 from src.agent import generate_stability_report
 from src.stability_engine import detect_degradation, detect_anomaly
 
@@ -32,8 +31,8 @@ class MonitoringService:
         if self.latest is None:
             return {"message": "No evaluations performed yet"}
 
-        degradation = detect_degradation(list(self.history))
-        anomaly = detect_anomaly(list(self.history))
+        degradation = detect_degradation(self.latest["ADSI"])
+        anomaly = detect_anomaly([entry["ADSI"] for entry in self.history])
 
         return {
             "current": self.latest,

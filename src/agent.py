@@ -24,15 +24,7 @@ def generate_stability_report(metrics: dict) -> dict:
     adsi = calculate_adsi(ahi, ihi, dhi)
 
     # --- Guardrails ---
-    guardrail_result = evaluate_guardrails(metrics)
-
-    # --- Stability Tier ---
-    if adsi >= 0.85:
-        tier = "Stable"
-    elif adsi >= 0.65:
-        tier = "Warning"
-    else:
-        tier = "Critical"
+    guardrail_result = evaluate_guardrails(adsi)
 
     return {
         "timestamp": datetime.utcnow().isoformat(),
@@ -42,6 +34,6 @@ def generate_stability_report(metrics: dict) -> dict:
             "DHI": round(dhi, 3),
             "ADSI": adsi,
         },
-        "stability_tier": tier,
+        "stability_tier": guardrail_result.title(),
         "guardrail_flags": guardrail_result,
     }
