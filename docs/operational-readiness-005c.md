@@ -14,7 +14,7 @@ Evidence: https://github.com/strdst7/ai-os/actions/runs/41558016110
 | SQLite integrity | `PRAGMA integrity_check` returned `ok` for live and backup databases on CI. | Pass on CI |
 | Environment config | Missing and relative database paths stopped the Docker container. A file path on `/data` worked. | Pass on CI; mount ownership and host persistence remain operator checks |
 
-The Docker image sets `AIOS_REQUIRE_PERSISTENCE=1`. Set `AIOS_OBSERVATION_DB=/data/observations.db` and mount a persistent volume at `/data`. The script uses an isolated CI volume. CI volumes do not prove a production host's mount, backup schedule, restore runbook, or disk alerts. The local Mac Docker build timed out while the data volume had under 0.5 GiB free. Docker Desktop then reported `unable to start`. No local container lifecycle result is claimed.
+The Docker image sets `AIOS_REQUIRE_PERSISTENCE=1`. Set `AIOS_OBSERVATION_DB=/data/observations.db` and mount a persistent volume at `/data`. The script uses an isolated CI volume. CI volumes do not prove a production host's mount, backup schedule, restore runbook, or disk alerts. An earlier Mac build timed out. A later local build succeeded, then disk space fell to 263 MiB. No local container lifecycle result is claimed.
 
 CI tests: Python 3.10.22, 47 passed, 97% coverage, one warning. The earlier two FastAPI `on_event` warnings closed through a lifespan hook. The remaining `StarletteDeprecationWarning` originates in the installed FastAPI TestClient importing `httpx`. It is test-client compatibility noise, not an application warning. Keep it visible. Review dependency compatibility before replacing `httpx` or changing the test client.
 
@@ -54,6 +54,21 @@ docker build -t ai-os-lifecycle:ci .
 AIOS_RUN_ENOSPC_TEST=1 python3 tests/full_volume.py
 ```
 
-Do not run it on this Mac without enough headroom.
+Do not run it on this Mac without enough headroom. At the latest check, the Mac had 710 MiB free. No Docker test or cleanup ran at that level.
 
 This disposable-runner result does not establish production readiness. Production-host mount, backup schedule, disk alerts, and restore drill need separate host checks. The production recovery rule still needs labeled incidents, cadence, and a false-clear target.
+
+## Deployment-environment gate
+
+The deployment target, operator, and volume layout are not identified. Keep the service private and PR #8 open. Record the following on the actual target before approving deployment:
+
+| Gate | Required evidence | Status |
+| --- | --- | --- |
+| Topology | One host and one replica, or a decision to replace SQLite with a shared transactional store. | Pending |
+| Volume | Inspect the real mount, ownership, permissions, and `AIOS_OBSERVATION_DB` path. Restart and recreate against the same volume. | Pending |
+| Backup | Set a schedule, retention, and storage outside the database volume. Record a successful online backup. | Pending |
+| Restore | Restore into an isolated target. Check history, anomaly state, UUID replay, and `PRAGMA integrity_check`. | Pending |
+| Capacity | Check free space, disk alerts, backup-write errors, and response handling on the deployment filesystem. Never fill a production data volume. | Pending |
+| Exposure | Keep the API private until a security review checks access, secrets, and network binding. | Pending |
+
+Do not reuse the disposable CI result as evidence for these target-specific gates. Keep the two-Stable recovery rule unchanged until labeled incidents support a policy.
