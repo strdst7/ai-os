@@ -1,8 +1,8 @@
 # Task 005C — Operational Readiness Report
 
 Status: **seven checks completed on the isolated CI runner; production deployment not approved.**
-Source: PR #8, tested commit `c2142fe6e62c93acbfa38e433237e8831966adfc`.
-Evidence: https://github.com/strdst7/ai-os/actions/runs/41557732710
+Source: PR #8; source changes at `c2142fe6e62c93acbfa38e433237e8831966adfc`.
+Evidence: https://github.com/strdst7/ai-os/actions/runs/41558016110
 
 | Check | Evidence | Result |
 | --- | --- | --- |
