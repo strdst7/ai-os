@@ -1,6 +1,6 @@
 # Task 005C — Operational Readiness Report
 
-Status: **six checks passed on the isolated CI runner; disk exhaustion remains partial. Production deployment not approved.**
+Status: **all seven checks passed on disposable CI runners. Production deployment not approved.**
 Source: PR #8; source changes at `c2142fe6e62c93acbfa38e433237e8831966adfc`.
 Evidence: https://github.com/strdst7/ai-os/actions/runs/41558016110
 
@@ -10,7 +10,7 @@ Evidence: https://github.com/strdst7/ai-os/actions/runs/41558016110
 | Container recreation | The CI script removed and created a container using the same named Docker volume. History and anomaly remained identical. | Pass on CI |
 | SQLite backup | `sqlite3.Connection.backup` copied the live database into the mounted volume. | Pass on CI |
 | Restore | A container opened the backup file and recovered the original history and anomaly. New Stable records completed recovery. | Pass on CI |
-| Disk exhaustion | `PRAGMA max_page_count` reproduced `database or disk is full`. The write rolled back, the alert stayed unchanged, and the reopened database passed integrity check. | Simulated SQLite page limit passed; actual full-volume test pending |
+| Disk exhaustion | `PRAGMA max_page_count` reproduced a full database. Task 006 filled an isolated 16 MiB tmpfs. The API returned HTTP 500 without recording the failed observation. Backup also failed. Integrity and retry passed after freeing space. | Simulation and disposable full-volume check passed; production host pending |
 | SQLite integrity | `PRAGMA integrity_check` returned `ok` for live and backup databases on CI. | Pass on CI |
 | Environment config | Missing and relative database paths stopped the Docker container. A file path on `/data` worked. | Pass on CI; mount ownership and host persistence remain operator checks |
 
@@ -20,10 +20,40 @@ CI tests: Python 3.10.22, 47 passed, 97% coverage, one warning. The earlier two 
 
 Production recovery policy remains **pending**. The current count rule is uncalibrated. Obtain labeled incidents, observation cadence, and an operator-approved false-clear target. Compare candidate rules on held-out incidents before modifying recovery logic. No recovery logic changed in 005C.
 
-## Pending full-volume check
+## Task 006 — disposable full-volume result
 
-`tests/full_volume.py` prepares an **unexecuted** ENOSPC check. It creates a disposable 16 MiB Docker tmpfs volume. It never mounts production data. It fills only that volume. It tests observation writes, backup, API response, integrity, and recovery after freeing space. It also rejects false HTTP success and phantom history. It removes its container and volume on exit.
+The [opt-in run](https://github.com/strdst7/ai-os/actions/runs/41561506594) checked commit `696d598a6b51a29db72a6e4bd9d13afda2cd0501`. The GitHub-hosted `ubuntu-latest` runner reported Linux `7.0.0-1017-azure`, x86_64. Docker client and server reported `29.4.2`. The runner reported 93,980,954,624 free bytes before build. `df` showed 88 GiB available on `/dev/root`. The script required at least 4 GiB free and explicit `AIOS_RUN_ENOSPC_TEST=1`.
 
-Run it only on an approved disposable Docker host. The script requires `AIOS_RUN_ENOSPC_TEST=1` and at least 4 GiB free on `/`. Build `ai-os-lifecycle:ci` from this branch. Then run `AIOS_RUN_ENOSPC_TEST=1 python3 tests/full_volume.py`. Do not run it on this Mac without enough headroom.
+The script created a unique Docker local-driver volume backed by tmpfs. Inside the container, `/data` reported `tmpfs` and exactly 16,777,216 bytes capacity. The API port bound only to `127.0.0.1`. This volume held test observations only. No production data was mounted. After filling it, available blocks reached zero.
 
-The full-volume check remains **pending** until its actual output is recorded. CI lifecycle and page-limit checks do not close it. Production-host mount, backup schedule, disk alerts, and restore drill need separate host checks.
+```text
+Mount: tmpfs; capacity: 16777216 bytes
+Volume free blocks after fill: 0
+Observation write HTTP status: 500
+Observation write HTTP body: Internal Server Error
+History and anomaly unchanged after failed write
+Backup on full volume: backup_failed: database or disk is full
+Removed filler; volume space restored
+Integrity after ENOSPC: ok; observation rows: 1
+Retry: HTTP success; history: 2; anomaly: true
+Live integrity after retry: ok
+Backup after space restoration: ok; integrity: ok
+ENOSPC write and backup failed; API rejected write; integrity and recovery passed
+Application container exit code: 0
+Cleanup exit codes: stop=0, container=0, volume=0
+```
+
+The failed observation produced no success response. History and anomaly state stayed unchanged. Its retry succeeded after freeing space. The original row remained readable. SQLite reported `ok` for the live database and backup. The API returned a generic HTTP 500, not a structured storage error. Operators still need a disk alert.
+
+The workflow also injected an error after mounting, before filling. That test process exited `1` as intended. Its application container exited `0` after a normal stop. Cleanup exit codes were `stop=0`, `container=0`, and `volume=0`. The workflow found no matching test container or volume afterward. The real ENOSPC run exited `0` with the same cleanup codes. No unexpected filesystem or transaction behavior appeared.
+
+Only approved disposable Docker hosts can run this check. The script requires `AIOS_RUN_ENOSPC_TEST=1` and at least 4 GiB free on `/`.
+
+```sh
+docker build -t ai-os-lifecycle:ci .
+AIOS_RUN_ENOSPC_TEST=1 python3 tests/full_volume.py
+```
+
+Do not run it on this Mac without enough headroom.
+
+This disposable-runner result does not establish production readiness. Production-host mount, backup schedule, disk alerts, and restore drill need separate host checks. The production recovery rule still needs labeled incidents, cadence, and a false-clear target.
