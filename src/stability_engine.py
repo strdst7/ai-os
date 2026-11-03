@@ -1,4 +1,18 @@
+from math import isfinite
+
 import numpy as np
+
+
+METRIC_NAMES = ("kpi_error", "retrieval_score", "latency_dev", "embedding_shift")
+
+
+def validate_metrics(metrics):
+    for name in METRIC_NAMES:
+        if name not in metrics or metrics[name] is None:
+            raise ValueError(f"insufficient_data: {name} is missing")
+        value = metrics[name]
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not isfinite(value) or not 0 <= value <= 1:
+            raise ValueError(f"invalid_data: {name} must be a finite number between 0 and 1")
 
 
 def calculate_ahi(kpi_error):
@@ -25,11 +39,12 @@ def calculate_adsi(metrics_or_ahi, ihi=None, dhi=None):
         if ihi is not None or dhi is not None:
             raise TypeError("Pass either a metrics dict or (ahi, ihi, dhi), not both")
         metrics = metrics_or_ahi
-        ahi = calculate_ahi(metrics.get("kpi_error", 0))
-        ihi = calculate_ihi(metrics.get("retrieval_score", 0))
+        validate_metrics(metrics)
+        ahi = calculate_ahi(metrics["kpi_error"])
+        ihi = calculate_ihi(metrics["retrieval_score"])
         dhi = calculate_dhi(
-            metrics.get("latency_dev", 0),
-            metrics.get("embedding_shift", 0)
+            metrics["latency_dev"],
+            metrics["embedding_shift"]
         )
     else:
         if ihi is None or dhi is None:

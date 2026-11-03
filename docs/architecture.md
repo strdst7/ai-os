@@ -32,6 +32,11 @@ Enforces stability tiers:
 ### Monitoring Service
 Maintains telemetry history and detects anomalies.
 
+Recovery currently requires two consecutive fresh Stable observations after an anomaly.
+A Warning or Critical observation resets the recovery count; replayed observations do not advance it.
+The rule has no elapsed-time requirement. Tests cover one-second and one-day gaps, but no incident data or false-clear analysis supports the threshold.
+Treat this as provisional, not statistically validated. Calibrate against labeled incidents and operator requirements before production alerting.
+
 ### API Layer
 FastAPI exposes monitoring endpoints.
 
