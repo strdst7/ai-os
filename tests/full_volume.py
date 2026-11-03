@@ -111,10 +111,14 @@ with sqlite3.connect('/data/observations.db') as source, sqlite3.connect('/data/
         print("Backup after space restoration: ok; integrity: ok", flush=True)
         print("ENOSPC write and backup failed; API rejected write; integrity and recovery passed")
     finally:
+        stopped = subprocess.run(["docker", "stop", lifecycle.NAME], capture_output=True, text=True)
+        if stopped.returncode == 0:
+            exit_code = lifecycle.docker("inspect", "-f", "{{.State.ExitCode}}", lifecycle.NAME)
+            print(f"Application container exit code: {exit_code}", flush=True)
         container = subprocess.run(["docker", "rm", "-f", lifecycle.NAME], capture_output=True, text=True)
         volume = subprocess.run(["docker", "volume", "rm", lifecycle.VOLUME], capture_output=True, text=True)
-        print(f"Cleanup exit codes: container={container.returncode}, volume={volume.returncode}", flush=True)
-        if container.returncode or volume.returncode:
+        print(f"Cleanup exit codes: stop={stopped.returncode}, container={container.returncode}, volume={volume.returncode}", flush=True)
+        if stopped.returncode or container.returncode or volume.returncode:
             raise RuntimeError("Disposable Docker container or volume cleanup failed")
 
 
