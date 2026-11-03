@@ -1,6 +1,7 @@
 import json
 import os
 import sqlite3
+from pathlib import Path
 from threading import Lock
 from uuid import uuid4
 
@@ -16,6 +17,11 @@ class MonitoringService:
         db_path = db_path if db_path is not None else os.environ.get("AIOS_OBSERVATION_DB", ":memory:")
         if not db_path:
             raise ValueError("AIOS_OBSERVATION_DB must be a persistent file path")
+        if os.environ.get("AIOS_REQUIRE_PERSISTENCE") == "1" and (
+            db_path == ":memory:" or not Path(db_path).is_absolute()
+        ):
+            raise ValueError("AIOS_OBSERVATION_DB must be an absolute persistent file path")
+        # ponytail: one local writer store; switch to shared transactions for multi-host deployment.
         self.lock = Lock()
         self.db = sqlite3.connect(db_path, timeout=30, check_same_thread=False, isolation_level=None)
         self.db.execute("""CREATE TABLE IF NOT EXISTS observations (

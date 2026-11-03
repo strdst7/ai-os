@@ -215,3 +215,61 @@ def test_two_connections_share_atomic_idempotency(tmp_path):
 def test_unwritable_store_path_fails_closed(tmp_path):
     with pytest.raises(sqlite3.OperationalError):
         MonitoringService(tmp_path / "missing-directory" / "observations.db")
+
+
+def test_container_mode_requires_explicit_absolute_database_path(monkeypatch, tmp_path):
+    monkeypatch.setenv("AIOS_REQUIRE_PERSISTENCE", "1")
+    for path in (":memory:", "relative.db"):
+        with pytest.raises(ValueError, match="absolute persistent file path"):
+            MonitoringService(path)
+    monkeypatch.delenv("AIOS_OBSERVATION_DB", raising=False)
+    with pytest.raises(ValueError, match="absolute persistent file path"):
+        MonitoringService()
+    path = tmp_path / "observations.db"
+    monkeypatch.setenv("AIOS_OBSERVATION_DB", str(path))
+    monitor = MonitoringService()
+    monitor.evaluate({**CRITICAL, "observation_id": str(uuid4())})
+    monitor.close()
+    assert path.is_file()
+
+
+def test_sqlite_backup_restores_history_and_anomaly(tmp_path):
+    original = tmp_path / "observations.db"
+    backup = tmp_path / "backup.db"
+    restored = tmp_path / "restored.db"
+    monitor = MonitoringService(original)
+    critical = {**CRITICAL, "observation_id": str(uuid4())}
+    monitor.evaluate(critical)
+    monitor.evaluate({**STABLE, "observation_id": str(uuid4())})
+    before = monitor.get_observability()
+    assert before["anomaly"] is True
+    with sqlite3.connect(backup) as destination:
+        monitor.db.backup(destination)
+    monitor.close()
+    with sqlite3.connect(backup) as source, sqlite3.connect(restored) as destination:
+        assert source.execute("PRAGMA integrity_check").fetchone()[0] == "ok"
+        source.backup(destination)
+    recovered = MonitoringService(restored)
+    assert recovered.get_observability() == before
+    assert recovered.evaluate(critical)["stability_tier"] == "Critical"
+    assert recovered.get_observability() == before
+    recovered.evaluate({**STABLE, "observation_id": str(uuid4())})
+    assert recovered.get_observability()["anomaly"] is False
+    recovered.close()
+
+
+def test_sqlite_full_rolls_back_observation_and_alert(tmp_path):
+    path = tmp_path / "observations.db"
+    monitor = MonitoringService(path)
+    monitor.evaluate({**CRITICAL, "observation_id": str(uuid4())})
+    before = monitor.get_observability()
+    pages = monitor.db.execute("PRAGMA page_count").fetchone()[0]
+    monitor.db.execute(f"PRAGMA max_page_count={pages}")
+    with pytest.raises(sqlite3.OperationalError, match="database or disk is full"):
+        monitor.evaluate({**STABLE, "observation_id": str(uuid4()), "padding": "x" * 32768})
+    assert monitor.get_observability() == before
+    monitor.close()
+    restarted = MonitoringService(path)
+    assert restarted.get_observability() == before
+    assert restarted.db.execute("PRAGMA integrity_check").fetchone()[0] == "ok"
+    restarted.close()
