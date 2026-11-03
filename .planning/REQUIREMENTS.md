@@ -36,7 +36,17 @@ This milestone ends with a host decision and runnable check plan. Live deploymen
 
 ## Traceability
 
-The roadmap maps each v1 requirement to exactly one phase.
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| HOST-01 | Phase 1 | Pending |
+| HOST-02 | Phase 1 | Pending |
+| DATA-01 | Phase 2 | Pending |
+| BACK-01 | Phase 2 | Pending |
+| BACK-02 | Phase 2 | Pending |
+| ALRT-01 | Phase 2 | Pending |
+| SECU-01 | Phase 2 | Pending |
+
+**Coverage:** Seven v1 requirements, seven mapped, zero unmapped.
 
 ---
 *Requirements defined: 2026-11-03*
