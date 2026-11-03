@@ -70,6 +70,7 @@ print(os.statvfs('/data').f_bavail)
         except urllib.error.HTTPError as error:
             assert error.code >= 500, error.code
             print(f"Observation write HTTP status: {error.code}", flush=True)
+            print(f"Observation write HTTP body: {error.read().decode()}", flush=True)
         assert lifecycle.request(url, "/observability") == before
         print("History and anomaly unchanged after failed write", flush=True)
 
@@ -79,13 +80,14 @@ try:
         source.backup(backup)
 except sqlite3.OperationalError as error:
     assert 'full' in str(error).lower() or 'open database' in str(error).lower(), error
-    print('backup_failed')
+    print('backup_failed: ' + str(error))
 else:
     raise AssertionError('Backup unexpectedly succeeded on full volume')
 """)
-        assert backup_result == "backup_failed"
-        print("Backup on full volume: failed", flush=True)
+        assert backup_result.startswith("backup_failed: "), backup_result
+        print("Backup on full volume: " + backup_result, flush=True)
         inside("import os; os.unlink('/data/filler')")
+        print("Removed filler; volume space restored", flush=True)
         rows = inside("""import sqlite3
 with sqlite3.connect('file:/data/observations.db?mode=rw', uri=True) as db:
     assert db.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
