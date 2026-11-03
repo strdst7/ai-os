@@ -5,6 +5,13 @@ on:
     branches: [ dev ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      run_full_volume:
+        description: 'Run disposable 16 MiB ENOSPC check on a hosted runner'
+        required: true
+        type: boolean
+        default: false
 
 jobs:
   test:
@@ -42,3 +49,39 @@ jobs:
         run: docker build -t ai-os-lifecycle:ci .
       - name: Check persistent volume lifecycle
         run: python3 tests/container_lifecycle.py
+
+  full-volume:
+    if: github.event_name == 'workflow_dispatch' && inputs.run_full_volume
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Record runner and check disk before build
+        run: |
+          uname -a
+          docker version --format 'Client={{.Client.Version}} Server={{.Server.Version}}'
+          df -h / /var/lib/docker
+          python3 -c 'import shutil; free=shutil.disk_usage("/").free; print(f"Free bytes before build: {free}"); assert free >= 4 * 1024 ** 3'
+      - name: Build disposable image
+        run: docker build -t ai-os-lifecycle:ci .
+      - name: Check cleanup after injected failure
+        env:
+          AIOS_RUN_ENOSPC_TEST: '1'
+          AIOS_FAIL_AFTER_MOUNT: '1'
+        run: |
+          set +e
+          python3 -u tests/full_volume.py
+          status=$?
+          set -e
+          echo "Injected-run exit code: $status"
+          test "$status" -ne 0
+          test -z "$(docker ps -aq --filter name=ai-os-)"
+          test -z "$(docker volume ls -q --filter name=ai-os-)"
+      - name: Check real ENOSPC and cleanup
+        env:
+          AIOS_RUN_ENOSPC_TEST: '1'
+        run: |
+          python3 -u tests/full_volume.py
+          test -z "$(docker ps -aq --filter name=ai-os-)"
+          test -z "$(docker volume ls -q --filter name=ai-os-)"
