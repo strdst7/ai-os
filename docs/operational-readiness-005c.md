@@ -1,6 +1,7 @@
 # Task 005C — Operational Readiness Report
 
 Status: **all seven checks passed on disposable CI runners. Production deployment not approved.**
+PR #8 merged into `main` as `be3c7f436ad65d49d58c96f56fdfd53de3f06137`.
 Source: PR #8; source changes at `c2142fe6e62c93acbfa38e433237e8831966adfc`.
 Evidence: https://github.com/strdst7/ai-os/actions/runs/41558016110
 
@@ -60,7 +61,7 @@ This disposable-runner result does not establish production readiness. Productio
 
 ## Deployment-environment gate
 
-The deployment target, operator, and volume layout are not identified. These four acceptance items remain open:
+The named host is Streamlit Community Cloud at `https://ai-osdev.streamlit.app/`. Its repository entrypoint is `app.py`: a session-local dashboard. It does not start the Docker/FastAPI service in `src/main.py`, read `AIOS_OBSERVATION_DB`, or write observations to SQLite. The CI volume checks apply to that separate API deployment path. The live URL redirected to Streamlit sign-in during an unauthenticated probe, so live dashboard behavior and deployment source revision remain unconfirmed. No persistent host mount, backup destination, or operator access was established. These four acceptance items remain open for any future stateful API deployment:
 
 | Acceptance item | Required evidence on the deployment environment | Status |
 | --- | --- | --- |
@@ -69,4 +70,4 @@ The deployment target, operator, and volume layout are not identified. These fou
 | Restore drill | Restore a real backup into an isolated target. Check history, anomaly state, UUID replay, and `PRAGMA integrity_check`. | Pending |
 | Disk monitoring | Set capacity thresholds and alerts before exhaustion. Check alert delivery and backup-write error handling. Never fill production storage. | Pending |
 
-Confirm the topology supports one host and one replica before using SQLite. Keep PR #8 open and the service private until security review. Do not reuse disposable CI results as target-host evidence. Keep the two-Stable recovery rule unchanged until labeled incidents support a policy.
+Confirm the topology supports one host and one replica before using SQLite. PR #8 is merged; do not expose the FastAPI service publicly until security review. Do not reuse disposable CI results as target-host evidence. Keep the two-Stable recovery rule unchanged until labeled incidents support a policy. Streamlit's session-local dashboard cannot satisfy the four stateful API gates without a separately identified persistent host and backup/alert operator.
