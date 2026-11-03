@@ -60,15 +60,13 @@ This disposable-runner result does not establish production readiness. Productio
 
 ## Deployment-environment gate
 
-The deployment target, operator, and volume layout are not identified. Keep the service private and PR #8 open. Record the following on the actual target before approving deployment:
+The deployment target, operator, and volume layout are not identified. These four acceptance items remain open:
 
-| Gate | Required evidence | Status |
+| Acceptance item | Required evidence on the deployment environment | Status |
 | --- | --- | --- |
-| Topology | One host and one replica, or a decision to replace SQLite with a shared transactional store. | Pending |
-| Volume | Inspect the real mount, ownership, permissions, and `AIOS_OBSERVATION_DB` path. Restart and recreate against the same volume. | Pending |
-| Backup | Set a schedule, retention, and storage outside the database volume. Record a successful online backup. | Pending |
-| Restore | Restore into an isolated target. Check history, anomaly state, UUID replay, and `PRAGMA integrity_check`. | Pending |
-| Capacity | Check free space, disk alerts, backup-write errors, and response handling on the deployment filesystem. Never fill a production data volume. | Pending |
-| Exposure | Keep the API private until a security review checks access, secrets, and network binding. | Pending |
+| Host-volume validation | Inspect the actual persistent mount, `AIOS_OBSERVATION_DB` path, ownership, and permissions. Check history after restart and recreation. | Pending |
+| Backup schedule | Record automated frequency, retention, off-volume destination, and failure notification. Check an actual scheduled backup. | Pending |
+| Restore drill | Restore a real backup into an isolated target. Check history, anomaly state, UUID replay, and `PRAGMA integrity_check`. | Pending |
+| Disk monitoring | Set capacity thresholds and alerts before exhaustion. Check alert delivery and backup-write error handling. Never fill production storage. | Pending |
 
-Do not reuse the disposable CI result as evidence for these target-specific gates. Keep the two-Stable recovery rule unchanged until labeled incidents support a policy.
+Confirm the topology supports one host and one replica before using SQLite. Keep PR #8 open and the service private until security review. Do not reuse disposable CI results as target-host evidence. Keep the two-Stable recovery rule unchanged until labeled incidents support a policy.
