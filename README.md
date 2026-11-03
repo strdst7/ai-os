@@ -10,7 +10,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Python](https://img.shields.io/badge/python-3.10+-blue)
 ![Framework](https://img.shields.io/badge/framework-FastAPI-green)
-![Status](https://img.shields.io/badge/status-production_ready-brightgreen)
+![Status](https://img.shields.io/badge/status-demo_only-yellow)
 
 </p>
 
@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-Production-grade monitoring architecture for detecting instability and operational drift in deployed AI systems.
+Research dashboard for exploring instability and operational drift in AI deployments. The Streamlit demo keeps history only in a browser session. The separate FastAPI/SQLite service is not production-approved; see [operational readiness](docs/operational-readiness-005c.md).
 </p>
 
 
