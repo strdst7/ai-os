@@ -26,7 +26,7 @@ AI-OS enforces:
 
 - API key authentication
 - Environment-based configuration
-- Guardrail threshold validation
+- Fixed guardrail tier thresholds in `src/guardrails.py`
 - Telemetry validation via schema typing
 
 ---
