@@ -1,7 +1,7 @@
 # Phase 1: Host and ownership decision — Research
 
-**Researched:** 2026-11-05  
-**Domain:** Private API host selection and SQLite topology decision  
+**Researched:** 2026-11-05
+**Domain:** Private API host selection and SQLite topology decision
 **Confidence:** HIGH for repository facts; LOW for host fit until MIA supplies a host
 
 <user_constraints>
