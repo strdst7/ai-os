@@ -1,1 +1,15 @@
-{"mode":"interactive","granularity":"coarse","workflow":{"research":false,"plan_check":true,"verifier":true,"compact_content":true,"auto_advance":false},"planning":{"commit_docs":false}}
+{
+  "mode": "interactive",
+  "granularity": "coarse",
+  "workflow": {
+    "research": false,
+    "plan_check": true,
+    "verifier": true,
+    "compact_content": true,
+    "auto_advance": false,
+    "api_coverage_gate": false
+  },
+  "planning": {
+    "commit_docs": false
+  }
+}
