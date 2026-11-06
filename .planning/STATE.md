@@ -28,9 +28,9 @@ Last activity: 2026-11-07 — Decision record published; documentation checks pa
 
 ### Decisions
 
-- No API host selected. Streamlit Community Cloud hosts only the session-local demo.
+- MIA owns host selection and is interim operator. The named host operating contact remains pending.
 
 ### Blockers/Concerns
 
-- Actual host and operator are unknown. Record a blocked decision instead of inventing either.
+- The API host and named operating contact are unknown. Keep the decision blocked.
 - Production approval requires target-host evidence and security review.
