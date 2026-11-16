@@ -29,7 +29,7 @@ That check proves the Proxmox node answers on its management ports. It does not 
 
 A green management-port check is not host evidence, so the two live in separate columns.
 
-| Item | Verified on 2026-11-17 | Not verified |
+| Check | Verified on 2026-11-17 | Not verified |
 | --- | --- | --- |
 | Node reachability | ICMP echo replies from 100.122.194.34 | — |
 | Proxmox web UI | HTTPS `HTTP 200` on port 8006 | — |
