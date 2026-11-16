@@ -60,7 +60,7 @@ Each row is Pending. MIA is the interim operator for the four host gates and mus
 
 | Security review | Independent reviewer, assignment pending | Review the named host, the container network exposure, `AIOS_API_KEY` handling in `src/auth.py` (503 when the server key is unset, short, whitespace-padded or a placeholder; 401 when the client key is missing or mismatched), the exposure path and operational controls. | Written decision tied to the host and image revision. | Pending |
 
-The [deployment guide](DEPLOYMENT.md) remains the runtime contract that governs the container, and its statement that production API deployment remains blocked is still true: this record selects a host, it does not approve deployment. CI lifecycle and full-volume results in the [operational-readiness report](operational-readiness-005c.md) came from disposable runners, including a tmpfs full-volume simulation, and provide no target-host mount or alert evidence. This phase produced no gate evidence at all — the Proxmox reachability check above is infrastructure liveness, not a host gate.
+The [deployment guide](DEPLOYMENT.md) remains the runtime contract that governs the container, and its statement that production API deployment remains blocked is still true — deployment itself is not approved; this record selects a host and nothing more. CI lifecycle and full-volume results in the [operational-readiness report](operational-readiness-005c.md) came from disposable runners, including a tmpfs full-volume simulation, and provide no target-host mount or alert evidence. This phase produced no gate evidence at all — the Proxmox reachability check above is infrastructure liveness, not a host gate.
 
 ## Next decision
 
