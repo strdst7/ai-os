@@ -31,6 +31,7 @@ A green management-port check is not host evidence, so the two live in separate 
 
 | Check | Verified on 2026-11-17 | Not verified |
 | --- | --- | --- |
+| Not verified | — | The rows below are the outstanding checks; this row labels them. |
 | Node reachability | ICMP echo replies from 100.122.194.34 | — |
 | Proxmox web UI | HTTPS `HTTP 200` on port 8006 | — |
 | SSH | TCP port 22 accepting connections | — |
@@ -57,7 +58,6 @@ Each row is Pending. MIA is the interim operator for the four host gates and mus
 | Backup schedule | MIA, interim operator; named delegate pending | Define automated frequency and retention, an off-volume destination that is not the storage the database lives on, and a failure notification path. Pass condition is a completed scheduled run in the log, not an on-demand copy. | Scheduler config, destination and retention policy, completed scheduled-run log, failure-notification result. | Pending |
 | Restore drill | MIA, interim operator; named delegate pending | Restore a real backup into an isolated target, then check history, anomaly state, UUID replay and `PRAGMA integrity_check` without overwriting the only copy. | Backup identifier, isolated restore steps, recorded checks. | Pending |
 | Disk monitoring | MIA, interim operator; named delegate pending | Set capacity thresholds for the volume holding `/data`, prove an alert is delivered, and show backup-write error reporting. Do not fill production storage; `tests/full_volume.py` must not run on the real volume. | Threshold and routing config, delivered alert, safe backup-write error evidence. | Pending |
-
 | Security review | Independent reviewer, assignment pending | Review the named host, the container network exposure, `AIOS_API_KEY` handling in `src/auth.py` (503 when the server key is unset, short, whitespace-padded or a placeholder; 401 when the client key is missing or mismatched), the exposure path and operational controls. | Written decision tied to the host and image revision. | Pending |
 
 The [deployment guide](DEPLOYMENT.md) remains the runtime contract that governs the container, and its statement that production API deployment remains blocked is still true — deployment itself is not approved; this record selects a host and nothing more. CI lifecycle and full-volume results in the [operational-readiness report](operational-readiness-005c.md) came from disposable runners, including a tmpfs full-volume simulation, and provide no target-host mount or alert evidence. This phase produced no gate evidence at all — the Proxmox reachability check above is infrastructure liveness, not a host gate.
