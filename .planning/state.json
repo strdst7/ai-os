@@ -1,0 +1,18 @@
+{
+  "contract": "1.0.0",
+  "flavor": "core",
+  "milestone": null,
+  "phases": [
+    {
+      "number": "1",
+      "name": "Host selection and evidence plan",
+      "status": "pending"
+    }
+  ],
+  "next": {
+    "command": "/gsd-progress --next",
+    "label": "Advance to the next step (plan phase 01)",
+    "reason": "Phase 1 of 1 — needs a plan"
+  },
+  "updated_at": "2026-11-16T20:36:39.875Z"
+}
