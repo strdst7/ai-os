@@ -69,7 +69,7 @@ coverage:
     requirement: GATE-01
     verification:
       - kind: other
-        ref: "python3 -c '<task 2 assertion>' (5 pending cells, gate order)"
+        ref: "python3 -c '<task 2 assertion>' (5 pending cells, gate order, Not verified label row)"
         status: pass
     human_judgment: false
   - id: D5
@@ -95,6 +95,10 @@ status: complete
 - **Completed:** 2026-11-17
 - **Tasks:** 3
 - **Files modified:** 1 (`docs/api-host-decision.md`), plus this SUMMARY
+
+## Orbital Sync
+
+Three task commits plus one summary commit on `docs/api-host-readiness`; a fourth follow-up commit (`d6327ae`) made the ledger's Not verified label a real table row and reattached the detached Security review row to the gate table, so all three plan checks exit 0 against the shipped document.
 
 ## Accomplishments
 
