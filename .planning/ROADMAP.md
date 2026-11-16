@@ -6,7 +6,7 @@ Decide whether an eligible stateful API host exists, then define host-specific e
 
 ## Phases
 
-- [ ] **Phase 1: Host selection and evidence plan** - Record the host decision and five approval prerequisites.
+- [x] **Phase 1: Host selection and evidence plan** - Record the host decision and five approval prerequisites.
 
 ## Phase Details
 
