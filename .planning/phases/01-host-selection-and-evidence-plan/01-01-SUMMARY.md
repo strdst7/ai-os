@@ -98,7 +98,7 @@ status: complete
 
 ## Orbital Sync
 
-Three task commits plus one summary commit on `docs/api-host-readiness`; a fourth follow-up commit (`d6327ae`) made the ledger's Not verified label a real table row and reattached the detached Security review row to the gate table, so all three plan checks exit 0 against the shipped document.
+Three task commits plus one summary commit on `docs/api-host-readiness`, then two follow-up commits: `d6327ae` made the ledger's Not verified label a real table row and reattached the detached Security review row to the gate table, and `030df1e` recorded this correction here. All three plan checks exit 0 against the shipped document; the earlier note that Task 2 could never pass is superseded — it passes at `d6327ae`.
 
 ## Accomplishments
 

@@ -23,7 +23,7 @@ Keep the API private until its actual host satisfies the production acceptance g
 
 ## Context
 
-`app.py` runs the Streamlit demo, not the stateful API. `docs/DEPLOYMENT.md` and `docs/operational-readiness-005c.md` list the outstanding host gates. No API host is selected. Main matches `origin/main` at `2893451d1a2cab3682e5c65d30568a23868520e8`.
+`app.py` runs the Streamlit demo, not the stateful API. `docs/DEPLOYMENT.md` and `docs/operational-readiness-005c.md` list the outstanding host gates. The stateful API host is selected: Proxmox VE `peakybuildr` on the tailnet at `100.122.194.34`, with MIA as interim operating contact (a named delegate is pending). The four host gates and the security review remain Pending; see `docs/api-host-decision.md`. Main matches `origin/main` at `2893451d1a2cab3682e5c65d30568a23868520e8`.
 
 ## Constraints
 

@@ -11,7 +11,7 @@ Decide whether an eligible stateful API host exists, then define host-specific e
 ## Phase Details
 
 ### Phase 1: Host selection and evidence plan
-**Goal**: Produce one decision record naming an eligible host and operator, or a blocked decision, with explicit host evidence criteria and owners.
+**Goal**: Produce one decision record naming the selected host and operator, with explicit host evidence criteria and owners; record a blocked decision only when no eligible host exists.
 **Depends on**: Nothing (first phase)
 **Requirements**: HOST-01, HOST-02, GATE-01, GATE-02
 **Success Criteria** (what must be TRUE):
@@ -21,7 +21,7 @@ Decide whether an eligible stateful API host exists, then define host-specific e
 **Plans**: 1 plan
 
 Plans:
-- [x] 01-01-PLAN.md — Record the blocked API host decision and acceptance-evidence plan.
+- [x] 01-01-PLAN.md — Record the selected host `peakybuildr` with a dated evidence ledger and a Pending gate plan.
 
 ## Progress
 
