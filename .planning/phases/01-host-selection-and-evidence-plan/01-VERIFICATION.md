@@ -7,7 +7,7 @@ covered_files:
   - .planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md
   - .planning/phases/01-host-selection-and-evidence-plan/01-01-SUMMARY.md
   - docs/api-host-decision.md
-covered_digest: "v4:sha256:969e48ab70072c4702b784c343bca5ebb305a5f85d837d4900d4b799d9e6e62e"
+covered_digest: "v4:sha256:480560370c243de517ce03b44f71fa39e7f05ba31d146fc514f266b8ff43f8b8"
 behavior_unverified: 0
 overrides_applied: 0
 re_verification:
