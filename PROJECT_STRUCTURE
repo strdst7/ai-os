@@ -4,5 +4,6 @@ src/ — core monitoring system (stability engine, guardrails, API)
 src/services/ — monitoring service and SQLite persistence
 docs/ — architecture diagrams and visuals
 data/ — example telemetry datasets
-tools/ — offline scripts (synthetic telemetry generation)
+notebooks/ — reproducibility analysis (executed, outputs stored)
+tools/ — offline scripts (dataset and notebook generation)
 tests/ — system validation tests

@@ -401,6 +401,27 @@ Regenerate it deterministically with:
 python tools/generate_sample_telemetry.py
 ```
 
+Analysis notebook (executed, with stored outputs):
+
+`notebooks/reproducibility_analysis.ipynb`
+
+It validates the dataset against the `Telemetry` schema, computes ADSI per
+cycle, plots the tier transitions and sub-index decomposition, replays the
+rolling z-score detector, and measures guardrail trigger timing for the
+composite score versus each individual metric.
+
+Rebuild it after changing the dataset:
+
+```
+pip install nbformat nbclient ipykernel   # notebook toolchain (not run by CI)
+python tools/build_reproducibility_notebook.py
+```
+
+Note on the lead-time result: on this synthetic series the composite ADSI
+triggers *later* than the drift sub-index (cycle 364 vs 279). The composite
+trades detection latency for robustness and a single interpretable alert; it
+is not an earlier-warning mechanism. See the notebook's Findings section.
+
 Supplementary materials include:
 
 • benchmark charts
