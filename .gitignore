@@ -38,3 +38,8 @@ openapi.json
 # ===============================
 *.swp
 *.swo
+
+# Editor / stray backups
+*.save
+.venv310/
+.venv/
