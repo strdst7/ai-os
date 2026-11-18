@@ -391,21 +391,21 @@ Run the server
 ---  
 ## Reproducibility
 
-Example telemetry dataset:
+Example telemetry dataset (500 synthetic monitoring cycles across stable, warning, and critical phases):
 
-𝚍𝚊𝚝𝚊/𝚜𝚊𝚖𝚙𝚕𝚎_𝚝𝚎𝚕𝚎𝚖𝚎𝚝𝚛𝚢.𝚓𝚜𝚘𝚗
+`data/sample_telemetry.json`
 
-Experiment notebook:
+Regenerate it deterministically with:
 
-𝚗𝚘𝚝𝚎𝚋𝚘𝚘𝚔𝚜/𝚛𝚎𝚙𝚛𝚘𝚍𝚞𝚌𝚒𝚋𝚒𝚕𝚒𝚝𝚢_𝚊𝚗𝚊𝚕𝚢𝚜𝚒𝚜.𝚒𝚙𝚢𝚗𝚋
+```
+python tools/generate_sample_telemetry.py
+```
 
 Supplementary materials include:
 
 • benchmark charts
 
 • stability timeline visualizations
-
-• reproducibility notebooks
 
 ---
 # Enterprise Impact
