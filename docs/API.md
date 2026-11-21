@@ -112,8 +112,9 @@ After an evaluation, the response has this shape. The example values are illustr
 | 409 | Existing `observation_id` reused with different metrics. | `{"detail":"Observation ID already used"}` |
 | 422 | Invalid JSON body, missing metric, invalid UUID, out-of-range or non-float metric, or extra field. | FastAPI validation response with a `detail` list. |
 | 503 | Server `AIOS_API_KEY` missing or rejected by validation. | `{"detail":"API key not configured"}` |
+| 503 | Observation store cannot be written (full, locked, read-only, or unavailable). | `{"detail":"storage_full: ...","retryable":true}` plus `Retry-After: 5`. |
 
-No custom handler translates SQLite or other unexpected failures into a documented API error envelope. An invalid body does not create an observation.
+A storage failure is reported as HTTP 503 with `retryable: true` and a `detail` prefix identifying the cause: `storage_full`, `storage_busy`, `storage_unavailable`, or `storage_error`. The underlying SQLite message is not included in the response body. A rejected write does not create an observation and does not change history or alert state, so retrying is safe. An invalid body does not create an observation.
 
 ## Rate limits
 

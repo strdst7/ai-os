@@ -44,7 +44,7 @@ Application container exit code: 0
 Cleanup exit codes: stop=0, container=0, volume=0
 ```
 
-The failed observation produced no success response. History and anomaly state stayed unchanged. Its retry succeeded after freeing space. The original row remained readable. SQLite reported `ok` for the live database and backup. The API returned a generic HTTP 500, not a structured storage error. Operators still need a disk alert.
+The failed observation produced no success response. History and anomaly state stayed unchanged. Its retry succeeded after freeing space. The original row remained readable. SQLite reported `ok` for the live database and backup. At the time, the API returned a generic HTTP 500. Storage failures are now mapped to a structured `503` with a `retryable` flag and `Retry-After: 5` (`storage_full`, `storage_busy`, `storage_unavailable`, or `storage_error`); see `src/main.py`. This changes only the HTTP response — the rejection still leaves history and alert state untouched. Operators still need a disk alert.
 
 The workflow also injected an error after mounting, before filling. That test process exited `1` as intended. Its application container exited `0` after a normal stop. Cleanup exit codes were `stop=0`, `container=0`, and `volume=0`. The workflow found no matching test container or volume afterward. The real ENOSPC run exited `0` with the same cleanup codes. No unexpected filesystem or transaction behavior appeared.
 
