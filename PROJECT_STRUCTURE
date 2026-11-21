@@ -1,7 +1,9 @@
- # AI-OS Project Structure
+# AI-OS Project Structure
 
-src/ — core monitoring system  
-docs/ — architecture diagrams and visuals  
-data/ — example telemetry datasets  
-notebooks/ — reproducibility experiments  
+src/ — core monitoring system (stability engine, guardrails, API)
+src/services/ — monitoring service and SQLite persistence
+docs/ — architecture diagrams and visuals
+data/ — example telemetry datasets
+notebooks/ — reproducibility analysis (executed, outputs stored)
+tools/ — offline scripts (dataset and notebook generation)
 tests/ — system validation tests

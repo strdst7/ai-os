@@ -1,70 +1,3502 @@
-Dataset Description
-
-This dataset contains synthetic telemetry records used to simulate stability monitoring in enterprise AI deployments. The dataset was created to reproduce the stability evaluation experiments described in the AI-OS framework.
-
-Each record represents a monitoring cycle and contains normalized system metrics used to compute the AI Deployment Stability Index (ADSI).
-
-The dataset enables evaluation of:
-
-• stability degradation detection
-• anomaly detection using rolling statistics
-• composite stability modeling across subsystems
-
-⸻
-
-Dataset Structure
-
-Each telemetry record includes:
-
-Field	Description
-timestamp	Monitoring cycle timestamp
-kpi_error	KPI misalignment error rate
-retrieval_score	Retrieval system quality score
-latency_deviation	Infrastructure latency variation
-embedding_shift	Embedding drift magnitude
-
-All values are normalized between 0 and 1.
-
-⸻
-
-Dataset Size
-	•	500 simulated monitoring cycles
-	•	3 degradation phases
-
-1️⃣ Stable phase
-2️⃣ Warning phase
-3️⃣ Critical degradation phase
-
-This progression enables controlled evaluation of stability tier transitions.
-
-⸻
-
-Dataset Purpose
-
-The dataset is designed to:
-	•	reproduce ADSI calculations
-	•	validate stability tier classification
-	•	simulate compound degradation scenarios
-	•	demonstrate early failure detection compared to isolated metric monitoring
-
-⸻
-
-Example Record
-
-{
-  "timestamp": "2026-01-01T00:00:01Z",
-  "kpi_error": 0.05,
-  "retrieval_score": 0.92,
-  "latency_deviation": 0.08,
-  "embedding_shift": 0.04
-}
-
-
-⸻
-
-Dataset Location
-
-data/sample_telemetry.json
-
-GitHub Repository:
-https://github.com/strdst7/ai-os
+[
+  {
+    "timestamp": "2026-01-01T00:00:00Z",
+    "kpi_error": 0.0385,
+    "retrieval_score": 0.9372,
+    "latency_dev": 0.0514,
+    "embedding_shift": 0.0265
+  },
+  {
+    "timestamp": "2026-01-01T00:01:00Z",
+    "kpi_error": 0.0387,
+    "retrieval_score": 0.9362,
+    "latency_dev": 0.0481,
+    "embedding_shift": 0.0264
+  },
+  {
+    "timestamp": "2026-01-01T00:02:00Z",
+    "kpi_error": 0.0349,
+    "retrieval_score": 0.9357,
+    "latency_dev": 0.0448,
+    "embedding_shift": 0.0231
+  },
+  {
+    "timestamp": "2026-01-01T00:03:00Z",
+    "kpi_error": 0.0342,
+    "retrieval_score": 0.9383,
+    "latency_dev": 0.042,
+    "embedding_shift": 0.0208
+  },
+  {
+    "timestamp": "2026-01-01T00:04:00Z",
+    "kpi_error": 0.0351,
+    "retrieval_score": 0.9419,
+    "latency_dev": 0.0428,
+    "embedding_shift": 0.0198
+  },
+  {
+    "timestamp": "2026-01-01T00:05:00Z",
+    "kpi_error": 0.0388,
+    "retrieval_score": 0.9383,
+    "latency_dev": 0.0459,
+    "embedding_shift": 0.018
+  },
+  {
+    "timestamp": "2026-01-01T00:06:00Z",
+    "kpi_error": 0.0359,
+    "retrieval_score": 0.9353,
+    "latency_dev": 0.0446,
+    "embedding_shift": 0.0205
+  },
+  {
+    "timestamp": "2026-01-01T00:07:00Z",
+    "kpi_error": 0.0332,
+    "retrieval_score": 0.9359,
+    "latency_dev": 0.0459,
+    "embedding_shift": 0.0193
+  },
+  {
+    "timestamp": "2026-01-01T00:08:00Z",
+    "kpi_error": 0.0335,
+    "retrieval_score": 0.9324,
+    "latency_dev": 0.0426,
+    "embedding_shift": 0.0169
+  },
+  {
+    "timestamp": "2026-01-01T00:09:00Z",
+    "kpi_error": 0.0348,
+    "retrieval_score": 0.9319,
+    "latency_dev": 0.0413,
+    "embedding_shift": 0.0175
+  },
+  {
+    "timestamp": "2026-01-01T00:10:00Z",
+    "kpi_error": 0.0344,
+    "retrieval_score": 0.9303,
+    "latency_dev": 0.0438,
+    "embedding_shift": 0.019
+  },
+  {
+    "timestamp": "2026-01-01T00:11:00Z",
+    "kpi_error": 0.0322,
+    "retrieval_score": 0.9309,
+    "latency_dev": 0.0442,
+    "embedding_shift": 0.0219
+  },
+  {
+    "timestamp": "2026-01-01T00:12:00Z",
+    "kpi_error": 0.0339,
+    "retrieval_score": 0.9292,
+    "latency_dev": 0.0483,
+    "embedding_shift": 0.0187
+  },
+  {
+    "timestamp": "2026-01-01T00:13:00Z",
+    "kpi_error": 0.0332,
+    "retrieval_score": 0.9313,
+    "latency_dev": 0.0457,
+    "embedding_shift": 0.0185
+  },
+  {
+    "timestamp": "2026-01-01T00:14:00Z",
+    "kpi_error": 0.0294,
+    "retrieval_score": 0.9327,
+    "latency_dev": 0.048,
+    "embedding_shift": 0.019
+  },
+  {
+    "timestamp": "2026-01-01T00:15:00Z",
+    "kpi_error": 0.0323,
+    "retrieval_score": 0.9312,
+    "latency_dev": 0.0498,
+    "embedding_shift": 0.0197
+  },
+  {
+    "timestamp": "2026-01-01T00:16:00Z",
+    "kpi_error": 0.0328,
+    "retrieval_score": 0.9309,
+    "latency_dev": 0.0527,
+    "embedding_shift": 0.0231
+  },
+  {
+    "timestamp": "2026-01-01T00:17:00Z",
+    "kpi_error": 0.0325,
+    "retrieval_score": 0.9322,
+    "latency_dev": 0.0494,
+    "embedding_shift": 0.0246
+  },
+  {
+    "timestamp": "2026-01-01T00:18:00Z",
+    "kpi_error": 0.0336,
+    "retrieval_score": 0.9362,
+    "latency_dev": 0.0521,
+    "embedding_shift": 0.0228
+  },
+  {
+    "timestamp": "2026-01-01T00:19:00Z",
+    "kpi_error": 0.0326,
+    "retrieval_score": 0.9376,
+    "latency_dev": 0.0485,
+    "embedding_shift": 0.0224
+  },
+  {
+    "timestamp": "2026-01-01T00:20:00Z",
+    "kpi_error": 0.0298,
+    "retrieval_score": 0.9345,
+    "latency_dev": 0.0452,
+    "embedding_shift": 0.0245
+  },
+  {
+    "timestamp": "2026-01-01T00:21:00Z",
+    "kpi_error": 0.0268,
+    "retrieval_score": 0.9325,
+    "latency_dev": 0.0445,
+    "embedding_shift": 0.0273
+  },
+  {
+    "timestamp": "2026-01-01T00:22:00Z",
+    "kpi_error": 0.0233,
+    "retrieval_score": 0.9321,
+    "latency_dev": 0.0451,
+    "embedding_shift": 0.0303
+  },
+  {
+    "timestamp": "2026-01-01T00:23:00Z",
+    "kpi_error": 0.0258,
+    "retrieval_score": 0.9351,
+    "latency_dev": 0.0436,
+    "embedding_shift": 0.0295
+  },
+  {
+    "timestamp": "2026-01-01T00:24:00Z",
+    "kpi_error": 0.0245,
+    "retrieval_score": 0.9382,
+    "latency_dev": 0.0474,
+    "embedding_shift": 0.0266
+  },
+  {
+    "timestamp": "2026-01-01T00:25:00Z",
+    "kpi_error": 0.0219,
+    "retrieval_score": 0.936,
+    "latency_dev": 0.0455,
+    "embedding_shift": 0.0264
+  },
+  {
+    "timestamp": "2026-01-01T00:26:00Z",
+    "kpi_error": 0.0225,
+    "retrieval_score": 0.9341,
+    "latency_dev": 0.0417,
+    "embedding_shift": 0.0257
+  },
+  {
+    "timestamp": "2026-01-01T00:27:00Z",
+    "kpi_error": 0.0213,
+    "retrieval_score": 0.9347,
+    "latency_dev": 0.0455,
+    "embedding_shift": 0.0271
+  },
+  {
+    "timestamp": "2026-01-01T00:28:00Z",
+    "kpi_error": 0.0213,
+    "retrieval_score": 0.9357,
+    "latency_dev": 0.0471,
+    "embedding_shift": 0.0234
+  },
+  {
+    "timestamp": "2026-01-01T00:29:00Z",
+    "kpi_error": 0.0244,
+    "retrieval_score": 0.9379,
+    "latency_dev": 0.0503,
+    "embedding_shift": 0.0257
+  },
+  {
+    "timestamp": "2026-01-01T00:30:00Z",
+    "kpi_error": 0.0235,
+    "retrieval_score": 0.9371,
+    "latency_dev": 0.0474,
+    "embedding_shift": 0.0267
+  },
+  {
+    "timestamp": "2026-01-01T00:31:00Z",
+    "kpi_error": 0.0199,
+    "retrieval_score": 0.9337,
+    "latency_dev": 0.0452,
+    "embedding_shift": 0.0239
+  },
+  {
+    "timestamp": "2026-01-01T00:32:00Z",
+    "kpi_error": 0.0185,
+    "retrieval_score": 0.9301,
+    "latency_dev": 0.0414,
+    "embedding_shift": 0.021
+  },
+  {
+    "timestamp": "2026-01-01T00:33:00Z",
+    "kpi_error": 0.0152,
+    "retrieval_score": 0.9291,
+    "latency_dev": 0.0378,
+    "embedding_shift": 0.0239
+  },
+  {
+    "timestamp": "2026-01-01T00:34:00Z",
+    "kpi_error": 0.016,
+    "retrieval_score": 0.9263,
+    "latency_dev": 0.0361,
+    "embedding_shift": 0.0226
+  },
+  {
+    "timestamp": "2026-01-01T00:35:00Z",
+    "kpi_error": 0.0148,
+    "retrieval_score": 0.9233,
+    "latency_dev": 0.0391,
+    "embedding_shift": 0.0264
+  },
+  {
+    "timestamp": "2026-01-01T00:36:00Z",
+    "kpi_error": 0.0145,
+    "retrieval_score": 0.9232,
+    "latency_dev": 0.0359,
+    "embedding_shift": 0.0231
+  },
+  {
+    "timestamp": "2026-01-01T00:37:00Z",
+    "kpi_error": 0.0131,
+    "retrieval_score": 0.9213,
+    "latency_dev": 0.0388,
+    "embedding_shift": 0.0203
+  },
+  {
+    "timestamp": "2026-01-01T00:38:00Z",
+    "kpi_error": 0.0092,
+    "retrieval_score": 0.9249,
+    "latency_dev": 0.0392,
+    "embedding_shift": 0.0174
+  },
+  {
+    "timestamp": "2026-01-01T00:39:00Z",
+    "kpi_error": 0.0094,
+    "retrieval_score": 0.9212,
+    "latency_dev": 0.0396,
+    "embedding_shift": 0.0211
+  },
+  {
+    "timestamp": "2026-01-01T00:40:00Z",
+    "kpi_error": 0.0122,
+    "retrieval_score": 0.9228,
+    "latency_dev": 0.0379,
+    "embedding_shift": 0.0199
+  },
+  {
+    "timestamp": "2026-01-01T00:41:00Z",
+    "kpi_error": 0.0095,
+    "retrieval_score": 0.925,
+    "latency_dev": 0.0384,
+    "embedding_shift": 0.0221
+  },
+  {
+    "timestamp": "2026-01-01T00:42:00Z",
+    "kpi_error": 0.008,
+    "retrieval_score": 0.9228,
+    "latency_dev": 0.0411,
+    "embedding_shift": 0.0259
+  },
+  {
+    "timestamp": "2026-01-01T00:43:00Z",
+    "kpi_error": 0.0107,
+    "retrieval_score": 0.9252,
+    "latency_dev": 0.0438,
+    "embedding_shift": 0.0277
+  },
+  {
+    "timestamp": "2026-01-01T00:44:00Z",
+    "kpi_error": 0.0085,
+    "retrieval_score": 0.9254,
+    "latency_dev": 0.0429,
+    "embedding_shift": 0.0238
+  },
+  {
+    "timestamp": "2026-01-01T00:45:00Z",
+    "kpi_error": 0.0046,
+    "retrieval_score": 0.9236,
+    "latency_dev": 0.0411,
+    "embedding_shift": 0.0252
+  },
+  {
+    "timestamp": "2026-01-01T00:46:00Z",
+    "kpi_error": 0.0081,
+    "retrieval_score": 0.9232,
+    "latency_dev": 0.0448,
+    "embedding_shift": 0.029
+  },
+  {
+    "timestamp": "2026-01-01T00:47:00Z",
+    "kpi_error": 0.0117,
+    "retrieval_score": 0.9222,
+    "latency_dev": 0.0428,
+    "embedding_shift": 0.0268
+  },
+  {
+    "timestamp": "2026-01-01T00:48:00Z",
+    "kpi_error": 0.0091,
+    "retrieval_score": 0.9198,
+    "latency_dev": 0.044,
+    "embedding_shift": 0.0299
+  },
+  {
+    "timestamp": "2026-01-01T00:49:00Z",
+    "kpi_error": 0.0118,
+    "retrieval_score": 0.9197,
+    "latency_dev": 0.0454,
+    "embedding_shift": 0.0322
+  },
+  {
+    "timestamp": "2026-01-01T00:50:00Z",
+    "kpi_error": 0.0083,
+    "retrieval_score": 0.921,
+    "latency_dev": 0.0489,
+    "embedding_shift": 0.0343
+  },
+  {
+    "timestamp": "2026-01-01T00:51:00Z",
+    "kpi_error": 0.0102,
+    "retrieval_score": 0.9208,
+    "latency_dev": 0.0465,
+    "embedding_shift": 0.0365
+  },
+  {
+    "timestamp": "2026-01-01T00:52:00Z",
+    "kpi_error": 0.0088,
+    "retrieval_score": 0.9233,
+    "latency_dev": 0.0505,
+    "embedding_shift": 0.0356
+  },
+  {
+    "timestamp": "2026-01-01T00:53:00Z",
+    "kpi_error": 0.0079,
+    "retrieval_score": 0.9269,
+    "latency_dev": 0.0525,
+    "embedding_shift": 0.0329
+  },
+  {
+    "timestamp": "2026-01-01T00:54:00Z",
+    "kpi_error": 0.0048,
+    "retrieval_score": 0.9241,
+    "latency_dev": 0.0559,
+    "embedding_shift": 0.0352
+  },
+  {
+    "timestamp": "2026-01-01T00:55:00Z",
+    "kpi_error": 0.0019,
+    "retrieval_score": 0.9267,
+    "latency_dev": 0.06,
+    "embedding_shift": 0.0364
+  },
+  {
+    "timestamp": "2026-01-01T00:56:00Z",
+    "kpi_error": 0.0006,
+    "retrieval_score": 0.9271,
+    "latency_dev": 0.0572,
+    "embedding_shift": 0.0324
+  },
+  {
+    "timestamp": "2026-01-01T00:57:00Z",
+    "kpi_error": 0.0043,
+    "retrieval_score": 0.9283,
+    "latency_dev": 0.0576,
+    "embedding_shift": 0.0358
+  },
+  {
+    "timestamp": "2026-01-01T00:58:00Z",
+    "kpi_error": 0.0036,
+    "retrieval_score": 0.9313,
+    "latency_dev": 0.0604,
+    "embedding_shift": 0.0333
+  },
+  {
+    "timestamp": "2026-01-01T00:59:00Z",
+    "kpi_error": 0.0016,
+    "retrieval_score": 0.9297,
+    "latency_dev": 0.0586,
+    "embedding_shift": 0.0339
+  },
+  {
+    "timestamp": "2026-01-01T01:00:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9291,
+    "latency_dev": 0.0558,
+    "embedding_shift": 0.0371
+  },
+  {
+    "timestamp": "2026-01-01T01:01:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9288,
+    "latency_dev": 0.0567,
+    "embedding_shift": 0.0402
+  },
+  {
+    "timestamp": "2026-01-01T01:02:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9321,
+    "latency_dev": 0.0569,
+    "embedding_shift": 0.0404
+  },
+  {
+    "timestamp": "2026-01-01T01:03:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9283,
+    "latency_dev": 0.0566,
+    "embedding_shift": 0.0378
+  },
+  {
+    "timestamp": "2026-01-01T01:04:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9307,
+    "latency_dev": 0.0542,
+    "embedding_shift": 0.0375
+  },
+  {
+    "timestamp": "2026-01-01T01:05:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9312,
+    "latency_dev": 0.053,
+    "embedding_shift": 0.0375
+  },
+  {
+    "timestamp": "2026-01-01T01:06:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9335,
+    "latency_dev": 0.05,
+    "embedding_shift": 0.0379
+  },
+  {
+    "timestamp": "2026-01-01T01:07:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9317,
+    "latency_dev": 0.0524,
+    "embedding_shift": 0.0378
+  },
+  {
+    "timestamp": "2026-01-01T01:08:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9338,
+    "latency_dev": 0.0559,
+    "embedding_shift": 0.0373
+  },
+  {
+    "timestamp": "2026-01-01T01:09:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9339,
+    "latency_dev": 0.0562,
+    "embedding_shift": 0.0387
+  },
+  {
+    "timestamp": "2026-01-01T01:10:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9342,
+    "latency_dev": 0.0562,
+    "embedding_shift": 0.0422
+  },
+  {
+    "timestamp": "2026-01-01T01:11:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9372,
+    "latency_dev": 0.06,
+    "embedding_shift": 0.0401
+  },
+  {
+    "timestamp": "2026-01-01T01:12:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9408,
+    "latency_dev": 0.0629,
+    "embedding_shift": 0.0371
+  },
+  {
+    "timestamp": "2026-01-01T01:13:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9403,
+    "latency_dev": 0.0597,
+    "embedding_shift": 0.035
+  },
+  {
+    "timestamp": "2026-01-01T01:14:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9417,
+    "latency_dev": 0.0622,
+    "embedding_shift": 0.038
+  },
+  {
+    "timestamp": "2026-01-01T01:15:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9434,
+    "latency_dev": 0.0636,
+    "embedding_shift": 0.0351
+  },
+  {
+    "timestamp": "2026-01-01T01:16:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9472,
+    "latency_dev": 0.0616,
+    "embedding_shift": 0.0386
+  },
+  {
+    "timestamp": "2026-01-01T01:17:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9471,
+    "latency_dev": 0.0657,
+    "embedding_shift": 0.0412
+  },
+  {
+    "timestamp": "2026-01-01T01:18:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9466,
+    "latency_dev": 0.066,
+    "embedding_shift": 0.0398
+  },
+  {
+    "timestamp": "2026-01-01T01:19:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9452,
+    "latency_dev": 0.068,
+    "embedding_shift": 0.0358
+  },
+  {
+    "timestamp": "2026-01-01T01:20:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9447,
+    "latency_dev": 0.0644,
+    "embedding_shift": 0.0344
+  },
+  {
+    "timestamp": "2026-01-01T01:21:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9448,
+    "latency_dev": 0.0611,
+    "embedding_shift": 0.0382
+  },
+  {
+    "timestamp": "2026-01-01T01:22:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9486,
+    "latency_dev": 0.0581,
+    "embedding_shift": 0.0362
+  },
+  {
+    "timestamp": "2026-01-01T01:23:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9509,
+    "latency_dev": 0.0565,
+    "embedding_shift": 0.0331
+  },
+  {
+    "timestamp": "2026-01-01T01:24:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9542,
+    "latency_dev": 0.0592,
+    "embedding_shift": 0.0311
+  },
+  {
+    "timestamp": "2026-01-01T01:25:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9575,
+    "latency_dev": 0.06,
+    "embedding_shift": 0.0326
+  },
+  {
+    "timestamp": "2026-01-01T01:26:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.954,
+    "latency_dev": 0.0617,
+    "embedding_shift": 0.0319
+  },
+  {
+    "timestamp": "2026-01-01T01:27:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9576,
+    "latency_dev": 0.063,
+    "embedding_shift": 0.0342
+  },
+  {
+    "timestamp": "2026-01-01T01:28:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9604,
+    "latency_dev": 0.0597,
+    "embedding_shift": 0.037
+  },
+  {
+    "timestamp": "2026-01-01T01:29:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9592,
+    "latency_dev": 0.0603,
+    "embedding_shift": 0.0403
+  },
+  {
+    "timestamp": "2026-01-01T01:30:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9562,
+    "latency_dev": 0.0607,
+    "embedding_shift": 0.0381
+  },
+  {
+    "timestamp": "2026-01-01T01:31:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9535,
+    "latency_dev": 0.0573,
+    "embedding_shift": 0.0356
+  },
+  {
+    "timestamp": "2026-01-01T01:32:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.952,
+    "latency_dev": 0.0596,
+    "embedding_shift": 0.0339
+  },
+  {
+    "timestamp": "2026-01-01T01:33:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9494,
+    "latency_dev": 0.0586,
+    "embedding_shift": 0.0299
+  },
+  {
+    "timestamp": "2026-01-01T01:34:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9456,
+    "latency_dev": 0.0607,
+    "embedding_shift": 0.0302
+  },
+  {
+    "timestamp": "2026-01-01T01:35:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9454,
+    "latency_dev": 0.0643,
+    "embedding_shift": 0.027
+  },
+  {
+    "timestamp": "2026-01-01T01:36:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9449,
+    "latency_dev": 0.0645,
+    "embedding_shift": 0.0296
+  },
+  {
+    "timestamp": "2026-01-01T01:37:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9449,
+    "latency_dev": 0.0662,
+    "embedding_shift": 0.0333
+  },
+  {
+    "timestamp": "2026-01-01T01:38:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9476,
+    "latency_dev": 0.0681,
+    "embedding_shift": 0.0343
+  },
+  {
+    "timestamp": "2026-01-01T01:39:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9464,
+    "latency_dev": 0.0647,
+    "embedding_shift": 0.0312
+  },
+  {
+    "timestamp": "2026-01-01T01:40:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9484,
+    "latency_dev": 0.0629,
+    "embedding_shift": 0.0284
+  },
+  {
+    "timestamp": "2026-01-01T01:41:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9511,
+    "latency_dev": 0.0661,
+    "embedding_shift": 0.0297
+  },
+  {
+    "timestamp": "2026-01-01T01:42:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9491,
+    "latency_dev": 0.0646,
+    "embedding_shift": 0.0293
+  },
+  {
+    "timestamp": "2026-01-01T01:43:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9487,
+    "latency_dev": 0.063,
+    "embedding_shift": 0.0329
+  },
+  {
+    "timestamp": "2026-01-01T01:44:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9491,
+    "latency_dev": 0.0611,
+    "embedding_shift": 0.0365
+  },
+  {
+    "timestamp": "2026-01-01T01:45:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9479,
+    "latency_dev": 0.0573,
+    "embedding_shift": 0.0355
+  },
+  {
+    "timestamp": "2026-01-01T01:46:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.948,
+    "latency_dev": 0.0551,
+    "embedding_shift": 0.0354
+  },
+  {
+    "timestamp": "2026-01-01T01:47:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9461,
+    "latency_dev": 0.052,
+    "embedding_shift": 0.0345
+  },
+  {
+    "timestamp": "2026-01-01T01:48:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9423,
+    "latency_dev": 0.0507,
+    "embedding_shift": 0.0323
+  },
+  {
+    "timestamp": "2026-01-01T01:49:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9426,
+    "latency_dev": 0.0529,
+    "embedding_shift": 0.0334
+  },
+  {
+    "timestamp": "2026-01-01T01:50:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9456,
+    "latency_dev": 0.0522,
+    "embedding_shift": 0.0319
+  },
+  {
+    "timestamp": "2026-01-01T01:51:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9428,
+    "latency_dev": 0.0542,
+    "embedding_shift": 0.033
+  },
+  {
+    "timestamp": "2026-01-01T01:52:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9455,
+    "latency_dev": 0.0575,
+    "embedding_shift": 0.0339
+  },
+  {
+    "timestamp": "2026-01-01T01:53:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.948,
+    "latency_dev": 0.0548,
+    "embedding_shift": 0.034
+  },
+  {
+    "timestamp": "2026-01-01T01:54:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9507,
+    "latency_dev": 0.0575,
+    "embedding_shift": 0.0365
+  },
+  {
+    "timestamp": "2026-01-01T01:55:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9539,
+    "latency_dev": 0.0591,
+    "embedding_shift": 0.0379
+  },
+  {
+    "timestamp": "2026-01-01T01:56:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9502,
+    "latency_dev": 0.0564,
+    "embedding_shift": 0.0367
+  },
+  {
+    "timestamp": "2026-01-01T01:57:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9529,
+    "latency_dev": 0.0571,
+    "embedding_shift": 0.0376
+  },
+  {
+    "timestamp": "2026-01-01T01:58:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9543,
+    "latency_dev": 0.0572,
+    "embedding_shift": 0.0336
+  },
+  {
+    "timestamp": "2026-01-01T01:59:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9564,
+    "latency_dev": 0.0574,
+    "embedding_shift": 0.0337
+  },
+  {
+    "timestamp": "2026-01-01T02:00:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9529,
+    "latency_dev": 0.0595,
+    "embedding_shift": 0.0317
+  },
+  {
+    "timestamp": "2026-01-01T02:01:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.951,
+    "latency_dev": 0.0615,
+    "embedding_shift": 0.0292
+  },
+  {
+    "timestamp": "2026-01-01T02:02:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9549,
+    "latency_dev": 0.0617,
+    "embedding_shift": 0.0282
+  },
+  {
+    "timestamp": "2026-01-01T02:03:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9564,
+    "latency_dev": 0.064,
+    "embedding_shift": 0.029
+  },
+  {
+    "timestamp": "2026-01-01T02:04:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.953,
+    "latency_dev": 0.0614,
+    "embedding_shift": 0.0269
+  },
+  {
+    "timestamp": "2026-01-01T02:05:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9515,
+    "latency_dev": 0.0622,
+    "embedding_shift": 0.0229
+  },
+  {
+    "timestamp": "2026-01-01T02:06:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9496,
+    "latency_dev": 0.0637,
+    "embedding_shift": 0.0244
+  },
+  {
+    "timestamp": "2026-01-01T02:07:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.948,
+    "latency_dev": 0.0641,
+    "embedding_shift": 0.024
+  },
+  {
+    "timestamp": "2026-01-01T02:08:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9449,
+    "latency_dev": 0.0674,
+    "embedding_shift": 0.0215
+  },
+  {
+    "timestamp": "2026-01-01T02:09:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9485,
+    "latency_dev": 0.0637,
+    "embedding_shift": 0.0211
+  },
+  {
+    "timestamp": "2026-01-01T02:10:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9522,
+    "latency_dev": 0.0635,
+    "embedding_shift": 0.0191
+  },
+  {
+    "timestamp": "2026-01-01T02:11:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9558,
+    "latency_dev": 0.0614,
+    "embedding_shift": 0.0197
+  },
+  {
+    "timestamp": "2026-01-01T02:12:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.956,
+    "latency_dev": 0.0653,
+    "embedding_shift": 0.0166
+  },
+  {
+    "timestamp": "2026-01-01T02:13:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9561,
+    "latency_dev": 0.0685,
+    "embedding_shift": 0.0181
+  },
+  {
+    "timestamp": "2026-01-01T02:14:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9593,
+    "latency_dev": 0.0686,
+    "embedding_shift": 0.0142
+  },
+  {
+    "timestamp": "2026-01-01T02:15:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9593,
+    "latency_dev": 0.0684,
+    "embedding_shift": 0.0126
+  },
+  {
+    "timestamp": "2026-01-01T02:16:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.958,
+    "latency_dev": 0.0672,
+    "embedding_shift": 0.0152
+  },
+  {
+    "timestamp": "2026-01-01T02:17:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9601,
+    "latency_dev": 0.0701,
+    "embedding_shift": 0.012
+  },
+  {
+    "timestamp": "2026-01-01T02:18:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9618,
+    "latency_dev": 0.0735,
+    "embedding_shift": 0.0103
+  },
+  {
+    "timestamp": "2026-01-01T02:19:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9609,
+    "latency_dev": 0.0777,
+    "embedding_shift": 0.0109
+  },
+  {
+    "timestamp": "2026-01-01T02:20:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9604,
+    "latency_dev": 0.0761,
+    "embedding_shift": 0.0072
+  },
+  {
+    "timestamp": "2026-01-01T02:21:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9631,
+    "latency_dev": 0.0746,
+    "embedding_shift": 0.0105
+  },
+  {
+    "timestamp": "2026-01-01T02:22:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9612,
+    "latency_dev": 0.0749,
+    "embedding_shift": 0.008
+  },
+  {
+    "timestamp": "2026-01-01T02:23:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9649,
+    "latency_dev": 0.0781,
+    "embedding_shift": 0.0104
+  },
+  {
+    "timestamp": "2026-01-01T02:24:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9682,
+    "latency_dev": 0.0819,
+    "embedding_shift": 0.0107
+  },
+  {
+    "timestamp": "2026-01-01T02:25:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9646,
+    "latency_dev": 0.0839,
+    "embedding_shift": 0.0102
+  },
+  {
+    "timestamp": "2026-01-01T02:26:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9658,
+    "latency_dev": 0.0824,
+    "embedding_shift": 0.0065
+  },
+  {
+    "timestamp": "2026-01-01T02:27:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9629,
+    "latency_dev": 0.0824,
+    "embedding_shift": 0.0051
+  },
+  {
+    "timestamp": "2026-01-01T02:28:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9648,
+    "latency_dev": 0.0864,
+    "embedding_shift": 0.0031
+  },
+  {
+    "timestamp": "2026-01-01T02:29:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9632,
+    "latency_dev": 0.0871,
+    "embedding_shift": 0.0021
+  },
+  {
+    "timestamp": "2026-01-01T02:30:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9605,
+    "latency_dev": 0.0849,
+    "embedding_shift": 0.0053
+  },
+  {
+    "timestamp": "2026-01-01T02:31:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9583,
+    "latency_dev": 0.0884,
+    "embedding_shift": 0.0092
+  },
+  {
+    "timestamp": "2026-01-01T02:32:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9554,
+    "latency_dev": 0.0861,
+    "embedding_shift": 0.0058
+  },
+  {
+    "timestamp": "2026-01-01T02:33:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9522,
+    "latency_dev": 0.0842,
+    "embedding_shift": 0.0037
+  },
+  {
+    "timestamp": "2026-01-01T02:34:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9553,
+    "latency_dev": 0.0864,
+    "embedding_shift": 0.003
+  },
+  {
+    "timestamp": "2026-01-01T02:35:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9555,
+    "latency_dev": 0.0856,
+    "embedding_shift": 0.0016
+  },
+  {
+    "timestamp": "2026-01-01T02:36:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9538,
+    "latency_dev": 0.0896,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:37:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9548,
+    "latency_dev": 0.0927,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:38:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9528,
+    "latency_dev": 0.0921,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:39:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9556,
+    "latency_dev": 0.0953,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:40:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9573,
+    "latency_dev": 0.0986,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:41:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9534,
+    "latency_dev": 0.098,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:42:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9562,
+    "latency_dev": 0.1019,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:43:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9535,
+    "latency_dev": 0.1023,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:44:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9553,
+    "latency_dev": 0.1037,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:45:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9557,
+    "latency_dev": 0.1002,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:46:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9591,
+    "latency_dev": 0.1016,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:47:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9571,
+    "latency_dev": 0.1029,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:48:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9537,
+    "latency_dev": 0.1033,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:49:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9515,
+    "latency_dev": 0.1043,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:50:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9512,
+    "latency_dev": 0.1081,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:51:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.951,
+    "latency_dev": 0.1062,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:52:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9527,
+    "latency_dev": 0.1049,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:53:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9541,
+    "latency_dev": 0.1044,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:54:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9575,
+    "latency_dev": 0.1024,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:55:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9569,
+    "latency_dev": 0.1041,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:56:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9588,
+    "latency_dev": 0.1043,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:57:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9574,
+    "latency_dev": 0.1071,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:58:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9595,
+    "latency_dev": 0.1057,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T02:59:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.957,
+    "latency_dev": 0.1037,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:00:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9606,
+    "latency_dev": 0.101,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:01:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9644,
+    "latency_dev": 0.0984,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:02:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9636,
+    "latency_dev": 0.1017,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:03:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9676,
+    "latency_dev": 0.1054,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:04:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9711,
+    "latency_dev": 0.1076,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:05:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9701,
+    "latency_dev": 0.1068,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:06:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9662,
+    "latency_dev": 0.1052,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:07:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9632,
+    "latency_dev": 0.1091,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:08:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9658,
+    "latency_dev": 0.1119,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:09:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9656,
+    "latency_dev": 0.1111,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:10:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9645,
+    "latency_dev": 0.1144,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:11:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.967,
+    "latency_dev": 0.1168,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:12:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9636,
+    "latency_dev": 0.1203,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:13:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9668,
+    "latency_dev": 0.1193,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:14:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9677,
+    "latency_dev": 0.1176,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:15:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9659,
+    "latency_dev": 0.1138,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:16:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.967,
+    "latency_dev": 0.1175,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:17:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9669,
+    "latency_dev": 0.1214,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:18:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9649,
+    "latency_dev": 0.121,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:19:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9624,
+    "latency_dev": 0.1236,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:20:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9637,
+    "latency_dev": 0.1263,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:21:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9618,
+    "latency_dev": 0.1304,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:22:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.963,
+    "latency_dev": 0.1301,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:23:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9626,
+    "latency_dev": 0.1305,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:24:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9656,
+    "latency_dev": 0.1305,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:25:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9648,
+    "latency_dev": 0.1339,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:26:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9633,
+    "latency_dev": 0.1367,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:27:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9652,
+    "latency_dev": 0.1398,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:28:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9628,
+    "latency_dev": 0.1422,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:29:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9595,
+    "latency_dev": 0.1419,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:30:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9618,
+    "latency_dev": 0.1444,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:31:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9649,
+    "latency_dev": 0.1462,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:32:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9653,
+    "latency_dev": 0.1519,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:33:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.967,
+    "latency_dev": 0.1565,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:34:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9645,
+    "latency_dev": 0.1552,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:35:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9644,
+    "latency_dev": 0.1605,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:36:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9631,
+    "latency_dev": 0.1603,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:37:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9591,
+    "latency_dev": 0.1629,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:38:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9573,
+    "latency_dev": 0.1618,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:39:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9572,
+    "latency_dev": 0.1649,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:40:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.955,
+    "latency_dev": 0.1681,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:41:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9518,
+    "latency_dev": 0.1722,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:42:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9478,
+    "latency_dev": 0.1732,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:43:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9437,
+    "latency_dev": 0.1723,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:44:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9411,
+    "latency_dev": 0.1726,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:45:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9408,
+    "latency_dev": 0.1732,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:46:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.944,
+    "latency_dev": 0.1739,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:47:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9408,
+    "latency_dev": 0.1718,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:48:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9425,
+    "latency_dev": 0.1728,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:49:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.939,
+    "latency_dev": 0.1708,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:50:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9414,
+    "latency_dev": 0.1693,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:51:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9406,
+    "latency_dev": 0.1682,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:52:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9432,
+    "latency_dev": 0.1669,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:53:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9461,
+    "latency_dev": 0.1663,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:54:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9491,
+    "latency_dev": 0.168,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:55:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9474,
+    "latency_dev": 0.173,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:56:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9438,
+    "latency_dev": 0.1771,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:57:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9457,
+    "latency_dev": 0.1815,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:58:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9441,
+    "latency_dev": 0.1834,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T03:59:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9413,
+    "latency_dev": 0.187,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T04:00:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9409,
+    "latency_dev": 0.1909,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T04:01:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.937,
+    "latency_dev": 0.1935,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T04:02:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9347,
+    "latency_dev": 0.1947,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T04:03:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9351,
+    "latency_dev": 0.196,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T04:04:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9352,
+    "latency_dev": 0.1978,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T04:05:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9366,
+    "latency_dev": 0.1992,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T04:06:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9327,
+    "latency_dev": 0.198,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T04:07:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9314,
+    "latency_dev": 0.1999,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T04:08:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9272,
+    "latency_dev": 0.2036,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T04:09:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9228,
+    "latency_dev": 0.2054,
+    "embedding_shift": 0.0
+  },
+  {
+    "timestamp": "2026-01-01T04:10:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9191,
+    "latency_dev": 0.2101,
+    "embedding_shift": 0.0042
+  },
+  {
+    "timestamp": "2026-01-01T04:11:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9207,
+    "latency_dev": 0.2094,
+    "embedding_shift": 0.0094
+  },
+  {
+    "timestamp": "2026-01-01T04:12:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9236,
+    "latency_dev": 0.2146,
+    "embedding_shift": 0.0082
+  },
+  {
+    "timestamp": "2026-01-01T04:13:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9262,
+    "latency_dev": 0.2129,
+    "embedding_shift": 0.0084
+  },
+  {
+    "timestamp": "2026-01-01T04:14:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9226,
+    "latency_dev": 0.2179,
+    "embedding_shift": 0.008
+  },
+  {
+    "timestamp": "2026-01-01T04:15:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9189,
+    "latency_dev": 0.2197,
+    "embedding_shift": 0.0127
+  },
+  {
+    "timestamp": "2026-01-01T04:16:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9162,
+    "latency_dev": 0.2215,
+    "embedding_shift": 0.0127
+  },
+  {
+    "timestamp": "2026-01-01T04:17:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9128,
+    "latency_dev": 0.2206,
+    "embedding_shift": 0.0176
+  },
+  {
+    "timestamp": "2026-01-01T04:18:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9152,
+    "latency_dev": 0.2198,
+    "embedding_shift": 0.0213
+  },
+  {
+    "timestamp": "2026-01-01T04:19:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9146,
+    "latency_dev": 0.2227,
+    "embedding_shift": 0.0215
+  },
+  {
+    "timestamp": "2026-01-01T04:20:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9142,
+    "latency_dev": 0.2251,
+    "embedding_shift": 0.026
+  },
+  {
+    "timestamp": "2026-01-01T04:21:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9173,
+    "latency_dev": 0.2279,
+    "embedding_shift": 0.0266
+  },
+  {
+    "timestamp": "2026-01-01T04:22:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9146,
+    "latency_dev": 0.2337,
+    "embedding_shift": 0.0286
+  },
+  {
+    "timestamp": "2026-01-01T04:23:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9159,
+    "latency_dev": 0.235,
+    "embedding_shift": 0.0274
+  },
+  {
+    "timestamp": "2026-01-01T04:24:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9115,
+    "latency_dev": 0.2394,
+    "embedding_shift": 0.0268
+  },
+  {
+    "timestamp": "2026-01-01T04:25:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9145,
+    "latency_dev": 0.2418,
+    "embedding_shift": 0.0295
+  },
+  {
+    "timestamp": "2026-01-01T04:26:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9097,
+    "latency_dev": 0.2399,
+    "embedding_shift": 0.0281
+  },
+  {
+    "timestamp": "2026-01-01T04:27:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9083,
+    "latency_dev": 0.2418,
+    "embedding_shift": 0.0327
+  },
+  {
+    "timestamp": "2026-01-01T04:28:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9053,
+    "latency_dev": 0.2448,
+    "embedding_shift": 0.0303
+  },
+  {
+    "timestamp": "2026-01-01T04:29:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9033,
+    "latency_dev": 0.2435,
+    "embedding_shift": 0.0305
+  },
+  {
+    "timestamp": "2026-01-01T04:30:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9031,
+    "latency_dev": 0.246,
+    "embedding_shift": 0.0296
+  },
+  {
+    "timestamp": "2026-01-01T04:31:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9021,
+    "latency_dev": 0.2449,
+    "embedding_shift": 0.0344
+  },
+  {
+    "timestamp": "2026-01-01T04:32:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8985,
+    "latency_dev": 0.2434,
+    "embedding_shift": 0.0369
+  },
+  {
+    "timestamp": "2026-01-01T04:33:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8999,
+    "latency_dev": 0.2445,
+    "embedding_shift": 0.0365
+  },
+  {
+    "timestamp": "2026-01-01T04:34:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9002,
+    "latency_dev": 0.2468,
+    "embedding_shift": 0.0367
+  },
+  {
+    "timestamp": "2026-01-01T04:35:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.899,
+    "latency_dev": 0.2521,
+    "embedding_shift": 0.0399
+  },
+  {
+    "timestamp": "2026-01-01T04:36:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.9013,
+    "latency_dev": 0.2502,
+    "embedding_shift": 0.0416
+  },
+  {
+    "timestamp": "2026-01-01T04:37:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8984,
+    "latency_dev": 0.2485,
+    "embedding_shift": 0.0452
+  },
+  {
+    "timestamp": "2026-01-01T04:38:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.898,
+    "latency_dev": 0.2538,
+    "embedding_shift": 0.0438
+  },
+  {
+    "timestamp": "2026-01-01T04:39:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.898,
+    "latency_dev": 0.2557,
+    "embedding_shift": 0.0463
+  },
+  {
+    "timestamp": "2026-01-01T04:40:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8946,
+    "latency_dev": 0.2559,
+    "embedding_shift": 0.0461
+  },
+  {
+    "timestamp": "2026-01-01T04:41:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8969,
+    "latency_dev": 0.26,
+    "embedding_shift": 0.0492
+  },
+  {
+    "timestamp": "2026-01-01T04:42:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8988,
+    "latency_dev": 0.2638,
+    "embedding_shift": 0.0503
+  },
+  {
+    "timestamp": "2026-01-01T04:43:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8976,
+    "latency_dev": 0.2634,
+    "embedding_shift": 0.0486
+  },
+  {
+    "timestamp": "2026-01-01T04:44:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8931,
+    "latency_dev": 0.2639,
+    "embedding_shift": 0.052
+  },
+  {
+    "timestamp": "2026-01-01T04:45:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.895,
+    "latency_dev": 0.2673,
+    "embedding_shift": 0.0515
+  },
+  {
+    "timestamp": "2026-01-01T04:46:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8937,
+    "latency_dev": 0.2715,
+    "embedding_shift": 0.0531
+  },
+  {
+    "timestamp": "2026-01-01T04:47:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.894,
+    "latency_dev": 0.277,
+    "embedding_shift": 0.0522
+  },
+  {
+    "timestamp": "2026-01-01T04:48:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8893,
+    "latency_dev": 0.2769,
+    "embedding_shift": 0.0515
+  },
+  {
+    "timestamp": "2026-01-01T04:49:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.892,
+    "latency_dev": 0.2806,
+    "embedding_shift": 0.0515
+  },
+  {
+    "timestamp": "2026-01-01T04:50:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8898,
+    "latency_dev": 0.2803,
+    "embedding_shift": 0.0562
+  },
+  {
+    "timestamp": "2026-01-01T04:51:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8905,
+    "latency_dev": 0.2835,
+    "embedding_shift": 0.0614
+  },
+  {
+    "timestamp": "2026-01-01T04:52:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8924,
+    "latency_dev": 0.2868,
+    "embedding_shift": 0.0657
+  },
+  {
+    "timestamp": "2026-01-01T04:53:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8934,
+    "latency_dev": 0.2892,
+    "embedding_shift": 0.0655
+  },
+  {
+    "timestamp": "2026-01-01T04:54:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8935,
+    "latency_dev": 0.2876,
+    "embedding_shift": 0.0702
+  },
+  {
+    "timestamp": "2026-01-01T04:55:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8889,
+    "latency_dev": 0.2863,
+    "embedding_shift": 0.0751
+  },
+  {
+    "timestamp": "2026-01-01T04:56:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8852,
+    "latency_dev": 0.2843,
+    "embedding_shift": 0.0728
+  },
+  {
+    "timestamp": "2026-01-01T04:57:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8854,
+    "latency_dev": 0.2877,
+    "embedding_shift": 0.0761
+  },
+  {
+    "timestamp": "2026-01-01T04:58:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8853,
+    "latency_dev": 0.2884,
+    "embedding_shift": 0.08
+  },
+  {
+    "timestamp": "2026-01-01T04:59:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8876,
+    "latency_dev": 0.2867,
+    "embedding_shift": 0.0844
+  },
+  {
+    "timestamp": "2026-01-01T05:00:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8904,
+    "latency_dev": 0.2854,
+    "embedding_shift": 0.0834
+  },
+  {
+    "timestamp": "2026-01-01T05:01:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8858,
+    "latency_dev": 0.29,
+    "embedding_shift": 0.0873
+  },
+  {
+    "timestamp": "2026-01-01T05:02:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8876,
+    "latency_dev": 0.2928,
+    "embedding_shift": 0.087
+  },
+  {
+    "timestamp": "2026-01-01T05:03:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8835,
+    "latency_dev": 0.2967,
+    "embedding_shift": 0.0861
+  },
+  {
+    "timestamp": "2026-01-01T05:04:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8821,
+    "latency_dev": 0.2946,
+    "embedding_shift": 0.0855
+  },
+  {
+    "timestamp": "2026-01-01T05:05:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.883,
+    "latency_dev": 0.2954,
+    "embedding_shift": 0.0855
+  },
+  {
+    "timestamp": "2026-01-01T05:06:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8822,
+    "latency_dev": 0.3,
+    "embedding_shift": 0.0878
+  },
+  {
+    "timestamp": "2026-01-01T05:07:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8807,
+    "latency_dev": 0.3013,
+    "embedding_shift": 0.0914
+  },
+  {
+    "timestamp": "2026-01-01T05:08:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8815,
+    "latency_dev": 0.3034,
+    "embedding_shift": 0.0905
+  },
+  {
+    "timestamp": "2026-01-01T05:09:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8774,
+    "latency_dev": 0.3077,
+    "embedding_shift": 0.0893
+  },
+  {
+    "timestamp": "2026-01-01T05:10:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8742,
+    "latency_dev": 0.3116,
+    "embedding_shift": 0.0945
+  },
+  {
+    "timestamp": "2026-01-01T05:11:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8732,
+    "latency_dev": 0.3134,
+    "embedding_shift": 0.0983
+  },
+  {
+    "timestamp": "2026-01-01T05:12:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8724,
+    "latency_dev": 0.314,
+    "embedding_shift": 0.1024
+  },
+  {
+    "timestamp": "2026-01-01T05:13:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8751,
+    "latency_dev": 0.314,
+    "embedding_shift": 0.1015
+  },
+  {
+    "timestamp": "2026-01-01T05:14:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8743,
+    "latency_dev": 0.3127,
+    "embedding_shift": 0.104
+  },
+  {
+    "timestamp": "2026-01-01T05:15:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8757,
+    "latency_dev": 0.3161,
+    "embedding_shift": 0.1077
+  },
+  {
+    "timestamp": "2026-01-01T05:16:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8737,
+    "latency_dev": 0.3171,
+    "embedding_shift": 0.1082
+  },
+  {
+    "timestamp": "2026-01-01T05:17:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8696,
+    "latency_dev": 0.322,
+    "embedding_shift": 0.1058
+  },
+  {
+    "timestamp": "2026-01-01T05:18:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8669,
+    "latency_dev": 0.327,
+    "embedding_shift": 0.1072
+  },
+  {
+    "timestamp": "2026-01-01T05:19:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8691,
+    "latency_dev": 0.3267,
+    "embedding_shift": 0.1083
+  },
+  {
+    "timestamp": "2026-01-01T05:20:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8703,
+    "latency_dev": 0.3305,
+    "embedding_shift": 0.1109
+  },
+  {
+    "timestamp": "2026-01-01T05:21:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8681,
+    "latency_dev": 0.3295,
+    "embedding_shift": 0.115
+  },
+  {
+    "timestamp": "2026-01-01T05:22:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8692,
+    "latency_dev": 0.3287,
+    "embedding_shift": 0.1159
+  },
+  {
+    "timestamp": "2026-01-01T05:23:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.869,
+    "latency_dev": 0.3275,
+    "embedding_shift": 0.117
+  },
+  {
+    "timestamp": "2026-01-01T05:24:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8661,
+    "latency_dev": 0.3268,
+    "embedding_shift": 0.1168
+  },
+  {
+    "timestamp": "2026-01-01T05:25:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.868,
+    "latency_dev": 0.3259,
+    "embedding_shift": 0.1155
+  },
+  {
+    "timestamp": "2026-01-01T05:26:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8658,
+    "latency_dev": 0.3279,
+    "embedding_shift": 0.1142
+  },
+  {
+    "timestamp": "2026-01-01T05:27:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8625,
+    "latency_dev": 0.3335,
+    "embedding_shift": 0.1174
+  },
+  {
+    "timestamp": "2026-01-01T05:28:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8653,
+    "latency_dev": 0.3321,
+    "embedding_shift": 0.1179
+  },
+  {
+    "timestamp": "2026-01-01T05:29:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8669,
+    "latency_dev": 0.3357,
+    "embedding_shift": 0.1188
+  },
+  {
+    "timestamp": "2026-01-01T05:30:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8671,
+    "latency_dev": 0.3344,
+    "embedding_shift": 0.1178
+  },
+  {
+    "timestamp": "2026-01-01T05:31:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8626,
+    "latency_dev": 0.3354,
+    "embedding_shift": 0.1215
+  },
+  {
+    "timestamp": "2026-01-01T05:32:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8618,
+    "latency_dev": 0.3382,
+    "embedding_shift": 0.1226
+  },
+  {
+    "timestamp": "2026-01-01T05:33:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8618,
+    "latency_dev": 0.3393,
+    "embedding_shift": 0.126
+  },
+  {
+    "timestamp": "2026-01-01T05:34:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8604,
+    "latency_dev": 0.3417,
+    "embedding_shift": 0.1294
+  },
+  {
+    "timestamp": "2026-01-01T05:35:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8574,
+    "latency_dev": 0.3452,
+    "embedding_shift": 0.1338
+  },
+  {
+    "timestamp": "2026-01-01T05:36:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8581,
+    "latency_dev": 0.3499,
+    "embedding_shift": 0.1366
+  },
+  {
+    "timestamp": "2026-01-01T05:37:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8569,
+    "latency_dev": 0.3502,
+    "embedding_shift": 0.1391
+  },
+  {
+    "timestamp": "2026-01-01T05:38:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8555,
+    "latency_dev": 0.3542,
+    "embedding_shift": 0.1422
+  },
+  {
+    "timestamp": "2026-01-01T05:39:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8526,
+    "latency_dev": 0.3554,
+    "embedding_shift": 0.1432
+  },
+  {
+    "timestamp": "2026-01-01T05:40:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8511,
+    "latency_dev": 0.3586,
+    "embedding_shift": 0.1481
+  },
+  {
+    "timestamp": "2026-01-01T05:41:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8515,
+    "latency_dev": 0.3626,
+    "embedding_shift": 0.1486
+  },
+  {
+    "timestamp": "2026-01-01T05:42:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8545,
+    "latency_dev": 0.3608,
+    "embedding_shift": 0.1503
+  },
+  {
+    "timestamp": "2026-01-01T05:43:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8559,
+    "latency_dev": 0.3661,
+    "embedding_shift": 0.1519
+  },
+  {
+    "timestamp": "2026-01-01T05:44:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8556,
+    "latency_dev": 0.3682,
+    "embedding_shift": 0.155
+  },
+  {
+    "timestamp": "2026-01-01T05:45:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8559,
+    "latency_dev": 0.3726,
+    "embedding_shift": 0.1566
+  },
+  {
+    "timestamp": "2026-01-01T05:46:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8587,
+    "latency_dev": 0.3721,
+    "embedding_shift": 0.1595
+  },
+  {
+    "timestamp": "2026-01-01T05:47:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.86,
+    "latency_dev": 0.3709,
+    "embedding_shift": 0.1647
+  },
+  {
+    "timestamp": "2026-01-01T05:48:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8556,
+    "latency_dev": 0.3709,
+    "embedding_shift": 0.1653
+  },
+  {
+    "timestamp": "2026-01-01T05:49:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8541,
+    "latency_dev": 0.3721,
+    "embedding_shift": 0.1683
+  },
+  {
+    "timestamp": "2026-01-01T05:50:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8514,
+    "latency_dev": 0.3717,
+    "embedding_shift": 0.1716
+  },
+  {
+    "timestamp": "2026-01-01T05:51:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8508,
+    "latency_dev": 0.3712,
+    "embedding_shift": 0.1755
+  },
+  {
+    "timestamp": "2026-01-01T05:52:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8476,
+    "latency_dev": 0.37,
+    "embedding_shift": 0.1791
+  },
+  {
+    "timestamp": "2026-01-01T05:53:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8479,
+    "latency_dev": 0.3716,
+    "embedding_shift": 0.181
+  },
+  {
+    "timestamp": "2026-01-01T05:54:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8508,
+    "latency_dev": 0.3722,
+    "embedding_shift": 0.1835
+  },
+  {
+    "timestamp": "2026-01-01T05:55:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8525,
+    "latency_dev": 0.3738,
+    "embedding_shift": 0.1832
+  },
+  {
+    "timestamp": "2026-01-01T05:56:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8486,
+    "latency_dev": 0.3782,
+    "embedding_shift": 0.1835
+  },
+  {
+    "timestamp": "2026-01-01T05:57:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.846,
+    "latency_dev": 0.379,
+    "embedding_shift": 0.1829
+  },
+  {
+    "timestamp": "2026-01-01T05:58:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8426,
+    "latency_dev": 0.3769,
+    "embedding_shift": 0.1861
+  },
+  {
+    "timestamp": "2026-01-01T05:59:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8397,
+    "latency_dev": 0.3771,
+    "embedding_shift": 0.1873
+  },
+  {
+    "timestamp": "2026-01-01T06:00:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.84,
+    "latency_dev": 0.3802,
+    "embedding_shift": 0.1876
+  },
+  {
+    "timestamp": "2026-01-01T06:01:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.842,
+    "latency_dev": 0.3784,
+    "embedding_shift": 0.1916
+  },
+  {
+    "timestamp": "2026-01-01T06:02:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8435,
+    "latency_dev": 0.3773,
+    "embedding_shift": 0.1957
+  },
+  {
+    "timestamp": "2026-01-01T06:03:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8387,
+    "latency_dev": 0.3752,
+    "embedding_shift": 0.2007
+  },
+  {
+    "timestamp": "2026-01-01T06:04:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8359,
+    "latency_dev": 0.3738,
+    "embedding_shift": 0.1992
+  },
+  {
+    "timestamp": "2026-01-01T06:05:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8373,
+    "latency_dev": 0.3744,
+    "embedding_shift": 0.1979
+  },
+  {
+    "timestamp": "2026-01-01T06:06:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8388,
+    "latency_dev": 0.3735,
+    "embedding_shift": 0.2024
+  },
+  {
+    "timestamp": "2026-01-01T06:07:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8402,
+    "latency_dev": 0.3767,
+    "embedding_shift": 0.2069
+  },
+  {
+    "timestamp": "2026-01-01T06:08:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8421,
+    "latency_dev": 0.3761,
+    "embedding_shift": 0.2099
+  },
+  {
+    "timestamp": "2026-01-01T06:09:00Z",
+    "kpi_error": 0.0007,
+    "retrieval_score": 0.8432,
+    "latency_dev": 0.3774,
+    "embedding_shift": 0.2143
+  },
+  {
+    "timestamp": "2026-01-01T06:10:00Z",
+    "kpi_error": 0.0018,
+    "retrieval_score": 0.8405,
+    "latency_dev": 0.3771,
+    "embedding_shift": 0.2129
+  },
+  {
+    "timestamp": "2026-01-01T06:11:00Z",
+    "kpi_error": 0.0024,
+    "retrieval_score": 0.8361,
+    "latency_dev": 0.3786,
+    "embedding_shift": 0.2114
+  },
+  {
+    "timestamp": "2026-01-01T06:12:00Z",
+    "kpi_error": 0.003,
+    "retrieval_score": 0.8353,
+    "latency_dev": 0.3807,
+    "embedding_shift": 0.2157
+  },
+  {
+    "timestamp": "2026-01-01T06:13:00Z",
+    "kpi_error": 0.0,
+    "retrieval_score": 0.8372,
+    "latency_dev": 0.3823,
+    "embedding_shift": 0.2176
+  },
+  {
+    "timestamp": "2026-01-01T06:14:00Z",
+    "kpi_error": 0.0018,
+    "retrieval_score": 0.8391,
+    "latency_dev": 0.3831,
+    "embedding_shift": 0.2184
+  },
+  {
+    "timestamp": "2026-01-01T06:15:00Z",
+    "kpi_error": 0.0061,
+    "retrieval_score": 0.8348,
+    "latency_dev": 0.386,
+    "embedding_shift": 0.2209
+  },
+  {
+    "timestamp": "2026-01-01T06:16:00Z",
+    "kpi_error": 0.003,
+    "retrieval_score": 0.8349,
+    "latency_dev": 0.3892,
+    "embedding_shift": 0.2257
+  },
+  {
+    "timestamp": "2026-01-01T06:17:00Z",
+    "kpi_error": 0.0023,
+    "retrieval_score": 0.8379,
+    "latency_dev": 0.3911,
+    "embedding_shift": 0.227
+  },
+  {
+    "timestamp": "2026-01-01T06:18:00Z",
+    "kpi_error": 0.0062,
+    "retrieval_score": 0.8334,
+    "latency_dev": 0.3946,
+    "embedding_shift": 0.2294
+  },
+  {
+    "timestamp": "2026-01-01T06:19:00Z",
+    "kpi_error": 0.0056,
+    "retrieval_score": 0.8354,
+    "latency_dev": 0.3954,
+    "embedding_shift": 0.2306
+  },
+  {
+    "timestamp": "2026-01-01T06:20:00Z",
+    "kpi_error": 0.0083,
+    "retrieval_score": 0.8355,
+    "latency_dev": 0.3956,
+    "embedding_shift": 0.2317
+  },
+  {
+    "timestamp": "2026-01-01T06:21:00Z",
+    "kpi_error": 0.0101,
+    "retrieval_score": 0.8339,
+    "latency_dev": 0.4007,
+    "embedding_shift": 0.2318
+  },
+  {
+    "timestamp": "2026-01-01T06:22:00Z",
+    "kpi_error": 0.0153,
+    "retrieval_score": 0.831,
+    "latency_dev": 0.4032,
+    "embedding_shift": 0.2316
+  },
+  {
+    "timestamp": "2026-01-01T06:23:00Z",
+    "kpi_error": 0.0178,
+    "retrieval_score": 0.8327,
+    "latency_dev": 0.4069,
+    "embedding_shift": 0.2356
+  },
+  {
+    "timestamp": "2026-01-01T06:24:00Z",
+    "kpi_error": 0.019,
+    "retrieval_score": 0.8292,
+    "latency_dev": 0.4078,
+    "embedding_shift": 0.238
+  },
+  {
+    "timestamp": "2026-01-01T06:25:00Z",
+    "kpi_error": 0.0225,
+    "retrieval_score": 0.8294,
+    "latency_dev": 0.4067,
+    "embedding_shift": 0.2414
+  },
+  {
+    "timestamp": "2026-01-01T06:26:00Z",
+    "kpi_error": 0.0281,
+    "retrieval_score": 0.8277,
+    "latency_dev": 0.4055,
+    "embedding_shift": 0.2415
+  },
+  {
+    "timestamp": "2026-01-01T06:27:00Z",
+    "kpi_error": 0.0267,
+    "retrieval_score": 0.8231,
+    "latency_dev": 0.4114,
+    "embedding_shift": 0.244
+  },
+  {
+    "timestamp": "2026-01-01T06:28:00Z",
+    "kpi_error": 0.0304,
+    "retrieval_score": 0.8233,
+    "latency_dev": 0.4172,
+    "embedding_shift": 0.2466
+  },
+  {
+    "timestamp": "2026-01-01T06:29:00Z",
+    "kpi_error": 0.0339,
+    "retrieval_score": 0.8223,
+    "latency_dev": 0.4213,
+    "embedding_shift": 0.249
+  },
+  {
+    "timestamp": "2026-01-01T06:30:00Z",
+    "kpi_error": 0.0378,
+    "retrieval_score": 0.8179,
+    "latency_dev": 0.4251,
+    "embedding_shift": 0.2504
+  },
+  {
+    "timestamp": "2026-01-01T06:31:00Z",
+    "kpi_error": 0.0424,
+    "retrieval_score": 0.8126,
+    "latency_dev": 0.4251,
+    "embedding_shift": 0.2483
+  },
+  {
+    "timestamp": "2026-01-01T06:32:00Z",
+    "kpi_error": 0.0471,
+    "retrieval_score": 0.8139,
+    "latency_dev": 0.4288,
+    "embedding_shift": 0.249
+  },
+  {
+    "timestamp": "2026-01-01T06:33:00Z",
+    "kpi_error": 0.0522,
+    "retrieval_score": 0.8141,
+    "latency_dev": 0.4318,
+    "embedding_shift": 0.2487
+  },
+  {
+    "timestamp": "2026-01-01T06:34:00Z",
+    "kpi_error": 0.0531,
+    "retrieval_score": 0.8114,
+    "latency_dev": 0.4328,
+    "embedding_shift": 0.2498
+  },
+  {
+    "timestamp": "2026-01-01T06:35:00Z",
+    "kpi_error": 0.0567,
+    "retrieval_score": 0.8127,
+    "latency_dev": 0.4318,
+    "embedding_shift": 0.252
+  },
+  {
+    "timestamp": "2026-01-01T06:36:00Z",
+    "kpi_error": 0.0556,
+    "retrieval_score": 0.8076,
+    "latency_dev": 0.4368,
+    "embedding_shift": 0.2543
+  },
+  {
+    "timestamp": "2026-01-01T06:37:00Z",
+    "kpi_error": 0.0614,
+    "retrieval_score": 0.8051,
+    "latency_dev": 0.4354,
+    "embedding_shift": 0.2551
+  },
+  {
+    "timestamp": "2026-01-01T06:38:00Z",
+    "kpi_error": 0.0646,
+    "retrieval_score": 0.8065,
+    "latency_dev": 0.4417,
+    "embedding_shift": 0.2565
+  },
+  {
+    "timestamp": "2026-01-01T06:39:00Z",
+    "kpi_error": 0.0664,
+    "retrieval_score": 0.8013,
+    "latency_dev": 0.4454,
+    "embedding_shift": 0.2559
+  },
+  {
+    "timestamp": "2026-01-01T06:40:00Z",
+    "kpi_error": 0.0662,
+    "retrieval_score": 0.7953,
+    "latency_dev": 0.4439,
+    "embedding_shift": 0.259
+  },
+  {
+    "timestamp": "2026-01-01T06:41:00Z",
+    "kpi_error": 0.0656,
+    "retrieval_score": 0.797,
+    "latency_dev": 0.4431,
+    "embedding_shift": 0.2637
+  },
+  {
+    "timestamp": "2026-01-01T06:42:00Z",
+    "kpi_error": 0.0652,
+    "retrieval_score": 0.791,
+    "latency_dev": 0.4474,
+    "embedding_shift": 0.2633
+  },
+  {
+    "timestamp": "2026-01-01T06:43:00Z",
+    "kpi_error": 0.0695,
+    "retrieval_score": 0.7864,
+    "latency_dev": 0.4463,
+    "embedding_shift": 0.2671
+  },
+  {
+    "timestamp": "2026-01-01T06:44:00Z",
+    "kpi_error": 0.0737,
+    "retrieval_score": 0.7872,
+    "latency_dev": 0.4506,
+    "embedding_shift": 0.2655
+  },
+  {
+    "timestamp": "2026-01-01T06:45:00Z",
+    "kpi_error": 0.0773,
+    "retrieval_score": 0.7868,
+    "latency_dev": 0.4528,
+    "embedding_shift": 0.2706
+  },
+  {
+    "timestamp": "2026-01-01T06:46:00Z",
+    "kpi_error": 0.0778,
+    "retrieval_score": 0.7884,
+    "latency_dev": 0.457,
+    "embedding_shift": 0.2684
+  },
+  {
+    "timestamp": "2026-01-01T06:47:00Z",
+    "kpi_error": 0.0764,
+    "retrieval_score": 0.7876,
+    "latency_dev": 0.4621,
+    "embedding_shift": 0.2667
+  },
+  {
+    "timestamp": "2026-01-01T06:48:00Z",
+    "kpi_error": 0.0774,
+    "retrieval_score": 0.7873,
+    "latency_dev": 0.4619,
+    "embedding_shift": 0.2712
+  },
+  {
+    "timestamp": "2026-01-01T06:49:00Z",
+    "kpi_error": 0.0798,
+    "retrieval_score": 0.7817,
+    "latency_dev": 0.4633,
+    "embedding_shift": 0.2735
+  },
+  {
+    "timestamp": "2026-01-01T06:50:00Z",
+    "kpi_error": 0.0818,
+    "retrieval_score": 0.7811,
+    "latency_dev": 0.463,
+    "embedding_shift": 0.2775
+  },
+  {
+    "timestamp": "2026-01-01T06:51:00Z",
+    "kpi_error": 0.0832,
+    "retrieval_score": 0.7801,
+    "latency_dev": 0.4665,
+    "embedding_shift": 0.2786
+  },
+  {
+    "timestamp": "2026-01-01T06:52:00Z",
+    "kpi_error": 0.0848,
+    "retrieval_score": 0.7803,
+    "latency_dev": 0.4726,
+    "embedding_shift": 0.2825
+  },
+  {
+    "timestamp": "2026-01-01T06:53:00Z",
+    "kpi_error": 0.0878,
+    "retrieval_score": 0.7766,
+    "latency_dev": 0.4716,
+    "embedding_shift": 0.288
+  },
+  {
+    "timestamp": "2026-01-01T06:54:00Z",
+    "kpi_error": 0.092,
+    "retrieval_score": 0.7771,
+    "latency_dev": 0.4727,
+    "embedding_shift": 0.2905
+  },
+  {
+    "timestamp": "2026-01-01T06:55:00Z",
+    "kpi_error": 0.0983,
+    "retrieval_score": 0.7777,
+    "latency_dev": 0.4761,
+    "embedding_shift": 0.2906
+  },
+  {
+    "timestamp": "2026-01-01T06:56:00Z",
+    "kpi_error": 0.1002,
+    "retrieval_score": 0.7787,
+    "latency_dev": 0.4776,
+    "embedding_shift": 0.2938
+  },
+  {
+    "timestamp": "2026-01-01T06:57:00Z",
+    "kpi_error": 0.1035,
+    "retrieval_score": 0.7798,
+    "latency_dev": 0.4825,
+    "embedding_shift": 0.2937
+  },
+  {
+    "timestamp": "2026-01-01T06:58:00Z",
+    "kpi_error": 0.102,
+    "retrieval_score": 0.7758,
+    "latency_dev": 0.4844,
+    "embedding_shift": 0.2961
+  },
+  {
+    "timestamp": "2026-01-01T06:59:00Z",
+    "kpi_error": 0.1071,
+    "retrieval_score": 0.7769,
+    "latency_dev": 0.4832,
+    "embedding_shift": 0.3004
+  },
+  {
+    "timestamp": "2026-01-01T07:00:00Z",
+    "kpi_error": 0.1121,
+    "retrieval_score": 0.7777,
+    "latency_dev": 0.4863,
+    "embedding_shift": 0.3003
+  },
+  {
+    "timestamp": "2026-01-01T07:01:00Z",
+    "kpi_error": 0.1174,
+    "retrieval_score": 0.7781,
+    "latency_dev": 0.4903,
+    "embedding_shift": 0.3053
+  },
+  {
+    "timestamp": "2026-01-01T07:02:00Z",
+    "kpi_error": 0.1186,
+    "retrieval_score": 0.7727,
+    "latency_dev": 0.4932,
+    "embedding_shift": 0.3093
+  },
+  {
+    "timestamp": "2026-01-01T07:03:00Z",
+    "kpi_error": 0.1188,
+    "retrieval_score": 0.7726,
+    "latency_dev": 0.4992,
+    "embedding_shift": 0.3088
+  },
+  {
+    "timestamp": "2026-01-01T07:04:00Z",
+    "kpi_error": 0.1221,
+    "retrieval_score": 0.772,
+    "latency_dev": 0.5014,
+    "embedding_shift": 0.3082
+  },
+  {
+    "timestamp": "2026-01-01T07:05:00Z",
+    "kpi_error": 0.1226,
+    "retrieval_score": 0.7719,
+    "latency_dev": 0.5062,
+    "embedding_shift": 0.3095
+  },
+  {
+    "timestamp": "2026-01-01T07:06:00Z",
+    "kpi_error": 0.1218,
+    "retrieval_score": 0.7723,
+    "latency_dev": 0.5109,
+    "embedding_shift": 0.309
+  },
+  {
+    "timestamp": "2026-01-01T07:07:00Z",
+    "kpi_error": 0.125,
+    "retrieval_score": 0.7734,
+    "latency_dev": 0.5165,
+    "embedding_shift": 0.3109
+  },
+  {
+    "timestamp": "2026-01-01T07:08:00Z",
+    "kpi_error": 0.1273,
+    "retrieval_score": 0.772,
+    "latency_dev": 0.5165,
+    "embedding_shift": 0.3101
+  },
+  {
+    "timestamp": "2026-01-01T07:09:00Z",
+    "kpi_error": 0.1272,
+    "retrieval_score": 0.7715,
+    "latency_dev": 0.5179,
+    "embedding_shift": 0.3123
+  },
+  {
+    "timestamp": "2026-01-01T07:10:00Z",
+    "kpi_error": 0.129,
+    "retrieval_score": 0.7696,
+    "latency_dev": 0.5176,
+    "embedding_shift": 0.3103
+  },
+  {
+    "timestamp": "2026-01-01T07:11:00Z",
+    "kpi_error": 0.1354,
+    "retrieval_score": 0.7665,
+    "latency_dev": 0.517,
+    "embedding_shift": 0.313
+  },
+  {
+    "timestamp": "2026-01-01T07:12:00Z",
+    "kpi_error": 0.1402,
+    "retrieval_score": 0.7617,
+    "latency_dev": 0.5202,
+    "embedding_shift": 0.3135
+  },
+  {
+    "timestamp": "2026-01-01T07:13:00Z",
+    "kpi_error": 0.1429,
+    "retrieval_score": 0.7558,
+    "latency_dev": 0.519,
+    "embedding_shift": 0.3191
+  },
+  {
+    "timestamp": "2026-01-01T07:14:00Z",
+    "kpi_error": 0.1483,
+    "retrieval_score": 0.7536,
+    "latency_dev": 0.522,
+    "embedding_shift": 0.3188
+  },
+  {
+    "timestamp": "2026-01-01T07:15:00Z",
+    "kpi_error": 0.1531,
+    "retrieval_score": 0.7509,
+    "latency_dev": 0.5281,
+    "embedding_shift": 0.3226
+  },
+  {
+    "timestamp": "2026-01-01T07:16:00Z",
+    "kpi_error": 0.1581,
+    "retrieval_score": 0.7525,
+    "latency_dev": 0.5286,
+    "embedding_shift": 0.3206
+  },
+  {
+    "timestamp": "2026-01-01T07:17:00Z",
+    "kpi_error": 0.1582,
+    "retrieval_score": 0.7479,
+    "latency_dev": 0.5278,
+    "embedding_shift": 0.3187
+  },
+  {
+    "timestamp": "2026-01-01T07:18:00Z",
+    "kpi_error": 0.1612,
+    "retrieval_score": 0.7488,
+    "latency_dev": 0.53,
+    "embedding_shift": 0.3239
+  },
+  {
+    "timestamp": "2026-01-01T07:19:00Z",
+    "kpi_error": 0.167,
+    "retrieval_score": 0.7432,
+    "latency_dev": 0.5333,
+    "embedding_shift": 0.3248
+  },
+  {
+    "timestamp": "2026-01-01T07:20:00Z",
+    "kpi_error": 0.1664,
+    "retrieval_score": 0.7448,
+    "latency_dev": 0.5338,
+    "embedding_shift": 0.327
+  },
+  {
+    "timestamp": "2026-01-01T07:21:00Z",
+    "kpi_error": 0.17,
+    "retrieval_score": 0.7464,
+    "latency_dev": 0.5377,
+    "embedding_shift": 0.3278
+  },
+  {
+    "timestamp": "2026-01-01T07:22:00Z",
+    "kpi_error": 0.1721,
+    "retrieval_score": 0.7416,
+    "latency_dev": 0.5439,
+    "embedding_shift": 0.3334
+  },
+  {
+    "timestamp": "2026-01-01T07:23:00Z",
+    "kpi_error": 0.1724,
+    "retrieval_score": 0.7358,
+    "latency_dev": 0.5444,
+    "embedding_shift": 0.3339
+  },
+  {
+    "timestamp": "2026-01-01T07:24:00Z",
+    "kpi_error": 0.1781,
+    "retrieval_score": 0.737,
+    "latency_dev": 0.5496,
+    "embedding_shift": 0.3319
+  },
+  {
+    "timestamp": "2026-01-01T07:25:00Z",
+    "kpi_error": 0.1829,
+    "retrieval_score": 0.7365,
+    "latency_dev": 0.5533,
+    "embedding_shift": 0.3375
+  },
+  {
+    "timestamp": "2026-01-01T07:26:00Z",
+    "kpi_error": 0.1819,
+    "retrieval_score": 0.7316,
+    "latency_dev": 0.5579,
+    "embedding_shift": 0.3427
+  },
+  {
+    "timestamp": "2026-01-01T07:27:00Z",
+    "kpi_error": 0.1858,
+    "retrieval_score": 0.7279,
+    "latency_dev": 0.5611,
+    "embedding_shift": 0.3464
+  },
+  {
+    "timestamp": "2026-01-01T07:28:00Z",
+    "kpi_error": 0.1851,
+    "retrieval_score": 0.7244,
+    "latency_dev": 0.5616,
+    "embedding_shift": 0.3451
+  },
+  {
+    "timestamp": "2026-01-01T07:29:00Z",
+    "kpi_error": 0.1875,
+    "retrieval_score": 0.7197,
+    "latency_dev": 0.5621,
+    "embedding_shift": 0.3439
+  },
+  {
+    "timestamp": "2026-01-01T07:30:00Z",
+    "kpi_error": 0.1914,
+    "retrieval_score": 0.7137,
+    "latency_dev": 0.5663,
+    "embedding_shift": 0.3431
+  },
+  {
+    "timestamp": "2026-01-01T07:31:00Z",
+    "kpi_error": 0.1902,
+    "retrieval_score": 0.7151,
+    "latency_dev": 0.5666,
+    "embedding_shift": 0.3482
+  },
+  {
+    "timestamp": "2026-01-01T07:32:00Z",
+    "kpi_error": 0.1956,
+    "retrieval_score": 0.7161,
+    "latency_dev": 0.5662,
+    "embedding_shift": 0.3495
+  },
+  {
+    "timestamp": "2026-01-01T07:33:00Z",
+    "kpi_error": 0.1949,
+    "retrieval_score": 0.7175,
+    "latency_dev": 0.5714,
+    "embedding_shift": 0.3522
+  },
+  {
+    "timestamp": "2026-01-01T07:34:00Z",
+    "kpi_error": 0.197,
+    "retrieval_score": 0.7141,
+    "latency_dev": 0.5765,
+    "embedding_shift": 0.3537
+  },
+  {
+    "timestamp": "2026-01-01T07:35:00Z",
+    "kpi_error": 0.2005,
+    "retrieval_score": 0.7092,
+    "latency_dev": 0.5768,
+    "embedding_shift": 0.3518
+  },
+  {
+    "timestamp": "2026-01-01T07:36:00Z",
+    "kpi_error": 0.2047,
+    "retrieval_score": 0.7075,
+    "latency_dev": 0.5764,
+    "embedding_shift": 0.3564
+  },
+  {
+    "timestamp": "2026-01-01T07:37:00Z",
+    "kpi_error": 0.2054,
+    "retrieval_score": 0.7047,
+    "latency_dev": 0.5762,
+    "embedding_shift": 0.3563
+  },
+  {
+    "timestamp": "2026-01-01T07:38:00Z",
+    "kpi_error": 0.2106,
+    "retrieval_score": 0.7013,
+    "latency_dev": 0.576,
+    "embedding_shift": 0.3579
+  },
+  {
+    "timestamp": "2026-01-01T07:39:00Z",
+    "kpi_error": 0.2116,
+    "retrieval_score": 0.7025,
+    "latency_dev": 0.5754,
+    "embedding_shift": 0.3634
+  },
+  {
+    "timestamp": "2026-01-01T07:40:00Z",
+    "kpi_error": 0.2106,
+    "retrieval_score": 0.7035,
+    "latency_dev": 0.5793,
+    "embedding_shift": 0.3627
+  },
+  {
+    "timestamp": "2026-01-01T07:41:00Z",
+    "kpi_error": 0.2129,
+    "retrieval_score": 0.6998,
+    "latency_dev": 0.5798,
+    "embedding_shift": 0.362
+  },
+  {
+    "timestamp": "2026-01-01T07:42:00Z",
+    "kpi_error": 0.2143,
+    "retrieval_score": 0.7016,
+    "latency_dev": 0.5863,
+    "embedding_shift": 0.3671
+  },
+  {
+    "timestamp": "2026-01-01T07:43:00Z",
+    "kpi_error": 0.2136,
+    "retrieval_score": 0.6978,
+    "latency_dev": 0.592,
+    "embedding_shift": 0.3652
+  },
+  {
+    "timestamp": "2026-01-01T07:44:00Z",
+    "kpi_error": 0.2179,
+    "retrieval_score": 0.6941,
+    "latency_dev": 0.5983,
+    "embedding_shift": 0.363
+  },
+  {
+    "timestamp": "2026-01-01T07:45:00Z",
+    "kpi_error": 0.2229,
+    "retrieval_score": 0.6908,
+    "latency_dev": 0.5979,
+    "embedding_shift": 0.3607
+  },
+  {
+    "timestamp": "2026-01-01T07:46:00Z",
+    "kpi_error": 0.228,
+    "retrieval_score": 0.6889,
+    "latency_dev": 0.5979,
+    "embedding_shift": 0.3619
+  },
+  {
+    "timestamp": "2026-01-01T07:47:00Z",
+    "kpi_error": 0.2338,
+    "retrieval_score": 0.6845,
+    "latency_dev": 0.601,
+    "embedding_shift": 0.3606
+  },
+  {
+    "timestamp": "2026-01-01T07:48:00Z",
+    "kpi_error": 0.2338,
+    "retrieval_score": 0.6846,
+    "latency_dev": 0.6052,
+    "embedding_shift": 0.3599
+  },
+  {
+    "timestamp": "2026-01-01T07:49:00Z",
+    "kpi_error": 0.2329,
+    "retrieval_score": 0.6793,
+    "latency_dev": 0.6086,
+    "embedding_shift": 0.3615
+  },
+  {
+    "timestamp": "2026-01-01T07:50:00Z",
+    "kpi_error": 0.2336,
+    "retrieval_score": 0.6748,
+    "latency_dev": 0.612,
+    "embedding_shift": 0.3648
+  },
+  {
+    "timestamp": "2026-01-01T07:51:00Z",
+    "kpi_error": 0.2386,
+    "retrieval_score": 0.6734,
+    "latency_dev": 0.6121,
+    "embedding_shift": 0.363
+  },
+  {
+    "timestamp": "2026-01-01T07:52:00Z",
+    "kpi_error": 0.2429,
+    "retrieval_score": 0.6706,
+    "latency_dev": 0.6164,
+    "embedding_shift": 0.3611
+  },
+  {
+    "timestamp": "2026-01-01T07:53:00Z",
+    "kpi_error": 0.2479,
+    "retrieval_score": 0.6672,
+    "latency_dev": 0.6216,
+    "embedding_shift": 0.3657
+  },
+  {
+    "timestamp": "2026-01-01T07:54:00Z",
+    "kpi_error": 0.2504,
+    "retrieval_score": 0.6612,
+    "latency_dev": 0.6274,
+    "embedding_shift": 0.3672
+  },
+  {
+    "timestamp": "2026-01-01T07:55:00Z",
+    "kpi_error": 0.2558,
+    "retrieval_score": 0.6573,
+    "latency_dev": 0.6274,
+    "embedding_shift": 0.3715
+  },
+  {
+    "timestamp": "2026-01-01T07:56:00Z",
+    "kpi_error": 0.2573,
+    "retrieval_score": 0.6525,
+    "latency_dev": 0.6288,
+    "embedding_shift": 0.374
+  },
+  {
+    "timestamp": "2026-01-01T07:57:00Z",
+    "kpi_error": 0.2558,
+    "retrieval_score": 0.6506,
+    "latency_dev": 0.6309,
+    "embedding_shift": 0.3758
+  },
+  {
+    "timestamp": "2026-01-01T07:58:00Z",
+    "kpi_error": 0.2553,
+    "retrieval_score": 0.6502,
+    "latency_dev": 0.6359,
+    "embedding_shift": 0.3804
+  },
+  {
+    "timestamp": "2026-01-01T07:59:00Z",
+    "kpi_error": 0.2564,
+    "retrieval_score": 0.6498,
+    "latency_dev": 0.6375,
+    "embedding_shift": 0.384
+  },
+  {
+    "timestamp": "2026-01-01T08:00:00Z",
+    "kpi_error": 0.2553,
+    "retrieval_score": 0.6507,
+    "latency_dev": 0.6436,
+    "embedding_shift": 0.3857
+  },
+  {
+    "timestamp": "2026-01-01T08:01:00Z",
+    "kpi_error": 0.258,
+    "retrieval_score": 0.6489,
+    "latency_dev": 0.6464,
+    "embedding_shift": 0.3835
+  },
+  {
+    "timestamp": "2026-01-01T08:02:00Z",
+    "kpi_error": 0.2642,
+    "retrieval_score": 0.6446,
+    "latency_dev": 0.6464,
+    "embedding_shift": 0.382
+  },
+  {
+    "timestamp": "2026-01-01T08:03:00Z",
+    "kpi_error": 0.2647,
+    "retrieval_score": 0.6451,
+    "latency_dev": 0.6451,
+    "embedding_shift": 0.3804
+  },
+  {
+    "timestamp": "2026-01-01T08:04:00Z",
+    "kpi_error": 0.2688,
+    "retrieval_score": 0.6406,
+    "latency_dev": 0.6437,
+    "embedding_shift": 0.3829
+  },
+  {
+    "timestamp": "2026-01-01T08:05:00Z",
+    "kpi_error": 0.2719,
+    "retrieval_score": 0.6387,
+    "latency_dev": 0.6479,
+    "embedding_shift": 0.3814
+  },
+  {
+    "timestamp": "2026-01-01T08:06:00Z",
+    "kpi_error": 0.2774,
+    "retrieval_score": 0.6383,
+    "latency_dev": 0.6467,
+    "embedding_shift": 0.38
+  },
+  {
+    "timestamp": "2026-01-01T08:07:00Z",
+    "kpi_error": 0.2798,
+    "retrieval_score": 0.6362,
+    "latency_dev": 0.6475,
+    "embedding_shift": 0.3787
+  },
+  {
+    "timestamp": "2026-01-01T08:08:00Z",
+    "kpi_error": 0.2815,
+    "retrieval_score": 0.6313,
+    "latency_dev": 0.6507,
+    "embedding_shift": 0.3833
+  },
+  {
+    "timestamp": "2026-01-01T08:09:00Z",
+    "kpi_error": 0.2812,
+    "retrieval_score": 0.6298,
+    "latency_dev": 0.6552,
+    "embedding_shift": 0.3822
+  },
+  {
+    "timestamp": "2026-01-01T08:10:00Z",
+    "kpi_error": 0.2863,
+    "retrieval_score": 0.6312,
+    "latency_dev": 0.6568,
+    "embedding_shift": 0.3833
+  },
+  {
+    "timestamp": "2026-01-01T08:11:00Z",
+    "kpi_error": 0.2916,
+    "retrieval_score": 0.6293,
+    "latency_dev": 0.6585,
+    "embedding_shift": 0.3885
+  },
+  {
+    "timestamp": "2026-01-01T08:12:00Z",
+    "kpi_error": 0.2963,
+    "retrieval_score": 0.6259,
+    "latency_dev": 0.6589,
+    "embedding_shift": 0.3888
+  },
+  {
+    "timestamp": "2026-01-01T08:13:00Z",
+    "kpi_error": 0.2983,
+    "retrieval_score": 0.6277,
+    "latency_dev": 0.6638,
+    "embedding_shift": 0.3938
+  },
+  {
+    "timestamp": "2026-01-01T08:14:00Z",
+    "kpi_error": 0.3033,
+    "retrieval_score": 0.6284,
+    "latency_dev": 0.6627,
+    "embedding_shift": 0.3956
+  },
+  {
+    "timestamp": "2026-01-01T08:15:00Z",
+    "kpi_error": 0.3094,
+    "retrieval_score": 0.6298,
+    "latency_dev": 0.6632,
+    "embedding_shift": 0.3966
+  },
+  {
+    "timestamp": "2026-01-01T08:16:00Z",
+    "kpi_error": 0.313,
+    "retrieval_score": 0.6266,
+    "latency_dev": 0.666,
+    "embedding_shift": 0.3949
+  },
+  {
+    "timestamp": "2026-01-01T08:17:00Z",
+    "kpi_error": 0.315,
+    "retrieval_score": 0.6246,
+    "latency_dev": 0.6646,
+    "embedding_shift": 0.3937
+  },
+  {
+    "timestamp": "2026-01-01T08:18:00Z",
+    "kpi_error": 0.3212,
+    "retrieval_score": 0.6247,
+    "latency_dev": 0.6706,
+    "embedding_shift": 0.3964
+  },
+  {
+    "timestamp": "2026-01-01T08:19:00Z",
+    "kpi_error": 0.3262,
+    "retrieval_score": 0.6257,
+    "latency_dev": 0.6762,
+    "embedding_shift": 0.3943
+  }
+]
