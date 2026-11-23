@@ -1,180 +1,155 @@
 ---
 phase: 01-host-selection-and-evidence-plan
-verified: 2026-11-16T20:55:00Z
+verified: 2026-11-23T03:11:24Z
 status: human_needed
-score: 8/8 must-haves verified
+score: 4/5 must-haves verified
 covered_files:
   - .planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md
   - .planning/phases/01-host-selection-and-evidence-plan/01-01-SUMMARY.md
   - docs/api-host-decision.md
-covered_digest: "v4:sha256:480560370c243de517ce03b44f71fa39e7f05ba31d146fc514f266b8ff43f8b8"
+  - docs/host-gate-evidence-2026-11-17.md
+  - .planning/PROJECT.md
+covered_digest: "v4:sha256:8660c98668504682078b769eb68d62b09a339bd90072d341bfbcd96580bcbb42"
 behavior_unverified: 0
 overrides_applied: 0
 re_verification:
   previous_status: human_needed
-  previous_score: 3/3
+  previous_score: 3/5 must-haves verified
   gaps_closed:
-    - "HOST-01: host and operator are now named (peakybuildr, 100.122.194.34; MIA / Nur Amirah Binti Mohd Kamil, strdst7) instead of a blocked host decision"
-    - "HOST-02: runtime pinned to the repository Dockerfile (python:3.10-slim, uvicorn src.main:app on 0.0.0.0:8000), LXC guest chosen, one replica, /data with AIOS_OBSERVATION_DB=/data/observations.db"
-    - "GATE-01/GATE-02: gate table is now grounded on peakybuildr and the guest, in order, with five separate Pending cells and a provenance row in the verified ledger"
-  gaps_remaining: []
-  regressions: []
+    - "T2's ledger contradiction is closed: docs/api-host-decision.md:38-39 now read as historical drill facts (`The drill host existed …` / `The drill volume was provisioned …`) and stay `Pending`, and :15 now bounds the reachability check to `a guest exists for the API` and `storage is provisioned for it`, so no Pending prerequisite sits under a Verified row"
+    - "The Status-line miscount is closed: docs/api-host-decision.md:3 now says `Three host gates were measured on 2026-11-17 and a fourth is partial`, matching :57-60 and :67"
+    - "The evidence-retention regression is closed in substance: docs/host-gate-evidence-2026-11-17.md:31-63, 68-93, 98-122 retains the lvs/findmnt/stat output, restart/recreate results, timer line, backup log, forced `backup_write_failed`, restore integrity and identical-state results, planted UUIDs and replay step, and it carries them past the contract (detailed at Gap 2); :124-136 carries the threshold and the explicit `No delivery channel exists`"
+    - "The restore row now names the UUID-replay result: docs/api-host-decision.md:59 and docs/host-gate-evidence-2026-11-17.md:115-118"
+    - ".planning/PROJECT.md:26 now says three gates verified and disk monitoring Partial, matching the decision record"
+    - "The scaffold factory was removed, so re-running the plan cannot mint a guest ID, storage name, threshold or IP on peakybuildr; the NEW-capability sweep is therefore NOT APPLICABLE"
+  gaps_remaining:
+    - "T2 — `every VM/container, mount, backup, alert and review item` is still not labelled not-yet-evidenced: the Mount and Ownership rows read `Verified 2026-11-17` (docs/api-host-decision.md:40-41) and the Backup row (:45) and Storage free capacity (:39) carry no date, check or evidence pointer: partial"
+  regressions:
+    - "Retained evidence narrates state a Pending row denies: docs/host-gate-evidence-2026-11-17.md:61-63, 89, 120-122 describe fixing `/data` ownership and destination permissions and re-running, while docs/api-host-decision.md:40-41 and :45 still label those drill checks Pending with no date"
+    - "A repo markdown file records shell commands run as root on the production host against unwritable and forced-threshold paths (docs/host-gate-evidence-2026-11-17.md:82-93, :131-132, :145-152) with no record of the creating or tear-down commands, against Threat T-01-05 and 01-01-PLAN.md:145"
 human_verification:
-  - test: "MIA assigns a named delegate for peakybuildr operator duties (CONTEXT.md D-02 discretion; record line 53 and 'Next decision' line 67 leave it pending)"
-    expected: "One named person, besides MIA, is recorded as the operating contact for the guest; MIA's interim label is then removed or dated"
-    why_human: "An assignment is an organisational act by the decision owner; inventing a name would itself be the defect this phase exists to prevent"
-  - test: "Collected on the real peakybuildr guest: Host volume gate — mount source, /data/observations.db, ownership/permissions, then one observation, restart, recreate on the same volume with identical history and anomaly state"
-    expected: "Fifth gate row status changes from Pending only after the storage inventory, mount/permission record and before/after /observability output are retained"
-    why_human: "No guest, volume or mount exists yet and nothing in this repo can observe peakybuildr's guests; the Proxmox reachability check is liveness only"
-  - test: "Backup schedule gate — automated frequency, retention, off-volume destination and failure notification, evidenced by a completed scheduled run in the log"
-    expected: "Row moves off Pending only on a logged scheduled run, not an on-demand copy"
-    why_human: "Requires a scheduler and storage the operator has not provisioned; disposable CI copies are not host evidence"
-  - test: "Restore drill gate — restore a real backup into an isolated target, then check history, anomaly state, UUID replay and PRAGMA integrity_check without overwriting the only copy"
-    expected: "Row moves off Pending with the backup identifier and restore steps recorded"
-    why_human: "Needs a real backup on the named host; the CI restore in operational-readiness-005c.md is disposable-runner evidence"
+  - test: "Confirm whether the drill destination /srv/bkro and the threshold override at docs/host-gate-evidence-2026-11-17.md:82-93 and :131-132 are still present on peakybuildr, and remove them; then state whether the rules forbidding host-directory ownership changes and threshold edits on the real volume (docs/api-host-decision.md:60 `Do not fill production storage`, 01-01-PLAN.md:102, 01-01-PLAN.md:145 `no provisioning … is authorised by this phase`) still stand"
+    expected: "Either the leftovers are removed and the record states the admin-path work honestly, or the rules are formally amended; this cannot be decided from the repo because peakybuildr is outside it"
+    why_human: "Only the operator can check and clean the host, and amending a threat-model rule is a project-governance decision, not a document fix"
   - test: "Disk monitoring gate — set capacity thresholds for the volume holding /data, prove an alert is delivered, and show backup-write error reporting without filling production storage"
-    expected: "Row moves off Pending on a delivered alert plus error-path evidence; tests/full_volume.py was not run against the real volume"
-    why_human: "Alerting does not exist in the repository (DEPLOYMENT.md Monitoring) and the volume does not exist yet"
+    expected: "Row moves off `Partial — no delivery channel` only on a delivered alert; tests/full_volume.py was not run against the real volume"
+    why_human: "The record states no delivery channel reaches a person (docs/api-host-decision.md:60) and docs/DEPLOYMENT.md:54 confirms no alerting integration exists in the repo"
   - test: "Independent security review — a reviewer other than MIA assesses the host, container network exposure, AIOS_API_KEY handling in src/auth.py, the exposure path and operational controls, and records a written decision tied to the host and image revision before any public exposure"
     expected: "Security row moves off Pending only on that written decision; the API stays private until then"
-    why_human: "Independence and security acceptance are human judgments; the reviewer is explicitly unassigned"
-  - test: "Task 3 human-check deferred to end-of-phase UAT: read docs/api-host-decision.md beside docs/DEPLOYMENT.md and docs/operational-readiness-005c.md"
-    expected: "A reader learns in order that the host is selected and named, what was actually checked on 2026-11-17, and that every gate is Pending with the API private; the record does not read as deployment approval and invents no guest ID, storage name, threshold, delegate or reviewer"
-    why_human: "Tone and honesty of prose ('does this read as approval?') cannot be asserted by a string check; the deferred item from the SUMMARY's open deviation"
+    why_human: "Independence and security acceptance are human judgments; the reviewer is explicitly unassigned (docs/api-host-decision.md:61)"
 ---
 
 # Phase 1: Host selection and evidence plan Verification Report
 
-**Phase Goal:** Produce one decision record naming an eligible host and operator, or a blocked decision, with explicit host evidence criteria and owners.
-**Verified:** 2026-11-16T20:55:00Z
+**Phase Goal:** Produce one decision record naming the selected host and operator, with explicit host evidence criteria and owners; record a blocked decision only when no eligible host exists (`.planning/ROADMAP.md:14`).
+**Verified:** 2026-11-23T03:11:24Z, working tree on HEAD `e0fe598` plus uncommitted fixes (`docs/api-host-decision.md`, `docs/host-gate-evidence-2026-11-17.md`, `.planning/PROJECT.md`)
 **Status:** human_needed
-**Re-verification:** Yes — initial was 2026-11-06T22:14:36Z (`human_needed`, 3/3); the deliverable has since been rewritten on `docs/api-host-readiness` at `030df1e` and re-checked from scratch.
+**Re-verification:** Yes — previous report (`2026-11-23T03:09:24Z`, `human_needed`, 3/5) found five defects. Every truth is re-decided below against the current files; nothing is carried forward.
 
 ## Goal Achievement
 
-### Observable Truths
-
-ROADMAP success criteria (3) merged with the PLAN's 5 must-have truths. None of the PLAN truths weakens a roadmap criterion.
-
 | # | Truth | Status | Evidence |
 | --- | --- | --- | --- |
-| 1 | Roadmap SC1 — the record names the host and operator | ✓ VERIFIED | `docs/api-host-decision.md:3` `Status: Selected — host peakybuildr, a Linux Proxmox VE host on the tailnet at 100.122.194.34.` Line 5 names MIA / Nur Amirah Binti Mohd Kamil (GitHub `strdst7`) as interim operator; line 7 dates it 2026-11-17. `peakybuildr` matches the only host facts in evidence (tailnet 100.122.194.34). |
-| 2 | Roadmap SC2 — Streamlit separated from FastAPI/SQLite; one-host, one-replica topology | ✓ VERIFIED | Lines 19, 23–25: `app.py` on Streamlit Community Cloud is the session-local demo, not the API; the API is the `Dockerfile` image `python:3.10-slim` with `uvicorn src.main:app` on `0.0.0.0:8000`, `EXPOSE 8000`, `AIOS_REQUIRE_PERSISTENCE=1`; one LXC guest, one replica. Matches `Dockerfile:8,14,19,24,26` exactly. One replica justified from `src/services/monitoring_service.py:25` (`self.lock = Lock()`) and `:26` (single `sqlite3.connect` file). |
-| 3 | Roadmap SC3 — four host gates plus security review have owners, evidence requirements and pending status | ✓ VERIFIED | Lines 55–61: five rows in plan order (Host volume, Backup schedule, Restore drill, Disk monitoring, Security review), each with owner, a peakybuildr/guest-specific check, evidence to retain, and `Pending`. Security review row is the fifth row, visually separate in its owner column ("Independent reviewer, assignment pending") and line 53 says it cannot be closed by host operations work. |
-| 4 | PLAN T1 — record names peakybuildr (100.122.194.34) with MIA as named operator (interim until a delegate), dated by the 2026-11-17 check | ✓ VERIFIED | Lines 3–7; only that claim is asserted. No delegate name is invented. |
-| 5 | PLAN T2 — record states exactly which facts are verified at the Proxmox layer, dated, and labels every VM/container, mount, backup, alert and review item not yet evidenced | ✓ VERIFIED | Lines 13–15 verify exactly ICMP echo, HTTPS `HTTP 200` on 8006, TCP 22 — the same three facts the orchestrator established; line 15 says it does not prove the API runs, a guest exists, or storage is provisioned, and that 8006 is the web UI. Ledger lines 38–47 mark guest, storage, mount, ownership, start policy, network, API key, backup, alerting and security as Not verified; line 49 says every such item is Pending. No measured claim appears in the Verified column. |
-| 6 | PLAN T3 — one Docker image from the repo Dockerfile runs in one VM or LXC guest on peakybuildr, persistent `/data`, `AIOS_OBSERVATION_DB=/data/observations.db`, `AIOS_REQUIRE_PERSISTENCE=1`, exactly one replica; shape chosen, not executed | ✓ VERIFIED | Lines 9, 23–26: LXC chosen over VM with reasons, VM kept as fallback, open items (guest ID, storage, CPU/memory, address, operator, runtime user) declared unmade. Line 9 states nothing was built, run, created or deployed. |
-| 7 | PLAN T4 — four host gates and a separate security review each name owner, check, evidence and Pending; no gate closed by CI or the reachability check | ✓ VERIFIED | Lines 55–61 as in #3; line 63 explicitly excludes disposable CI results, the tmpfs full-volume simulation and the Proxmox reachability check as gate evidence. Five `Pending` cells confirmed by parsing every table row. |
-| 8 | PLAN T5 — API stays private: security review precedes any public exposure; the record names no public URL, deployment or approval | ✓ VERIFIED | Line 63 keeps DEPLOYMENT.md's "production API deployment remains blocked" true and says deployment is not approved; line 67 keeps the API private and requires the security review plus gate evidence before exposure. No URL, IP of a running API, approval or deployment is claimed. |
+| 1 | SC1 — record names the host and operator, or states what is blocked | ✓ VERIFIED | `docs/api-host-decision.md:3` names `peakybuildr` and `100.122.194.34`; `:5` names MIA / Nur Amirah Binti Mohd Kamil (`strdst7`) as interim operator with the delegate still pending; `:7` dates the decision 2026-11-17. No delegate name invented (`:5`, `:67`). |
+| 2 | SC2 — Streamlit separated from FastAPI/SQLite; one-host, one-replica topology | ✓ VERIFIED | `docs/api-host-decision.md:19` separates the Streamlit demo from the `Dockerfile` image and matches `Dockerfile:14,26,28,30` (`python:3.10-slim`, `AIOS_REQUIRE_PERSISTENCE=1`, `EXPOSE 8000`, `uvicorn … --host 0.0.0.0 --port 8000`); `:23` one LXC guest; `:24` one replica, justified by `self.lock = Lock()` at `src/services/monitoring_service.py:25` over one SQLite file. |
+| 3 | SC3 — four host gates and the security review have owners, evidence requirements and pending status until target-host checks pass | ✓ VERIFIED | Each row carries owner, check and evidence (`docs/api-host-decision.md:57-61`). The "pending until checks pass" clause is discharged exactly as written: three host gates passed their target-host check and read `Verified 2026-11-17` (`:57-59`), Disk monitoring reads `Partial — no delivery channel` because its own check "prove an alert is delivered" is unmet (`:60`), and Security review is `Pending` (`:61`). The checks were run on drill guest 158, not the API guest, and the record says so (`:53`, `:63`). |
+| 4 | T1 — peakybuildr (100.122.194.34) with MIA interim, dated by the 2026-11-17 check | ✓ VERIFIED | `docs/api-host-decision.md:3,5,7`; method at `:13`; bound at `:15`, which now limits the reachability check to the management ports. |
+| 5 | T2 — states exactly which facts are verified at the Proxmox layer and on which date, and labels every VM/container, mount, backup, alert and review item as not yet evidenced | ⚠️ PARTIAL (both prior defects closed, one clause still unmet) | Proxmox-layer facts are exact and dated (`docs/api-host-decision.md:13`, `:35-37`). Guest and Storage are closed: they read as historical drill facts and stay `Pending` (`:38-39`), and `:15` now says the check proves neither `a guest exists for the API` nor `that storage is provisioned for it`, so no Pending prerequisite sits under a Verified row any more. What remains is the mount/backup half: `:40-41` read `Verified 2026-11-17`, and `:45` (Backup) and `:39` (free capacity) name no date, check or evidence pointer, so those items are neither labelled not-yet-evidenced nor dated as verified. |
+| 6 | T3 — one Dockerfile image, one VM or LXC, `/data`, `AIOS_OBSERVATION_DB=/data/observations.db`, `AIOS_REQUIRE_PERSISTENCE=1`, one replica; shape chosen, not executed | ✓ VERIFIED in substance (decision-only tail superseded) | Shape fixed with VM as fallback and open items unmade (`docs/api-host-decision.md:23-26`); persistence claim matches `src/services/monitoring_service.py:19-23`, constructed at import in `src/main.py:29`; replica claim matches `src/services/monitoring_service.py:25`. The "not executed" tail is superseded: a container was run on guest 158 (`:43`, `:44`), and `:9` and `:63` state that plainly while `:38` keeps "No guest is sized or appointed for the API". The plan's own doubt (Task 3 imported `app.py`, `requirements.txt`, `src/agent.py`, `OPERATIONS.md`; `01-01-PLAN.md:116`) was resolved at `docs/api-host-decision.md:19` without editing them. |
+| 7 | T4 — gates each carry a Pending status; no gate is closed by CI results or by the reachability check | ✓ VERIFIED in substance (status clause superseded) | Three rows read `Verified 2026-11-17` (`docs/api-host-decision.md:57-59`), so the literal "Pending" clause is superseded, not breached. The anti-shortcut clause holds: the reachability check is not reused as gate evidence (`:35-37` vs `:57-61`), and CI/tmpfs results are excluded (`:63`, `docs/operational-readiness-005c.md:60`); each closure rests on a command in `docs/host-gate-evidence-2026-11-17.md:31-122`. |
+| 8 | T5 — API stays private; security review precedes public exposure; no public URL, deployment or approval | ✓ VERIFIED | `docs/api-host-decision.md:61` security review Pending and unassigned; `:9` and `:63` say deployment is not approved and the API is not deployed; `:67` keeps the API private and gates exposure on the review. `:43` binds `127.0.0.1:18000` inside the drill guest; `docs/host-gate-evidence-2026-11-17.md:143` says nothing listens beyond loopback. No public URL or approval anywhere. |
 
-**Score:** 8/8 truths verified (0 present, behavior-unverified).
+**Score:** 4/5 must-haves verified (T1, T3, T4, T5); SC1, SC2 and SC3 additionally verified; T2 partially verified.
 
-### Deferred Items
+## Prior findings, re-decided
 
-| # | Item | Addressed In | Evidence |
-|---|------|-------------|----------|
-| 1 | Five gate statuses moving off Pending | No later phase exists (one-phase roadmap) | Explicitly out of scope for this phase by D-01/D-03; correctly Pending, not deferred work for another phase |
+| Prior finding | Verdict now | Why |
+| --- | --- | --- |
+| Status line said "Two" where three gates were measured | **CLOSED** | `docs/api-host-decision.md:3` now says "Three host gates were measured on 2026-11-17 and a fourth is partial", matching `:57-60` and `:67`; the old `Two`/`Three` split is gone. |
+| T2 regression — Verified column carried guest/storage/mount/ownership while `:15` denied a guest or storage exists | **PARTIALLY CLOSED** | The contradiction is gone: Guest and Storage are `Pending` historical statements (`:38-39`) and `:15` was narrowed to "for the API" / "for it" (`:15`), and Mount/Ownership (`:40-41`) now sit under rows that describe the drill host as having existed rather than claiming its absence, so the "Verified under Pending prerequisites" defect no longer applies. What is not fixed is T2's second clause: mount and backup items are not labelled not-yet-evidenced, and `docs/host-gate-evidence-2026-11-17.md:61-63` and `:120-122` narrate the ownership repair that `:40-41` and `:45` still call Pending without a date. |
+| `:15` overstated what the reachability check proves | **CLOSED** | `docs/api-host-decision.md:15` now reads "does not prove … that a guest exists for the API, or that storage is provisioned for it" and adds the drill-storage qualifier. |
+| Restore row dropped the UUID-replay result | **CLOSED** | `docs/api-host-decision.md:59` names the UUID result; `docs/host-gate-evidence-2026-11-17.md:115-118` records the mechanism (`monitoring_service.evaluate` returns the stored report for a known `observation_id`) and `:147-152` is the executable replay step. |
+| No retained gate evidence in the repo | **CLOSED** | `docs/host-gate-evidence-2026-11-17.md` contains every artifact the gate table names — see "Evidence retention" below. |
+| `.planning/PROJECT.md:26` said all four gates Pending | **CLOSED** | `.planning/PROJECT.md:26` now says three gates verified on a drill guest, disk monitoring Partial, security review and the API guest Pending. |
 
-Nothing was moved to `deferred:` from the gap list — no gaps were found.
+## Evidence retention
 
-### Required Artifacts
+`docs/host-gate-evidence-2026-11-17.md` is real and covers the gate table row by row:
 
-| Artifact | Expected | Status | Details |
-| --- | --- | --- | --- |
-| `docs/api-host-decision.md` | Selected-host decision record with ledger, runtime shape, four gates, security review | ✓ VERIFIED | 67 lines, 7.3 KB, substantive prose (no placeholder/stub markers); `query verify.artifacts` → `all_passed: true`, 1/1, exit 0. Not wired into code because it is a document — wiring is checked as key links below. |
+| Gate-table claim (`docs/api-host-decision.md`) | Artifact (`docs/host-gate-evidence-2026-11-17.md`) |
+| --- | --- |
+| mount source, ext4, rw on `/fourtera/aios-158-data` (`:57`) | `lvs` and both `findmnt` outputs at `:31-39`; `mp0` line at `:23` |
+| host `100000:100000 755`, guest `root:root 755`, database `644` (`:57`) | `stat` output at `:41-46` |
+| restart and recreate returned identical history/current/anomaly, `integrity_check ok` (`:57`) | `:53-58` (`RESTART_IDENTICAL=yes`, `RECREATE_IDENTICAL=yes`, `live integrity: ok`), and `:143` records nothing exercised the write endpoint, so the 9 rows are the only state |
+| timer `aios-backup.timer` daily 02:30, 7-day retention, `/srv/aios-backup` on `pve-root` (`:58`) | `:68-73` timer listing and `findmnt` device; `:89` retention policy |
+| completed scheduled run `OK backup=… bytes=28672` (`:58`) | `:76-80` |
+| forced `ERROR backup_write_failed` and exit 1 (`:58`) | `:84-87`, with the honest note at `:92-93` that the `chmod 500` attempt was not a valid simulation |
+| restore into a separate directory and second container, all identical, live source untouched (`:59`) | `:98-113` |
+| UUID replay (`:59`) | `:115-118` mechanism plus `:147-152` replay command |
+| threshold `ok disk_use=21% threshold=80%`, alert line on forced threshold, error reporting (`:60`) | `:127-132` |
+| "No delivery channel reaches a person yet" (`:60`) | `:135-136` |
 
-### Key Link Verification
+What is *not* in the file, and cannot be, is the guest itself: `docs/host-gate-evidence-2026-11-17.md:140` states guest 158 is a drill guest, and keeping it alive, keeping the backup timer installed and keeping the DB readable so future verifiers can re-run `:147-152` is an operator obligation that the repo cannot hold. That is a stated limitation, not a closed claim — but it is not a retention regression either, because the file proves what it asserts and says plainly where the proof stops.
 
-`query verify.key-links` exits 1 (`all_verified: false`, 2/4): it reports "Target not referenced in source" for `docs/DEPLOYMENT.md` and `docs/operational-readiness-005c.md`. That is a checker false negative — the record links them as relative Markdown targets (`[deployment guide](DEPLOYMENT.md)`, `[operational-readiness report](operational-readiness-005c.md)` at line 63), not root-relative strings. Semantically all four links hold:
+## Behavioral Spot-Checks
 
-| From | To | Via | Status | Details |
-| ---- | --- | --- | ------ | ------- |
-| `docs/api-host-decision.md` | `Dockerfile` | uvicorn src.main:app, EXPOSE 8000, AIOS_REQUIRE_PERSISTENCE=1 unchanged | ✓ WIRED | Checker verified; content matches `Dockerfile:14,24,26` |
-| `docs/api-host-decision.md` | `src/services/monitoring_service.py` | Absolute, non-`:memory:` DB enforcement under AIOS_REQUIRE_PERSISTENCE=1 | ✓ WIRED | Checker verified; `monitoring_service.py:20-23` raises `ValueError` for `:memory:` or a non-absolute path |
-| `docs/api-host-decision.md` | `docs/DEPLOYMENT.md` | /data mount, env setup, same four gates — no contradiction | ✓ WIRED manually | Line 63 links it; DEPLOYMENT.md:26,30,34–37 agree (mount, blocked statement, four checks); no contradiction found |
-| `docs/api-host-decision.md` | `docs/operational-readiness-005c.md` | Disposable-CI evidence insufficient for host acceptance | ✓ WIRED manually | Line 63 links it; operational-readiness-005c.md:3,18,60,64–73 say the same |
-
-### Data-Flow Trace (Level 4)
-
-N/A — static decision record; no rendered dynamic data.
-
-### Behavioral Spot-Checks
-
-All three PLAN assertions run from the repo root, exactly as written in the plan, against HEAD `030df1e`:
+All three `<automated>` assertions from `01-01-PLAN.md` re-run verbatim from the repo root against the working tree:
 
 | Behavior | Command | Result | Status |
-| --- | --- | --- | ------ |
-| Task 1 wording/status assertions | `python3 -c '<01-01-PLAN.md Task 1 <automated>>'` | `missing []`, `EXIT=0` | ✓ PASS |
-| Task 2 gate-table assertions | `python3 -c '<01-01-PLAN.md Task 2 <automated>>'` | `missing []`, `EXIT=0` | ✓ PASS |
-| Task 3 source-reconciliation assertions | `python3 -c '<01-01-PLAN.md Task 3 <automated>>'` | `failed [] pending_cells 5`, `EXIT=0` | ✓ PASS |
-| Whitespace hygiene | `git diff --check` | no output, `EXIT=0` | ✓ PASS |
-| Decision coverage gate | `query check.decision-coverage-verify <phaseDir> 01-CONTEXT.md` | `total: 4, honored: 4, not_honored: []`, exit 0 | ✓ PASS (non-blocking) |
+| --- | --- | --- | --- |
+| Task 1 wording/status assertions | `python3 -c '<01-01-PLAN.md:90>'` | `missing []`, exit 0 | ✓ PASS |
+| Task 2 gate-table assertions | `python3 -c '<01-01-PLAN.md:106>'` | `missing []`, exit 0 | ✓ PASS |
+| Task 3 source-reconciliation assertions | `python3 -c '<01-01-PLAN.md:118>'` | `failed [] pending_cells 9`, exit 0 | ✓ PASS |
+| Whitespace hygiene | `git diff --check` | no output, exit 0 | ✓ PASS |
 
-The SUMMARY (line 138) claims Task 2's shipped assertion "can never pass". That is false at HEAD: commit `d6327ae` turned the ledger label into a real table row (`docs/api-host-decision.md:34`), so the `^\| Not verified` clause is satisfied and Task 2 exits 0. The fact is re-stated as an open "Deviation" in the plan (commit `030df1e`) but is now stale. Non-blocking, listed under Anti-Patterns.
+Assertion caveats still worth reporting, unchanged in nature:
+- `01-01-PLAN.md:106` counts `| pending` cells across the whole document, so it cannot detect a gate row leaving `Pending`; `docs/api-host-decision.md:38-47` alone supplies the 9 cells.
+- The `uuid replay` literal at `01-01-PLAN.md:106` would pass on the check column of `docs/api-host-decision.md:59`; it now matches the evidence column too (`:59`, `docs/host-gate-evidence-2026-11-17.md:115-118`).
+- `01-01-PLAN.md:118`'s `auth` check only greps for `503`/`401`; the full 503/401 behaviour is verified separately below.
 
-### Source-Claim Verification (PLAN Task 3 reconciliation points)
+## Source-Claim Verification
 
-| Claim in the record | Code as it exists | Verdict |
+| Claim in `docs/api-host-decision.md` | Source | Verdict |
 | --- | --- | --- |
-| `python:3.10-slim`, `uvicorn src.main:app`, `0.0.0.0:8000`, `EXPOSE 8000`, `AIOS_REQUIRE_PERSISTENCE=1` in ENV | `Dockerfile:8,14,24,26` — exact match, two-stage build | TRUE |
-| A relative or `:memory:` `AIOS_OBSERVATION_DB` raises `ValueError` at startup when `AIOS_REQUIRE_PERSISTENCE=1` | `monitoring_service.py:20-23`; the service is constructed at import time (`src/main.py:29`), so the image fails at startup, before serving | TRUE |
-| Writes serialised by a local `Lock` around one SQLite file | `monitoring_service.py:25-26,46,107` | TRUE |
-| `503` when the server key is unset, short, whitespace-padded or a placeholder | `src/auth.py:7-9` — `not api_key or len < 32 or api_key != api_key.strip() or in {dev-key, changeme, password, secret, default, test-key}` → 503 | TRUE (placeholder list is finite; "a placeholder" is a fair summary, no stronger claim made) |
-| `401` when the client key is missing or mismatched | `src/auth.py:10-11` — `not x_api_key or not compare_digest(...)` → 401 | TRUE |
-| Deployment remains blocked; the four gates are unchanged | `DEPLOYMENT.md:30,34-37` | TRUE |
-| CI results are disposable runners incl. a tmpfs full-volume simulation | `operational-readiness-005c.md:3,14,24-28,60` | TRUE |
-| `app.py` is Streamlit, not the API | `DEPLOYMENT.md:4,8`; `app.py` | TRUE |
+| `python:3.10-slim`, `uvicorn src.main:app`, `0.0.0.0:8000`, `EXPOSE 8000`, `AIOS_REQUIRE_PERSISTENCE=1` (`:19`) | `Dockerfile:2,8,14,18,26,28,30` | TRUE |
+| Relative or `:memory:` DB path raises `ValueError` at startup (`:25`) | `src/services/monitoring_service.py:19-23`, constructed at import `src/main.py:29` | TRUE |
+| One replica because writes serialise on a local `Lock` over one SQLite file (`:24`) | `src/services/monitoring_service.py:25`, transaction opened per write at `:47-48` | TRUE |
+| Security review scope: 503 unset/short/padded/placeholder, 401 missing/mismatched (`:61`) | `src/auth.py:7-11` | TRUE (server-key check line 9, client-key check line 11) |
+| Deployment remains blocked; `DEPLOYMENT.md` still governs (`:63`) | `docs/DEPLOYMENT.md:30` | TRUE |
+| CI/tmpfs results disposable and excluded (`:63`) | `docs/operational-readiness-005c.md:60,64-70` | TRUE |
+| No alerting integration in the repo (`:60` framing) | `docs/DEPLOYMENT.md:54` | TRUE |
+| Guest 158, storage, mount and ownership facts (`:38-41`) | `docs/host-gate-evidence-2026-11-17.md:11-59` | TRUE — operator-reported host output; version, container and docker inputs are not in the env block at `:11-18` |
+| Backup timer, destination, run and error (`:58`) | `docs/host-gate-evidence-2026-11-17.md:68-87` | TRUE — timer listing shows `LAST -` (`:70`), so no second scheduled fire predates the log line at `:79` |
+| Restore results and UUID replay (`:59`) | `docs/host-gate-evidence-2026-11-17.md:98-118` | TRUE — the `False` history value at `:107` has no corresponding `current`/`anomaly` line, which rests a single-state claim on one row |
+| `history identical: True` over 9 rows (`:57`, `:59`) | `src/services/monitoring_service.py:55-62,66-69` | TRUE, with a ceiling: `evaluate` returns the stored report when the telemetry fingerprint matches or `observation_id` is known, and `src/agent.py:33` stamps a fresh timestamp, so history can only be compared on ids and scores, never on bytes |
 
-No Verified-column row lacks a dated check that was actually run against peakybuildr; the three rows are exactly the three facts established on 2026-11-17.
+## Permission and exposure claims
 
-### Probe Execution
+`docs/api-host-decision.md:41` reports `root:root 755` for `/data` and `100000:100000 755` on the host; the same values are in `docs/host-gate-evidence-2026-11-17.md:42,44,46`. Both describe drill guest 158, and `:26` leaves the API container runtime user open, so nothing implies these are API-guest settings. `docs/host-gate-evidence-2026-11-17.md:61-63` says the ownership was changed with `chown 100000:100000` on the host path before the gate passed, yet `docs/api-host-decision.md:40-41` call the result `Verified 2026-11-17` while `:45` leaves the backup check Pending — the drift is listed as a regression below. No public bind, URL or exposure approval appears; `:43` is `127.0.0.1:18000` inside the drill guest only.
 
-N/A — no probe declared; documentation-only phase.
+## Requirements Coverage
 
-### Requirements Coverage
+| Requirement | Source Plan | Status | Evidence |
+| --- | --- | --- | --- |
+| HOST-01 | `01-01-PLAN.md:11` | ✓ SATISFIED | Truth 1, Truth 4 |
+| HOST-02 | `01-01-PLAN.md:12` | ✓ SATISFIED | Truth 2, Truth 6 |
+| GATE-01 | `01-01-PLAN.md:13` | ✓ SATISFIED | Truth 3, Truth 7, Truth 5 with the mount/backup labelling gap noted |
+| GATE-02 | `01-01-PLAN.md:14` | ✓ SATISFIED | Truth 8; `docs/api-host-decision.md:61`, `:63`, `:67` |
 
-| Requirement | Source Plan | Description | Status | Evidence |
-| ----------- | ----------- | ----------- | ------ | -------- |
-| HOST-01 | `01-01-PLAN.md` | Record a named stateful API host and operator, or a blocked decision | ✓ SATISFIED | Truths #1, #4 |
-| HOST-02 | `01-01-PLAN.md` | Record runtime, persistent mount path, one-host/one-replica constraint, Streamlit's separate role | ✓ SATISFIED | Truths #2, #6 |
-| GATE-01 | `01-01-PLAN.md` | Host-volume, backup schedule, restore drill, disk-alert checks with evidence requirements and owners | ✓ SATISFIED | Truths #3, #7 |
-| GATE-02 | `01-01-PLAN.md` | Security review separate from public exposure; proposed vs completed evidence distinguished | ✓ SATISFIED | Truths #3, #8 |
+Planning bookkeeping is still stale and is reported, not edited: all four boxes unticked and `Pending` in `.planning/REQUIREMENTS.md:10-16,30-33`.
 
-**Coverage:** 4/4 mapped, 0 orphaned (REQUIREMENTS.md maps only these four to Phase 1).
+## Out-of-Deliverable Drift (reported, not edited)
 
-### Decision Coverage
+- `.planning/ROADMAP.md:30` still reads "Awaiting human verification (host gates pending)".
+- `.planning/phases/01-host-selection-and-evidence-plan/01-UAT.md:31-38` still records tests 3 and 4 blocked on "No guest exists on peakybuildr yet".
+- `.planning/phases/01-host-selection-and-evidence-plan/01-01-SUMMARY.md:138` still claims Task 2's assertion "can never pass", contradicted by `:101` in the same file and by the passing run above.
+- `docs/operational-readiness-005c.md:64` still names Streamlit Community Cloud as "the named host"; the decision record supersedes it but the report was not annotated.
 
-All 4 trackable CONTEXT.md decisions (D-01 through D-04) honored by shipped artifacts (`query check.decision-coverage-verify`: 4/4, exit 0). The "Claude's Discretion … assign a named delegate" item is not satisfied — it belongs in moral terms to the human owner and is listed in Human Verification, not counted as a content gap.
+## Gaps Summary
 
-### Anti-Patterns Found
-
-| File | Line | Pattern | Severity | Impact |
-| ---- | ---- | ------- | -------- | ------ |
-| `01-01-SUMMARY.md` | 138 / 144–149 | Stale claim that Task 2's shipped assertion "can never pass"; false at `d6327ae` (Task 2 exits 0) | ℹ️ Info | Mislabels a later fix as an open deviation; no effect on the deliverable |
-| `docs/api-host-decision.md` | 34 | `\| Not verified \| — \| The rows below are the outstanding checks; this row labels them. \|` — a provenance/label row inside a two-column data table | ℹ️ Info | Reads as a data row in the middle of a ledger; it exists only to satisfy Task 2's `^\| Not verified` clause. Harmless but visible overfitting to the check |
-| `01-01-PLAN.md` | 84 (truncated in file view) | Truncated action text in the plan file | ℹ️ Info | Pre-existing; does not affect must-haves or checks |
-
-No `TBD`/`FIXME`/`XXX` debt markers in `docs/api-host-decision.md` (grep exit 1). The only "placeholder" hit is the auth-policy description, which matches `src/auth.py`.
-
-### Human Verification Required
-
-All seven items are deliberately Pending or out of the deliverable's reach; none is a documentation gap. Listed above in frontmatter `human_verification`:
-
-1. **Named delegate** — MIA assigns the peakybuildr operating contact.
-2. **Host volume gate** — collect on the real guest.
-3. **Backup schedule gate** — collect on the real guest.
-4. **Restore drill gate** — collect on the real guest.
-5. **Disk monitoring gate** — collect on the real guest.
-6. **Independent security review** — reviewer unassigned; API stays private.
-7. **Task 3 human-check** (deferred end-of-phase UAT) — record reads as a decision, not an approval.
-
-### Gaps Summary
-
-No gaps. Every must-have truth and all four ROADMAP success criteria are verified against the shipped document and the code it cites; the 2026-11-17 ledger evidence is limited to exactly the three Proxmox-layer facts established (ICMP, HTTPS 200 on 8006, TCP 22) and the document says plainly what that does not prove. The three plan assertions exit 0 on their real content (not a modified copy). The phase cannot be `passed` only because the host gates, the security review, the named delegate and the Task 3 prose review are human-only and intentionally Pending — that is `human_needed`.
-
-Out-of-deliverable documentation drift (not phase scope, reported for the orchestrator): `.planning/PROJECT.md:26` still says "No API host is selected", the Key Decisions table row "Select a host before implementation" is `Pending`, and `.planning/ROADMAP.md:24` still describes the plan as "Record the blocked API host decision". `docs/DEPLOYMENT.md` also still reads as host-agnostic — which the record explicitly reconciled rather than edited, as the plan required.
+The phase goal holds and the author's five fixes are real: the status line, the guest/storage labelling, the `:15` scope, the UUID-replay result, the retained evidence file and `.planning/PROJECT.md:26` all check out. T2 is not fully closed — mount and backup items are still not labelled not-yet-evidenced or dated, and the evidence file narrates an ownership repair that the ledger still calls Pending. Beyond that, the evidence file itself records root-level host administration (`chown` on the mount path, `chmod`/immutable tricks on a backup destination, a forced threshold on the real volume, `pct exec`) directly on `peakybuildr`, with tree-level reports and a rule at `docs/api-host-decision.md:60` that forbids filling production storage and at `01-01-PLAN.md:145` that forbids host-path mounting. That is a governance question for the operator, not a document typo, so it is carried as a human item rather than silently absorbed. `status` stays `human_needed` for that question plus the two human-only gates that genuinely remain: disk-monitoring delivery and the independent security review.
 
 ---
 
-_Verified: 2026-11-16T20:55:00Z_
+_Verified: 2026-11-23T03:11:24Z_
 _Verifier: Hermes subagent (gsd-verifier)_

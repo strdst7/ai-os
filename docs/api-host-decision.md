@@ -1,6 +1,6 @@
 # Stateful API host decision
 
-Status: Selected — host `peakybuildr`, a Linux Proxmox VE host on the tailnet at 100.122.194.34. Two host gates were measured on 2026-11-17; the deployment is still not approved.
+Status: Selected — host `peakybuildr`, a Linux Proxmox VE host on the tailnet at 100.122.194.34. Three host gates were measured on 2026-11-17 and a fourth is partial; the deployment is still not approved.
 
 Decision owner and operator: MIA / Nur Amirah Binti Mohd Kamil (GitHub `strdst7`), interim operating contact until a named delegate is assigned.
 
@@ -12,7 +12,7 @@ This record selects the host and fixes the runtime shape. Phase 1 built no image
 
 Checked on 2026-11-17: ICMP echo replies from 100.122.194.34, HTTPS `HTTP 200` on port 8006, and TCP 22 accepting connections.
 
-That check proves the Proxmox node answers on its management ports. It does not prove that the API runs, that a guest exists, or that storage is provisioned. Port 8006 is the Proxmox web UI, not the API.
+That check proves the Proxmox node answers on its management ports. It does not prove that the API runs, that a guest exists for the API, or that storage is provisioned for it. Port 8006 is the Proxmox web UI, not the API. Storage that was provisioned solely for the drill below is recorded in the ledger as drill environment, not as API provisioning.
 
 ## What runs there, and what does not
 
@@ -35,14 +35,14 @@ A green management-port check is not host evidence, so the two live in separate 
 | Node reachability | ICMP echo replies from 100.122.194.34 | — | Verified |
 | Proxmox web UI | HTTPS `HTTP 200` on port 8006 | — | Verified |
 | SSH | TCP port 22 accepting connections | — | Verified |
-| Guest | Guest 157 `aios` (LXC, Debian 13, Docker) existing and running; guest 158 `aios-drill` (LXC, Debian 13, unprivileged) created for the gate drill | No guest is sized or appointed for the API. Evidence: `pct config` for the chosen guest. | Pending |
-| Storage | `/fourtera/vm-158-data`, ext4 on the 3.6 TB `fourtera` volume group; 10 GB | Storage for the API guest itself. Evidence: storage configuration and a capacity listing. | Pending |
-| Mount | `/data` bound from `/fourtera/aios-158-data`; recorded as `mp0` in the guest config and present after restart | — | Verified |
-| Ownership | Host `100000:100000 755`, guest `root:root 755 /data`, database file `root:root 644` | — | Verified |
-| Start policy | Container recreated on the same volume with an unchanged database path | Restart policy and the compose or `docker run` invocation adopted for the API. Evidence: the invocation and the restart policy in effect. | Pending |
+| Guest | The drill host existed: guest 158 `aios-drill` (LXC, Debian 13, unprivileged) was created for the gate drill and guest 157 `aios` was seen running | No guest is sized or appointed for the API. Evidence: `pct config` for the chosen guest. | Pending |
+| Storage | The drill volume was provisioned: `/fourtera/vm-158-data`, ext4 on the 3.6 TB `fourtera` volume group, 10 GB | Storage for the API guest itself. Evidence: storage configuration and a capacity listing. | Pending |
+| Mount | `/data` bound from `/fourtera/aios-158-data`; recorded as `mp0` in guest 158's config and present after restart | — | Verified 2026-11-17 |
+| Ownership | Host `100000:100000 755`, guest `root:root 755 /data`, database file `root:root 644` | — | Verified 2026-11-17 |
+| Start policy | Container started with an explicit `docker run` on the drill guest and recreated on the same volume with an unchanged database path | Restart policy and the compose or `docker run` invocation adopted for the API. Evidence: the invocation and the restart policy in effect. | Pending |
 | Network | Container bound `127.0.0.1:18000` inside the drill guest only | The tailnet address the API would answer on. Evidence: the guest's tailnet address and a probe from another tailnet node. | Pending |
 | API key | `AIOS_API_KEY` supplied to the drill container without printing its value; absent, the API answers `503 API key not configured` | Provisioning of the key on the API guest. | Pending |
-| Backup | Scheduled timer with off-volume destination, completed run logged, forced write-failure logged | The failure-notification path (see Disk monitoring). | Pending |
+| Backup | The drill timer ran off-volume (`/srv/aios-backup`), completed a scheduled run and logged a forced write failure | The failure-notification path (see Disk monitoring). | Pending |
 | Alerting | Threshold evaluated and an alert line written on a forced threshold | Delivery to a person. Evidence: see the Disk monitoring gate. | Pending |
 | Security | — | Any security review. Evidence: see the Security review row. | Pending |
 
@@ -56,11 +56,11 @@ The four host gates are measured on the drill guest 158; the named delegate is s
 | --- | --- | --- | --- | --- |
 | Host volume | MIA, interim operator; named delegate pending | Inspect the guest's persistent volume and the `/data` mount source, the database path `/data/observations.db`, ownership and permissions. Write one observation, restart the container, then recreate it on the same volume; identical history and anomaly state is the pass condition. | Mount source `/dev/mapper/fourtera-vm--158--data` (ext4, rw) on `/fourtera/aios-158-data`, bound to `/data`; host `100000:100000 755`, guest `root:root 755`, database `644`. Restart and recreate on the same volume both returned an identical `history`, `current` and `anomaly`, with `PRAGMA integrity_check` = `ok`. | Verified 2026-11-17 |
 | Backup schedule | MIA, interim operator; named delegate pending | Define automated frequency and retention, an off-volume destination that is not the storage the database lives on, and a failure notification path. Pass condition is a completed scheduled run in the log, not an on-demand copy. | systemd timer `aios-backup.timer`, daily 02:30, 7-day retention; destination `/srv/aios-backup` on `pve-root`, a different device from the `fourtera` volume holding `/data`; a completed scheduled run logged (`OK backup=… bytes=28672`); a forced write failure logged `ERROR backup_write_failed` and exited 1. Failure notification path still missing. | Verified 2026-11-17 for schedule, destination and run; notification path Pending |
-| Restore drill | MIA, interim operator; named delegate pending | Restore a real backup into an isolated target, then check history, anomaly state, UUID replay and `PRAGMA integrity_check` without overwriting the only copy. | Backup restored into a separate directory and a second container; `history identical: True`, `current identical: True`, `anomaly identical: True`, `integrity ok`; live source unchanged at 9 rows and `integrity ok`. A restored copy must be owned by uid 100000, or the container fails with `attempt to write a readonly database`. | Verified 2026-11-17 |
+| Restore drill | MIA, interim operator; named delegate pending | Restore a real backup into an isolated target, then check history, anomaly state, UUID replay and `PRAGMA integrity_check` without overwriting the only copy. | Backup restored into a separate directory and a second container; `history identical: True`, `current identical: True`, `anomaly identical: True`, `integrity ok`; live source unchanged at 9 rows and `integrity ok`. UUID replay: the restored copy carried the same observation UUIDs as the live database, and each stored row replays identically. A restored copy must be owned by uid 100000, or the container fails with `attempt to write a readonly database`. | Verified 2026-11-17 |
 | Disk monitoring | MIA, interim operator; named delegate pending | Set capacity thresholds for the volume holding `/data`, prove an alert is delivered, and show backup-write error reporting. Do not fill production storage; `tests/full_volume.py` must not run on the real volume. | Threshold script at 80% on `/fourtera` logging `ok disk_use=21% threshold=80%`; an alert line written when the threshold was forced; backup-write error reporting shown. No delivery channel reaches a person yet, so "alert is delivered" is not met. | Partial — no delivery channel |
 | Security review | Independent reviewer, assignment pending | Review the named host, the container network exposure, `AIOS_API_KEY` handling in `src/auth.py` (503 when the server key is unset, short, whitespace-padded or a placeholder; 401 when the client key is missing or mismatched), the exposure path and operational controls. | Written decision tied to the host and image revision. | Pending |
 
-These gates were measured on guest 158, a disposable LXC container created for the drill. They prove the volume, backup and restore contract holds on this host and this storage. They do not appoint guest 158 as the API guest, and the API is still not deployed. The [deployment guide](DEPLOYMENT.md) remains the runtime contract that governs the container, and its statement that production API deployment remains blocked is still true. CI lifecycle and full-volume results in the [operational-readiness report](operational-readiness-005c.md) came from disposable runners, including a tmpfs full-volume simulation; the drill above adds real target-host mount and storage evidence, and no target-host alert delivery.
+These gates were measured on guest 158, a disposable LXC container created for the drill. They prove the volume, backup and restore contract holds on this host and this storage. They do not appoint guest 158 as the API guest, and the API is still not deployed. The raw command output behind the three verified rows is retained in **[host-gate-evidence-2026-11-17.md](host-gate-evidence-2026-11-17.md)**. The [deployment guide](DEPLOYMENT.md) remains the runtime contract that governs the container, and its statement that production API deployment remains blocked is still true. CI lifecycle and full-volume results in the [operational-readiness report](operational-readiness-005c.md) came from disposable runners, including a tmpfs full-volume simulation; the drill above adds real target-host mount and storage evidence, and no target-host alert delivery.
 
 ## Next decision
 
