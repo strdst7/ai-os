@@ -1,6 +1,6 @@
 ---
 phase: 01-host-selection-and-evidence-plan
-verified: 2026-11-23T03:11:24Z
+verified: 2026-11-23T06:45:11Z
 status: human_needed
 score: 4/5 must-haves verified
 covered_files:
@@ -9,147 +9,151 @@ covered_files:
   - docs/api-host-decision.md
   - docs/host-gate-evidence-2026-11-17.md
   - .planning/PROJECT.md
-covered_digest: "v4:sha256:90dd3448af66578d1ad20bb869146ed71017887965388fc1605f0ad910cdbf1c"
+covered_digest: "v4:sha256:159c3b29aaa99b278707d2106b9e38764c4fd3bb35b25ec677448b1be45017c1"
 behavior_unverified: 0
 overrides_applied: 0
 re_verification:
   previous_status: human_needed
-  previous_score: 3/5 must-haves verified
+  previous_score: 4/5 must-haves verified
   gaps_closed:
-    - "T2's ledger contradiction is closed: docs/api-host-decision.md:38-39 now read as historical drill facts (`The drill host existed …` / `The drill volume was provisioned …`) and stay `Pending`, and :15 now bounds the reachability check to `a guest exists for the API` and `storage is provisioned for it`, so no Pending prerequisite sits under a Verified row"
-    - "The Status-line miscount is closed: docs/api-host-decision.md:3 now says `Three host gates were measured on 2026-11-17 and a fourth is partial`, matching :57-60 and :67"
-    - "The evidence-retention regression is closed in substance: docs/host-gate-evidence-2026-11-17.md:31-63, 68-93, 98-122 retains the lvs/findmnt/stat output, restart/recreate results, timer line, backup log, forced `backup_write_failed`, restore integrity and identical-state results, planted UUIDs and replay step, and it carries them past the contract (detailed at Gap 2); :124-136 carries the threshold and the explicit `No delivery channel exists`"
-    - "The restore row now names the UUID-replay result: docs/api-host-decision.md:59 and docs/host-gate-evidence-2026-11-17.md:115-118"
-    - ".planning/PROJECT.md:26 now says three gates verified and disk monitoring Partial, matching the decision record"
-    - "The scaffold factory was removed, so re-running the plan cannot mint a guest ID, storage name, threshold or IP on peakybuildr; the NEW-capability sweep is therefore NOT APPLICABLE"
+    - "The previous report's 'gate rows carry no date' finding is closed on the record's own terms: docs/api-host-decision.md:57-61 now carry a dated Status column (`Verified 2026-11-17`, `Verified 2026-11-17 for schedule, destination and run; notification path Pending`, `Partial — no delivery channel`), so the ledger's mount/backup items are no longer undated leaves"
+    - "The plan's all-Pending gate contract is retired rather than silently broken: .planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:106 now requires a Pending/Verified/Partial status cell per row plus at least three Pending cells, and .planning/ROADMAP.md:20 adds the anti-shortcut clause 'A gate leaves Pending only on a recorded target-host check, never on CI or reachability evidence'"
+    - "The drill-footprint finding is now recorded in-tree: docs/host-gate-evidence-2026-11-17.md:155-176 lists every item left on peakybuildr with its disposition and states the rows are 'present, not removed'"
+    - "The 'record still reads as API stays private / not approved' check still holds after the plan edit: docs/api-host-decision.md:3, :9, :63, :67"
   gaps_remaining:
-    - "T2 — `every VM/container, mount, backup, alert and review item` is still not labelled not-yet-evidenced: the Mount and Ownership rows read `Verified 2026-11-17` (docs/api-host-decision.md:40-41) and the Backup row (:45) and Storage free capacity (:39) carry no date, check or evidence pointer: partial"
+    - "T2 — the clause 'labels every VM/container, mount, backup, alert and review item as not yet evidenced' is still unmet and is NOT retired by the plan edit: docs/api-host-decision.md:40-41 read `Verified 2026-11-17`, :43-44 puts the container and API-key drill results in the Verified column, :45 puts off-volume backup results in the Verified column. The plan edit changed the *assertion* (.planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:106) and the ROADMAP criterion (.planning/ROADMAP.md:20), but the T2 truth text at 01-01-PLAN.md:25 and the Task 2 action at 01-01-PLAN.md:100/102/104 (`Keep exactly four host-gate rows … Status Pending`, `do not close any row`) were left unchanged — so the plan contradicts itself and T2 stays failed"
+    - "`covered_digest` is bound (per the verification brief) to `v4:sha256:159c3b29…`; it is not recomputed over the five covered files in this pass, because .planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md was edited in HEAD `84d99fb` while docs/api-host-decision.md and docs/host-gate-evidence-2026-11-17.md were not. The digest therefore cannot have been taken after this HEAD over unchanged content; treat it as supplied, not independently confirmed"
   regressions:
-    - "Retained evidence narrates state a Pending row denies: docs/host-gate-evidence-2026-11-17.md:61-63, 89, 120-122 describe fixing `/data` ownership and destination permissions and re-running, while docs/api-host-decision.md:40-41 and :45 still label those drill checks Pending with no date"
-    - "A repo markdown file records shell commands run as root on the production host against unwritable and forced-threshold paths (docs/host-gate-evidence-2026-11-17.md:82-93, :131-132, :145-152) with no record of the creating or tear-down commands, against Threat T-01-05 and 01-01-PLAN.md:145"
+    - "The plan revision lowered the bar where it matters most. Old assertion (.planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:106 at 17fc59b, diff in `84d99fb`) demanded `low.count(\"| pending\")>=5`; the new one accepts a row marked `| verified 2026-11-17` and pads the count with the ledger's ten unrelated `Pending` cells (docs/api-host-decision.md:38-47, 3-5 counted as ten because the gate Status cells are not Pending). Net effect: all four host gates and the security review could read `Verified` with an empty evidence pointer and both assertion and `01-01-PLAN.md:118` would still exit 0 — the check no longer proves 'no gate is closed without retained evidence', which is exactly the clause ROADMAP SC3 gained at .planning/ROADMAP.md:20"
+    - "No machine check ties a `Verified` gate cell to a retained-evidence anchor. docs/api-host-decision.md:57-61 name artifacts only in prose; only :63 links the evidence file. A row could flip to `Verified 2026-11-17` with no anchor and nothing in .planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:106 or :118 would notice"
+    - "Task 2's `<fails_when>` at .planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:107 still says 'fewer than five Pending cells exist' while the assertion at :106 accepts three; the fail text and the assertion disagree"
+    - "Task 3's `<fails_when>` at .planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:119 still says 'or fewer than five Pending cells remain', but the code at :118 no longer counts Pending cells at all"
+    - "Threat T-01-03's mitigation at .planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:143 still reads \"Task 2's verify asserts five Pending cells\" — false after the edit, so the threat register no longer describes the shipped check"
+    - "Header miscount survives: docs/api-host-decision.md:9 says 'the two executed gates below were measured' while :57-59 mark three gates Verified and :3 says 'Three host gates were measured'"
+    - "Plan prose vs ROADMAP: GATE-01 (Record …, no evidence required) is marked `Complete` at .planning/REQUIREMENTS.md:32, which FRESHNESS/REQUIREMENTS reads as satisfied, while .planning/ROADMAP.md:20 requires gates to stay Pending 'until target-host checks pass'. Defensible (the requirement is to record) but the two planning files now read differently on the same rows"
 human_verification:
-  - test: "Confirm whether the drill destination /srv/bkro and the threshold override at docs/host-gate-evidence-2026-11-17.md:82-93 and :131-132 are still present on peakybuildr, and remove them; then state whether the rules forbidding host-directory ownership changes and threshold edits on the real volume (docs/api-host-decision.md:60 `Do not fill production storage`, 01-01-PLAN.md:102, 01-01-PLAN.md:145 `no provisioning … is authorised by this phase`) still stand"
-    expected: "Either the leftovers are removed and the record states the admin-path work honestly, or the rules are formally amended; this cannot be decided from the repo because peakybuildr is outside it"
-    why_human: "Only the operator can check and clean the host, and amending a threat-model rule is a project-governance decision, not a document fix"
-  - test: "Disk monitoring gate — set capacity thresholds for the volume holding /data, prove an alert is delivered, and show backup-write error reporting without filling production storage"
-    expected: "Row moves off `Partial — no delivery channel` only on a delivered alert; tests/full_volume.py was not run against the real volume"
-    why_human: "The record states no delivery channel reaches a person (docs/api-host-decision.md:60) and docs/DEPLOYMENT.md:54 confirms no alerting integration exists in the repo"
+  - test: "Disk monitoring gate — set capacity thresholds for the volume holding /data, prove an alert is delivered to a person, and show backup-write error reporting without filling production storage"
+    expected: "docs/api-host-decision.md:60 moves off `Partial — no delivery channel` only on a recorded delivered alert; `tests/full_volume.py` was not run against the real volume"
+    why_human: "The record states no delivery channel reaches a person (docs/api-host-decision.md:60, docs/host-gate-evidence-2026-11-17.md:135-136) and docs/DEPLOYMENT.md:54 confirms no alerting integration exists in the repo"
   - test: "Independent security review — a reviewer other than MIA assesses the host, container network exposure, AIOS_API_KEY handling in src/auth.py, the exposure path and operational controls, and records a written decision tied to the host and image revision before any public exposure"
-    expected: "Security row moves off Pending only on that written decision; the API stays private until then"
+    expected: "docs/api-host-decision.md:61 moves off Pending only on that written decision; the API stays private until then"
     why_human: "Independence and security acceptance are human judgments; the reviewer is explicitly unassigned (docs/api-host-decision.md:61)"
+  - test: "Drill footprint cleanup on peakybuildr — decide keep-or-remove for each row of docs/host-gate-evidence-2026-11-17.md:160-168 (guest 158 + LV fourtera/vm-158-data, containers aios-gate/aios-restore, /srv/aios-restore-isolated, /srv/bkro, the drill systemd units and scripts) and execute the removals with the commands listed there"
+    expected: "Rows marked remove are gone from the host and :174-176's 'stated as present, not as removed' note is replaced by the actual outcome; evidence rows (:164) stay"
+    why_human: "peakybuildr is outside the repo and the last cleanup attempt failed on Tailscale SSH re-auth (docs/host-gate-evidence-2026-11-17.md:174-176); only the operator can run `pct destroy` / `lvremove`"
 ---
 
 # Phase 1: Host selection and evidence plan Verification Report
 
 **Phase Goal:** Produce one decision record naming the selected host and operator, with explicit host evidence criteria and owners; record a blocked decision only when no eligible host exists (`.planning/ROADMAP.md:14`).
-**Verified:** 2026-11-23T03:11:24Z, working tree on HEAD `e0fe598` plus uncommitted fixes (`docs/api-host-decision.md`, `docs/host-gate-evidence-2026-11-17.md`, `.planning/PROJECT.md`)
+**Verified:** 2026-11-23T06:45:11Z, working tree on HEAD `84d99fb` (dirty only in `tests/.DS_Store`, unrelated).
 **Status:** human_needed
-**Re-verification:** Yes — previous report (`2026-11-23T03:09:24Z`, `human_needed`, 3/5) found five defects. Every truth is re-decided below against the current files; nothing is carried forward.
+**Re-verification:** Yes — previous report (`2026-11-23T03:11:24Z`, `human_needed`, 4/5) had T2 failing. Every truth is re-decided below from the current files; nothing is carried forward, and the plan edit in `84d99fb` is judged on whether it describes the real end state.
 
 ## Goal Achievement
 
 | # | Truth | Status | Evidence |
 | --- | --- | --- | --- |
-| 1 | SC1 — record names the host and operator, or states what is blocked | ✓ VERIFIED | `docs/api-host-decision.md:3` names `peakybuildr` and `100.122.194.34`; `:5` names MIA / Nur Amirah Binti Mohd Kamil (`strdst7`) as interim operator with the delegate still pending; `:7` dates the decision 2026-11-17. No delegate name invented (`:5`, `:67`). |
-| 2 | SC2 — Streamlit separated from FastAPI/SQLite; one-host, one-replica topology | ✓ VERIFIED | `docs/api-host-decision.md:19` separates the Streamlit demo from the `Dockerfile` image and matches `Dockerfile:14,26,28,30` (`python:3.10-slim`, `AIOS_REQUIRE_PERSISTENCE=1`, `EXPOSE 8000`, `uvicorn … --host 0.0.0.0 --port 8000`); `:23` one LXC guest; `:24` one replica, justified by `self.lock = Lock()` at `src/services/monitoring_service.py:25` over one SQLite file. |
-| 3 | SC3 — four host gates and the security review have owners, evidence requirements and pending status until target-host checks pass | ✓ VERIFIED | Each row carries owner, check and evidence (`docs/api-host-decision.md:57-61`). The "pending until checks pass" clause is discharged exactly as written: three host gates passed their target-host check and read `Verified 2026-11-17` (`:57-59`), Disk monitoring reads `Partial — no delivery channel` because its own check "prove an alert is delivered" is unmet (`:60`), and Security review is `Pending` (`:61`). The checks were run on drill guest 158, not the API guest, and the record says so (`:53`, `:63`). |
-| 4 | T1 — peakybuildr (100.122.194.34) with MIA interim, dated by the 2026-11-17 check | ✓ VERIFIED | `docs/api-host-decision.md:3,5,7`; method at `:13`; bound at `:15`, which now limits the reachability check to the management ports. |
-| 5 | T2 — states exactly which facts are verified at the Proxmox layer and on which date, and labels every VM/container, mount, backup, alert and review item as not yet evidenced | ⚠️ PARTIAL (both prior defects closed, one clause still unmet) | Proxmox-layer facts are exact and dated (`docs/api-host-decision.md:13`, `:35-37`). Guest and Storage are closed: they read as historical drill facts and stay `Pending` (`:38-39`), and `:15` now says the check proves neither `a guest exists for the API` nor `that storage is provisioned for it`, so no Pending prerequisite sits under a Verified row any more. What remains is the mount/backup half: `:40-41` read `Verified 2026-11-17`, and `:45` (Backup) and `:39` (free capacity) name no date, check or evidence pointer, so those items are neither labelled not-yet-evidenced nor dated as verified. |
-| 6 | T3 — one Dockerfile image, one VM or LXC, `/data`, `AIOS_OBSERVATION_DB=/data/observations.db`, `AIOS_REQUIRE_PERSISTENCE=1`, one replica; shape chosen, not executed | ✓ VERIFIED in substance (decision-only tail superseded) | Shape fixed with VM as fallback and open items unmade (`docs/api-host-decision.md:23-26`); persistence claim matches `src/services/monitoring_service.py:19-23`, constructed at import in `src/main.py:29`; replica claim matches `src/services/monitoring_service.py:25`. The "not executed" tail is superseded: a container was run on guest 158 (`:43`, `:44`), and `:9` and `:63` state that plainly while `:38` keeps "No guest is sized or appointed for the API". The plan's own doubt (Task 3 imported `app.py`, `requirements.txt`, `src/agent.py`, `OPERATIONS.md`; `01-01-PLAN.md:116`) was resolved at `docs/api-host-decision.md:19` without editing them. |
-| 7 | T4 — gates each carry a Pending status; no gate is closed by CI results or by the reachability check | ✓ VERIFIED in substance (status clause superseded) | Three rows read `Verified 2026-11-17` (`docs/api-host-decision.md:57-59`), so the literal "Pending" clause is superseded, not breached. The anti-shortcut clause holds: the reachability check is not reused as gate evidence (`:35-37` vs `:57-61`), and CI/tmpfs results are excluded (`:63`, `docs/operational-readiness-005c.md:60`); each closure rests on a command in `docs/host-gate-evidence-2026-11-17.md:31-122`. |
-| 8 | T5 — API stays private; security review precedes public exposure; no public URL, deployment or approval | ✓ VERIFIED | `docs/api-host-decision.md:61` security review Pending and unassigned; `:9` and `:63` say deployment is not approved and the API is not deployed; `:67` keeps the API private and gates exposure on the review. `:43` binds `127.0.0.1:18000` inside the drill guest; `docs/host-gate-evidence-2026-11-17.md:143` says nothing listens beyond loopback. No public URL or approval anywhere. |
+| 1 | T1 — peakybuildr (100.122.194.34) selected with MIA as interim operator, dated by the 2026-11-17 check | ✓ VERIFIED | `docs/api-host-decision.md:3` names host and address; `:5` names MIA / Nur Amirah Binti Mohd Kamil (`strdst7`) interim, delegate pending; `:7` dates it; `:13` records the method; `:15` bounds it to management ports and denies a guest or storage for the API. No delegate invented (`:5`, `:67`). |
+| 2 | T2 — record states which facts are verified at the Proxmox layer and on which date, and labels every VM/container, mount, backup, alert and review item as not yet evidenced | ✗ FAILED | The first half holds: `docs/api-host-decision.md:35-37` are the three Proxmox-layer facts, each `Verified` and dated 2026-11-17 at `:13`. The second half does not: `:40` (Mount) and `:41` (Ownership) read `Verified 2026-11-17`; `:42` (Start policy) and `:43` (Network) and `:44` (API key) put the drill container's results in the Verified column; `:45` (Backup) puts the completed off-volume run in the Verified column; `:46` says the alert line was written. Only Guest, Storage and Security still read as not-yet-evidenced (`:38`, `:39`, `:47`). The plan edit retired the *assertion* (`01-01-PLAN.md:106`), not this truth (`01-01-PLAN.md:25`) nor Task 2's action (`01-01-PLAN.md:100`: `Every row keeps … Status Pending`; `:102` `Do not close any row`; `:104` `Nothing is marked passed`), so the record still departs from the plan it was built to satisfy. |
+| 3 | T3 — one Dockerfile image, one VM or LXC, `/data`, `AIOS_OBSERVATION_DB=/data/observations.db`, `AIOS_REQUIRE_PERSISTENCE=1`, one replica; shape chosen (not executed) | ✓ VERIFIED | Shape fixed at `docs/api-host-decision.md:23-26` with VM as fallback and open items unmade. Matches `Dockerfile:8,14,24,26` (`python:3.10-slim`, `AIOS_REQUIRE_PERSISTENCE=1`, `EXPOSE 8000`, `uvicorn src.main:app --host 0.0.0.0 --port 8000`). Persistence claim matches `src/services/monitoring_service.py:20-23`; replica claim matches `src/services/monitoring_service.py:25`. The "not executed" tail is superseded honestly: `docs/api-host-decision.md:9` says what Phase 1 built (nothing) and that gates were measured afterwards on guest 158, and `:26` keeps the API guest unmade. |
+| 4 | T4 — four host gates plus a separate security review each name an owner, the check, the evidence to retain and a Pending status; no gate closed by CI or the reachability check | ✓ VERIFIED in substance (status clause superseded by recorded target-host checks) | Every row at `docs/api-host-decision.md:57-61` has owner, a peakybuildr/guest check and an evidence-to-retain column. The literal Pending clause is superseded by `84d99fb` (`.planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:106`, `.planning/ROADMAP.md:20`) and by measurement, not by paperwork. The anti-shortcut clause holds: reachability (`:35-37`) is never cited as gate evidence, and each closure cites retained output in `docs/host-gate-evidence-2026-11-17.md:31-59` (Host volume), `:67-93` (Backup), `:98-122` (Restore); CI/tmpfs results are excluded at `:63` and `docs/operational-readiness-005c.md:60`. One gate sits between states: at `docs/api-host-decision.md:58` the failure-notification path is called both "still missing" and covered by "Verified 2026-11-17 for schedule, destination and run", and `:45` calls the same notification path Pending — a split status on one row, not a closure without evidence. |
+| 5 | T5 — API stays private; security review precedes public exposure; no public URL, deployment or approval | ✓ VERIFIED | Security review Pending and unassigned (`docs/api-host-decision.md:61`); "deployment is still not approved" and "Deployment is not approved" (`:3`, `:9`); `:63` keeps `docs/DEPLOYMENT.md:30` true (`Production API deployment remains blocked`); `:67` keeps the API private and gates exposure on review plus gate evidence. Drill bind is `127.0.0.1:18000` (`:43`, `docs/host-gate-evidence-2026-11-17.md:149`). No public URL or approval anywhere. |
 
-**Score:** 4/5 must-haves verified (T1, T3, T4, T5); SC1, SC2 and SC3 additionally verified; T2 partially verified.
+**Score:** 4/5 must-haves verified (T1, T3, T4, T5); T2 failed. SC1, SC2 and SC3 additionally hold as stated in `.planning/ROADMAP.md:18-20`.
+
+## Plan revision `84d99fb` — honest retire or lowered bar?
+
+**The edit is honest about the end state and dishonest about the bar.** Two separate questions:
+
+1. *Does it describe what actually happened?* Yes. Host volume (`docs/api-host-decision.md:57`), Backup (`:58`) and Restore drill (`:59`) were measured on guest 158 and retained at `docs/host-gate-evidence-2026-11-17.md:31-122`. Before `84d99fb` the plan asserted five Pending cells that the record could no longer honestly supply; leaving that assertion in place would have forced either a false `Pending` or a failing check. Retiring it was right. `.planning/REQUIREMENTS.md:30-33` and `.planning/ROADMAP.md:20,30` now match the record, and `.planning/phases/01-host-selection-and-evidence-plan/01-01-SUMMARY.md:169-185` annotates the old "no gate evidence exists" line instead of rewriting history.
+
+2. *Did it lower the bar in the way that matters?* Yes. The clause ROADMAP SC3 protects — "A gate leaves Pending only on a recorded target-host check, never on CI or reachability evidence" (`.planning/ROADMAP.md:20`) — has no machine check after the edit:
+   - The old assertion demanded `low.count("| pending")>=5` (see the `-` line at `.planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:106` in `git show 84d99fb`). The new one demands a status cell be one of three values (`.planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:106`: `any(s in low for s in ("| pending","| verified 2026-11-17","| partial"))`) plus `low.count("| pending")>=3`.
+   - Those three Pending cells are not gate cells. They come from `docs/api-host-decision.md:38-47`, which contains ten `| pending` cells. Flipping every gate row in `:57-61` to `Verified 2026-11-17` would still leave ten, and both `01-01-PLAN.md:106` and `:118` would exit 0.
+   - The evidence to retain is prose only (`docs/api-host-decision.md:57-61`); only `:63` links the file. A `Verified` cell with no anchor passes.
+   - So a gate can now be closed on nothing, including on a reachability check, and no check in the plan would object. That is exactly the shortcut the threat register names (`.planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:132`).
+
+   The lazy fix is one line each: assert the gate table's status column only contains `Pending|Partial|Verified 2026-11-17`, and require any `Verified` row to name `host-gate-evidence-2026-11-17.md` or a dated line. Also update `01-01-PLAN.md:107` and `:119` (`<fails_when>` still says "fewer than five Pending cells") and `:143` (T-01-03 still says "Task 2's verify asserts five Pending cells").
+
+**Verdict on T2:** still a regression, not a superseded expectation. The plan edit retires a *measurement-era* constraint on gate status (Task 2's assertion, ROADMAP SC3's Pending-until-checked phrasing), but T2 is a *labelling* truth — "labels every VM/container, mount, backup, alert and review item as not yet evidenced" (`.planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:25`). That sentence and the action that implements it (`:100`, `:102`, `:104`) are untouched by `84d99fb`, and the record still labels Mount, Ownership, Start policy, Network, API key and Backup as evidenced. Editing only the assertion contradicts the truth and the action it verifies; marking T2 verified would mean grading the document against a check written after the fact.
 
 ## Prior findings, re-decided
 
 | Prior finding | Verdict now | Why |
 | --- | --- | --- |
-| Status line said "Two" where three gates were measured | **CLOSED** | `docs/api-host-decision.md:3` now says "Three host gates were measured on 2026-11-17 and a fourth is partial", matching `:57-60` and `:67`; the old `Two`/`Three` split is gone. |
-| T2 regression — Verified column carried guest/storage/mount/ownership while `:15` denied a guest or storage exists | **PARTIALLY CLOSED** | The contradiction is gone: Guest and Storage are `Pending` historical statements (`:38-39`) and `:15` was narrowed to "for the API" / "for it" (`:15`), and Mount/Ownership (`:40-41`) now sit under rows that describe the drill host as having existed rather than claiming its absence, so the "Verified under Pending prerequisites" defect no longer applies. What is not fixed is T2's second clause: mount and backup items are not labelled not-yet-evidenced, and `docs/host-gate-evidence-2026-11-17.md:61-63` and `:120-122` narrate the ownership repair that `:40-41` and `:45` still call Pending without a date. |
-| `:15` overstated what the reachability check proves | **CLOSED** | `docs/api-host-decision.md:15` now reads "does not prove … that a guest exists for the API, or that storage is provisioned for it" and adds the drill-storage qualifier. |
-| Restore row dropped the UUID-replay result | **CLOSED** | `docs/api-host-decision.md:59` names the UUID result; `docs/host-gate-evidence-2026-11-17.md:115-118` records the mechanism (`monitoring_service.evaluate` returns the stored report for a known `observation_id`) and `:147-152` is the executable replay step. |
-| No retained gate evidence in the repo | **CLOSED** | `docs/host-gate-evidence-2026-11-17.md` contains every artifact the gate table names — see "Evidence retention" below. |
-| `.planning/PROJECT.md:26` said all four gates Pending | **CLOSED** | `.planning/PROJECT.md:26` now says three gates verified on a drill guest, disk monitoring Partial, security review and the API guest Pending. |
+| T2 — every mount/backup item must be labelled not-yet-evidenced | **STILL OPEN** | `docs/api-host-decision.md:40-41`, `:43-45` remain Verified-column entries; `.planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:25`, `:100`, `:102` still demand not-evidenced labelling. See above. |
+| Retained evidence narrates ownership repair that the ledger called Pending | **CLOSED** | The ledger now dates it: `docs/api-host-decision.md:41` and `:57` read `Verified 2026-11-17` for host `100000:100000`, matching `docs/host-gate-evidence-2026-11-17.md:61-63`. The narrate/deny contradiction is gone; what remains is the T2 labelling question, not a factual drift. |
+| Restore row dropped the UUID-replay result | **CLOSED** | `docs/api-host-decision.md:59` names UUID replay; retained at `docs/host-gate-evidence-2026-11-17.md:115-118` and `:147-152`. |
+| Gate rows carried no date | **CLOSED** | `docs/api-host-decision.md:57-61` Status column is dated or state-qualified. |
+| Host-directory root work with no record (drill footprint) | **CLOSED as a record, OPEN as a host state** | `docs/host-gate-evidence-2026-11-17.md:155-176` lists the guest, LV, containers, `/srv/bkro`, `/srv/aios-restore-isolated`, the drill units and scripts, and the `chown`, with keep/remove guidance; `:170-172` bounds it (`No production storage was filled`, drill volume and throwaway dir only, guest 157 untouched). `:174-176` says outright the rows are "present, not removed". The tree no longer hides anything; removal is the operator's action, carried below. |
+| `docs/api-host-decision.md:9` said "two executed gates" | **NEW, open** | `:3` says three were measured, `:57-59` show three `Verified`; `:9` still says "the two executed gates below". Minor count drift. |
+| `.planning/phases/01-host-selection-and-evidence-plan/01-01-SUMMARY.md:138` says Task 2 "can never pass" | **CLOSED** | Superseded by `:101` and by the passing run below; `:169-185` annotates the rest. |
+| `.planning/ROADMAP.md:30` said "Awaiting human verification (host gates pending)" | **CLOSED** | `.planning/ROADMAP.md:30` now records three gates verified, disk Partial, remaining human items. |
+| `.planning/phases/01-host-selection-and-evidence-plan/01-UAT.md:31-38` blocked on "No guest exists" | **CLOSED** | `01-UAT.md:22-52` now records rows 3 and 4 as pass against the retained evidence. |
 
-## Evidence retention
+## Does the record still read "API stays private, deployment not approved"?
 
-`docs/host-gate-evidence-2026-11-17.md` is real and covers the gate table row by row:
-
-| Gate-table claim (`docs/api-host-decision.md`) | Artifact (`docs/host-gate-evidence-2026-11-17.md`) |
-| --- | --- |
-| mount source, ext4, rw on `/fourtera/aios-158-data` (`:57`) | `lvs` and both `findmnt` outputs at `:31-39`; `mp0` line at `:23` |
-| host `100000:100000 755`, guest `root:root 755`, database `644` (`:57`) | `stat` output at `:41-46` |
-| restart and recreate returned identical history/current/anomaly, `integrity_check ok` (`:57`) | `:53-58` (`RESTART_IDENTICAL=yes`, `RECREATE_IDENTICAL=yes`, `live integrity: ok`), and `:143` records nothing exercised the write endpoint, so the 9 rows are the only state |
-| timer `aios-backup.timer` daily 02:30, 7-day retention, `/srv/aios-backup` on `pve-root` (`:58`) | `:68-73` timer listing and `findmnt` device; `:89` retention policy |
-| completed scheduled run `OK backup=… bytes=28672` (`:58`) | `:76-80` |
-| forced `ERROR backup_write_failed` and exit 1 (`:58`) | `:84-87`, with the honest note at `:92-93` that the `chmod 500` attempt was not a valid simulation |
-| restore into a separate directory and second container, all identical, live source untouched (`:59`) | `:98-113` |
-| UUID replay (`:59`) | `:115-118` mechanism plus `:147-152` replay command |
-| threshold `ok disk_use=21% threshold=80%`, alert line on forced threshold, error reporting (`:60`) | `:127-132` |
-| "No delivery channel reaches a person yet" (`:60`) | `:135-136` |
-
-What is *not* in the file, and cannot be, is the guest itself: `docs/host-gate-evidence-2026-11-17.md:140` states guest 158 is a drill guest, and keeping it alive, keeping the backup timer installed and keeping the DB readable so future verifiers can re-run `:147-152` is an operator obligation that the repo cannot hold. That is a stated limitation, not a closed claim — but it is not a retention regression either, because the file proves what it asserts and says plainly where the proof stops.
+Yes, and the plan edit did not weaken it. `docs/api-host-decision.md:3` ("the deployment is still not approved"), `:9` ("Deployment is not approved"), `:63` ("the API is still not deployed", `docs/DEPLOYMENT.md` block still true), `:67` ("The API stays private, and public exposure needs the security review plus that gate evidence"). No public URL, bind or approval appears; the only listener recorded is `127.0.0.1:18000` (`:43`, `docs/host-gate-evidence-2026-11-17.md:143`).
 
 ## Behavioral Spot-Checks
 
-All three `<automated>` assertions from `01-01-PLAN.md` re-run verbatim from the repo root against the working tree:
+All three `<automated>` assertions from `01-01-PLAN.md` re-run verbatim from the repo root at `84d99fb`, extracted from the `<automated>` element and executed as `python3 -c '<body>'` (the element also contains the `python3 -c ` prefix, which was stripped before execution):
 
 | Behavior | Command | Result | Status |
 | --- | --- | --- | --- |
-| Task 1 wording/status assertions | `python3 -c '<01-01-PLAN.md:90>'` | `missing []`, exit 0 | ✓ PASS |
-| Task 2 gate-table assertions | `python3 -c '<01-01-PLAN.md:106>'` | `missing []`, exit 0 | ✓ PASS |
-| Task 3 source-reconciliation assertions | `python3 -c '<01-01-PLAN.md:118>'` | `failed [] pending_cells 9`, exit 0 | ✓ PASS |
+| Task 1 wording/status assertions | `.planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:90` | `missing []`, exit 0 | ✓ PASS |
+| Task 2 gate-table assertions | `.planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:106` | `missing []`, exit 0 | ✓ PASS |
+| Task 3 source-reconciliation assertions | `.planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:118` | `failed []`, exit 0 | ✓ PASS |
 | Whitespace hygiene | `git diff --check` | no output, exit 0 | ✓ PASS |
 
-Assertion caveats still worth reporting, unchanged in nature:
-- `01-01-PLAN.md:106` counts `| pending` cells across the whole document, so it cannot detect a gate row leaving `Pending`; `docs/api-host-decision.md:38-47` alone supplies the 9 cells.
-- The `uuid replay` literal at `01-01-PLAN.md:106` would pass on the check column of `docs/api-host-decision.md:59`; it now matches the evidence column too (`:59`, `docs/host-gate-evidence-2026-11-17.md:115-118`).
-- `01-01-PLAN.md:118`'s `auth` check only greps for `503`/`401`; the full 503/401 behaviour is verified separately below.
+They pass, and that is the problem with Task 2's: passing proves only that the five literals appear and three `| pending` cells exist somewhere. Demonstrated ceiling — replace every gate row's status at `docs/api-host-decision.md:57-61` with `Verified 2026-11-17` and blank the evidence cells; `01-01-PLAN.md:106` and `:118` still exit 0 (10 `| pending` cells remain at `:38-47`). No such edit was made; the point is the check cannot see one.
+
+Other caveats worth reporting:
+- `01-01-PLAN.md:107` and `:119` (`<fails_when>`) still describe the five-Pending-cell rule that `:106`/`:118` no longer enforce.
+- `01-01-PLAN.md:143` (T-01-03 mitigation) still claims the verify "asserts five Pending cells".
+- `01-01-PLAN.md:90`'s `<automated>` element fails with `SyntaxError` if the whole element (including the `python3 -c ` prefix) is passed to `python3 -c`; only the quoted body is executable.
 
 ## Source-Claim Verification
 
 | Claim in `docs/api-host-decision.md` | Source | Verdict |
 | --- | --- | --- |
-| `python:3.10-slim`, `uvicorn src.main:app`, `0.0.0.0:8000`, `EXPOSE 8000`, `AIOS_REQUIRE_PERSISTENCE=1` (`:19`) | `Dockerfile:2,8,14,18,26,28,30` | TRUE |
-| Relative or `:memory:` DB path raises `ValueError` at startup (`:25`) | `src/services/monitoring_service.py:19-23`, constructed at import `src/main.py:29` | TRUE |
-| One replica because writes serialise on a local `Lock` over one SQLite file (`:24`) | `src/services/monitoring_service.py:25`, transaction opened per write at `:47-48` | TRUE |
-| Security review scope: 503 unset/short/padded/placeholder, 401 missing/mismatched (`:61`) | `src/auth.py:7-11` | TRUE (server-key check line 9, client-key check line 11) |
-| Deployment remains blocked; `DEPLOYMENT.md` still governs (`:63`) | `docs/DEPLOYMENT.md:30` | TRUE |
-| CI/tmpfs results disposable and excluded (`:63`) | `docs/operational-readiness-005c.md:60,64-70` | TRUE |
-| No alerting integration in the repo (`:60` framing) | `docs/DEPLOYMENT.md:54` | TRUE |
-| Guest 158, storage, mount and ownership facts (`:38-41`) | `docs/host-gate-evidence-2026-11-17.md:11-59` | TRUE — operator-reported host output; version, container and docker inputs are not in the env block at `:11-18` |
-| Backup timer, destination, run and error (`:58`) | `docs/host-gate-evidence-2026-11-17.md:68-87` | TRUE — timer listing shows `LAST -` (`:70`), so no second scheduled fire predates the log line at `:79` |
-| Restore results and UUID replay (`:59`) | `docs/host-gate-evidence-2026-11-17.md:98-118` | TRUE — the `False` history value at `:107` has no corresponding `current`/`anomaly` line, which rests a single-state claim on one row |
-| `history identical: True` over 9 rows (`:57`, `:59`) | `src/services/monitoring_service.py:55-62,66-69` | TRUE, with a ceiling: `evaluate` returns the stored report when the telemetry fingerprint matches or `observation_id` is known, and `src/agent.py:33` stamps a fresh timestamp, so history can only be compared on ids and scores, never on bytes |
-
-## Permission and exposure claims
-
-`docs/api-host-decision.md:41` reports `root:root 755` for `/data` and `100000:100000 755` on the host; the same values are in `docs/host-gate-evidence-2026-11-17.md:42,44,46`. Both describe drill guest 158, and `:26` leaves the API container runtime user open, so nothing implies these are API-guest settings. `docs/host-gate-evidence-2026-11-17.md:61-63` says the ownership was changed with `chown 100000:100000` on the host path before the gate passed, yet `docs/api-host-decision.md:40-41` call the result `Verified 2026-11-17` while `:45` leaves the backup check Pending — the drift is listed as a regression below. No public bind, URL or exposure approval appears; `:43` is `127.0.0.1:18000` inside the drill guest only.
+| `python:3.10-slim`, `uvicorn src.main:app`, `0.0.0.0:8000`, `EXPOSE 8000`, `AIOS_REQUIRE_PERSISTENCE=1` (`:19`) | `Dockerfile:2,8,14,24,26` | TRUE |
+| Relative or `:memory:` DB path raises `ValueError` at startup (`:25`) | `src/services/monitoring_service.py:19-23` | TRUE |
+| One replica because writes serialise on a local `Lock` over one SQLite file (`:24`) | `src/services/monitoring_service.py:5,25` | TRUE |
+| Security review scope: 503 on unset/short/padded/placeholder, 401 on missing/mismatched (`:61`) | `src/auth.py:7-11` | TRUE |
+| Deployment remains blocked; `DEPLOYMENT.md` governs (`:63`) | `docs/DEPLOYMENT.md:30` | TRUE |
+| CI/tmpfs results disposable and excluded (`:63`) | `docs/operational-readiness-005c.md:60` | TRUE |
+| No alerting integration in the repo (`:60`) | `docs/DEPLOYMENT.md:54` | TRUE |
+| Guest 158, storage, mount, ownership (`:38-41`) | `docs/host-gate-evidence-2026-11-17.md:11-59` | TRUE — operator-reported host output; the env block at `:11-18` carries image digest but no build command |
+| Backup timer, destination, run, forced error (`:58`) | `docs/host-gate-evidence-2026-11-17.md:67-93` | TRUE — timer listing shows `LAST -` (`:70`); the run at `:79` was started through the unit (`:76`), so "scheduled path" is accurate but was not an unattended fire |
+| Restore and UUID replay (`:59`) | `docs/host-gate-evidence-2026-11-17.md:98-118` | TRUE — `history identical: True` at `:108`; no `current`/`anomaly` value is printed for the restored copy beyond `:110` |
+| `history`/`current`/`anomaly` "byte-identical" (`:57`, evidence `:49-50`) | `docs/host-gate-evidence-2026-11-17.md:53-58` | PARTIAL — the lines are truncated with `…`, so identity is asserted by the `_IDENTICAL=yes` flags, not shown byte-for-byte |
 
 ## Requirements Coverage
 
 | Requirement | Source Plan | Status | Evidence |
 | --- | --- | --- | --- |
 | HOST-01 | `01-01-PLAN.md:11` | ✓ SATISFIED | Truth 1, Truth 4 |
-| HOST-02 | `01-01-PLAN.md:12` | ✓ SATISFIED | Truth 2, Truth 6 |
-| GATE-01 | `01-01-PLAN.md:13` | ✓ SATISFIED | Truth 3, Truth 7, Truth 5 with the mount/backup labelling gap noted |
-| GATE-02 | `01-01-PLAN.md:14` | ✓ SATISFIED | Truth 8; `docs/api-host-decision.md:61`, `:63`, `:67` |
+| HOST-02 | `01-01-PLAN.md:12` | ✓ SATISFIED | Truth 2 partially, Truth 3 |
+| GATE-01 | `01-01-PLAN.md:13` | ✓ SATISFIED (recording) | Truth 4; the "record checks, owners, evidence" obligation at `.planning/REQUIREMENTS.md:15` is met, and `.planning/REQUIREMENTS.md:32` correctly says Partial for the measurement |
+| GATE-02 | `01-01-PLAN.md:14` | ✓ SATISFIED (recording) | Truth 5; `.planning/REQUIREMENTS.md:33` correctly says Pending for the review itself |
 
-Planning bookkeeping is still stale and is reported, not edited: all four boxes unticked and `Pending` in `.planning/REQUIREMENTS.md:10-16,30-33`.
+`.planning/REQUIREMENTS.md:10-16` checkboxes none ticked while `:30-33` reads Complete/Complete/Partial/Pending — bookkeeping inconsistency, reported not edited. GATE-01 `Complete` at `:32` sits awkwardly against `.planning/ROADMAP.md:20`'s Pending-until-measured rule; the requirement text at `:15` only asks for the recording, so both readings survive, but the two files should agree.
 
 ## Out-of-Deliverable Drift (reported, not edited)
 
-- `.planning/ROADMAP.md:30` still reads "Awaiting human verification (host gates pending)".
-- `.planning/phases/01-host-selection-and-evidence-plan/01-UAT.md:31-38` still records tests 3 and 4 blocked on "No guest exists on peakybuildr yet".
-- `.planning/phases/01-host-selection-and-evidence-plan/01-01-SUMMARY.md:138` still claims Task 2's assertion "can never pass", contradicted by `:101` in the same file and by the passing run above.
-- `docs/operational-readiness-005c.md:64` still names Streamlit Community Cloud as "the named host"; the decision record supersedes it but the report was not annotated.
+- `docs/api-host-decision.md:9` says "the two executed gates", `:3` and `:57-59` say three.
+- `docs/api-host-decision.md:58` carries a split status on one row (schedule/destination/run verified; failure notification "still missing") while `:45` calls the same notification path Pending.
+- `.planning/phases/01-host-selection-and-evidence-plan/01-01-PLAN.md:107`, `:119`, `:143` still describe the retired five-Pending-cell rule.
+- `.planning/phases/01-host-selection-and-evidence-plan/01-01-SUMMARY.md:58-74` (coverage block) still credits D4 to "5 pending cells", a check that no longer exists.
+- `docs/operational-readiness-005c.md:64` still names Streamlit Community Cloud as "the named host"; the record supersedes it without annotation.
 
 ## Gaps Summary
 
-The phase goal holds and the author's five fixes are real: the status line, the guest/storage labelling, the `:15` scope, the UUID-replay result, the retained evidence file and `.planning/PROJECT.md:26` all check out. T2 is not fully closed — mount and backup items are still not labelled not-yet-evidenced or dated, and the evidence file narrates an ownership repair that the ledger still calls Pending. Beyond that, the evidence file itself records root-level host administration (`chown` on the mount path, `chmod`/immutable tricks on a backup destination, a forced threshold on the real volume, `pct exec`) directly on `peakybuildr`, with tree-level reports and a rule at `docs/api-host-decision.md:60` that forbids filling production storage and at `01-01-PLAN.md:145` that forbids host-path mounting. That is a governance question for the operator, not a document typo, so it is carried as a human item rather than silently absorbed. `status` stays `human_needed` for that question plus the two human-only gates that genuinely remain: disk-monitoring delivery and the independent security review.
+The phase goal holds and the record is a real decision, not an approval. T1, T3, T4 and T5 verify against the tree. T2 does not: the record still places mount, ownership, start policy, network, API key and backup drill results in its Verified column, and the plan text that requires them to read as not-yet-evidenced (`01-01-PLAN.md:25`, `:100`, `:102`, `:104`) was not edited. The `84d99fb` revision changed the assertion instead, and weakened it: three Pending cells drawn from the ledger plus a free choice of three status values means no gate closure — on evidence or on reachability — can be detected. That makes the plan's check describe an end state looser than the document it grades, which is a lowered bar, not an honest retire. Status stays `human_needed` for that plus three genuinely human-only items: an alert delivery channel, the independent security review, and the drill footprint still sitting on peakybuildr.
 
 ---
 
-_Verified: 2026-11-23T03:11:24Z_
+_Verified: 2026-11-23T06:45:11Z_
 _Verifier: Hermes subagent (gsd-verifier)_

@@ -6,7 +6,7 @@ Decision owner and operator: MIA / Nur Amirah Binti Mohd Kamil (GitHub `strdst7`
 
 Decision date: 2026-11-17.
 
-This record selects the host and fixes the runtime shape. Phase 1 built no image on `peakybuildr` and created no guest; the two executed gates below were measured afterwards on the disposable guest 158. Deployment is not approved.
+This record selects the host and fixes the runtime shape. Phase 1 built no image on `peakybuildr` and created no guest; the three executed gates below were measured afterwards on the disposable guest 158. Deployment is not approved.
 
 ## The host check, and what it does not prove
 
