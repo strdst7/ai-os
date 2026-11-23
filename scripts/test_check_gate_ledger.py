@@ -118,6 +118,36 @@ def main():
             flip(r, g)
     case("every gate flipped to Verified", 1, allver)
 
+    case("duplicate ## Gate 1 heading appended (v-N9)", 1,
+         lambda r: (Path(r) / "docs" / EVI).write_text(
+             (Path(r) / "docs" / EVI).read_text() +
+             "\n## Gate 1 \u2014 Host volume\n\n```\n$ echo nothing\n```\n"))
+    case("duplicate ## Environment heading (v-Q9)", 1,
+         lambda r: (Path(r) / "docs" / EVI).write_text(
+             (Path(r) / "docs" / EVI).read_text() +
+             "\n## Environment\n\nhost other 10.0.0.1\n"))
+    case("Verified with no date (v-N18)", 1,
+         lambda r: edit(r, REC, "| Verified 2026-11-17 |", "| Verified |"))
+    case("all dates rewritten, one prose mention left (v-N20)", 1,
+         lambda r: edit(r, EVI, "2026-11-17", "2026-11-16"))
+    case("guest id changed everywhere (v-N19)", 1,
+         lambda r: (edit(r, EVI, "158 aios-drill", "999 otherguest"),
+                    edit(r, EVI, "pct exec 158", "pct exec 999"),
+                    edit(r, EVI, "vm-158", "vm-999")))
+    case("Status line claims Deployed and approved (v-V3)", 1,
+         lambda r: edit(r, REC, "Status: Selected", "Status: Deployed and approved"))
+    case("whole gate ledger table deleted (v-Q5)", 1,
+         lambda r: (Path(r) / "docs" / REC).write_text(
+             "\n".join(l for l in (Path(r) / "docs" / REC).read_text().splitlines()
+                       if not (l.startswith("| ") and l.split("|")[1].strip().lower()
+                               in {"host volume", "backup schedule", "restore drill",
+                                   "disk monitoring", "security review"}))))
+    case("evidence file replaced by a symlink (v-N11)", 1,
+         lambda r: ((Path(r) / "docs" / "real.md").write_text(
+             (Path(r) / "docs" / EVI).read_text()),
+             (Path(r) / "docs" / EVI).unlink(),
+             (Path(r) / "docs" / EVI).symlink_to("real.md")))
+
     ok = True
     for label, got, want in cases:
         good = got == want

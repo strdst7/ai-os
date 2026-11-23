@@ -14,6 +14,8 @@ from pathlib import Path
 
 RECORD = Path("docs/api-host-decision.md")
 EVIDENCE = Path("docs/host-gate-evidence-2026-11-17.md")
+# ponytail: refuses symlinks rather than resolving them; a repo-type check
+# would catch a symlinked docs/ dir, but this is enough to stop a swap.
 
 # Gate name in the record's ledger -> (heading in the evidence doc, required
 # output tokens). An empty token list means no evidence fixture exists yet, so
@@ -49,18 +51,26 @@ def ledger_rows(record):
 
 
 def evidence_sections(text):
-    """Split the evidence doc into {heading: body} on its level-2 headings."""
-    sections, current, buf = {}, None, []
+    """Split the evidence doc into ({heading: body}, duplicate_headings).
+
+    A repeated heading is returned as a duplicate rather than overwriting the
+    earlier one: last-wins would let an appended section replace real evidence.
+    """
+    sections, seen, current, buf = {}, [], None, []
     for line in text.splitlines():
         if line.startswith("## "):
             if current is not None:
+                if current in sections:
+                    seen.append(current)
                 sections[current] = "\n".join(buf)
             current, buf = line[3:].strip(), []
         else:
             buf.append(line)
     if current is not None:
+        if current in sections:
+            seen.append(current)
         sections[current] = "\n".join(buf)
-    return sections
+    return sections, seen
 
 
 def gate_passed(section, tokens):
@@ -108,13 +118,44 @@ def check(record_text, evidence_text):
     if len(widths) > 1:
         problems.append(f"gate rows have inconsistent column counts: {sorted(widths)}")
 
-    sections = evidence_sections(evidence_text)
+    sections, dupes = evidence_sections(evidence_text)
+    if dupes:
+        problems.append(f"evidence repeats headings, last would win: {sorted(set(dupes))}")
+
+    status_line = next((l for l in record_text.splitlines()
+                        if l.lower().lstrip("*_ ").startswith("status")), "")
+    if "selected" not in status_line.lower():
+        problems.append(
+            f"record's Status line must still read Selected, found {status_line[:80]!r}")
+
+    if not any(l.startswith("| ") and "status" in l.lower() for l in record_text.splitlines()) \
+            and len(rows) < len(ORDER):
+        problems.append("gate ledger table appears to be missing")
+
+    env = sections.get("Environment", "").lower()
+    guest = re.search(r"guest\s+(\d+)\s+([a-z0-9-]+)", env)
+    if not guest:
+        problems.append("Environment block does not name the guest and its id")
+    else:
+        gid, gname = guest.group(1), guest.group(2)
+        if f"guest {gid}" not in lower or gname not in lower:
+            problems.append(
+                f"Environment guest {gid} {gname} is not the guest the record names")
+        for heading in [GATES[n][0] for n in ORDER if n in sections]:
+            body = sections[heading].lower()
+            for other in re.findall(r"guest\s+(\d+)\s+([a-z0-9-]+)", body):
+                if other != (gid, gname):
+                    problems.append(
+                        f"section {heading!r} cites guest {other[0]} {other[1]}, "
+                        f"Environment says {gid} {gname}")
 
     for name, status, _ in rows:
         cell = status.strip().lower()
         # A cell reads like "Verified 2026-11-17" or "Partial — no delivery
         # channel". The leading word is the status; the rest is detail.
         lead = cell.split()[0] if cell.split() else ""
+        if lead == "verified" and not re.search(r"\d{4}-\d{2}-\d{2}", cell):
+            problems.append(f"{name!r} reads Verified with no evidence date")
         if lead not in {"pending", "partial", "verified", "not"}:
             problems.append(
                 f"{name!r} has status {status!r}; it must open with Pending, "
@@ -136,8 +177,11 @@ def check(record_text, evidence_text):
     if "not approved" not in lower:
         problems.append("record no longer says deployment is not approved")
 
-    if not re.search(r"\b2026-11-17\b", evidence_text):
-        problems.append("evidence is not dated 2026-11-17")
+    header = "\n".join(evidence_text.splitlines()[:6]).lower()
+    if "2026-11-17" not in header:
+        problems.append("evidence header is not dated 2026-11-17")
+    if "2026-11-17" not in record_text:
+        problems.append("record does not carry the 2026-11-17 evidence date")
 
     env = sections.get("Environment", "").lower()
     if "peakybuildr" not in env:
@@ -150,6 +194,10 @@ def check(record_text, evidence_text):
 
 
 def main():
+    for path in (RECORD, EVIDENCE, Path("docs")):
+        if path.is_symlink():
+            print(f"FAIL: {path} is a symlink")
+            return 1
     problems = check(RECORD.read_text(), EVIDENCE.read_text())
     for p in problems:
         print("FAIL:", p)
