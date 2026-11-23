@@ -9,7 +9,7 @@ covered_files:
   - docs/api-host-decision.md
   - docs/host-gate-evidence-2026-11-17.md
   - .planning/PROJECT.md
-covered_digest: "v4:sha256:8660c98668504682078b769eb68d62b09a339bd90072d341bfbcd96580bcbb42"
+covered_digest: "v4:sha256:90dd3448af66578d1ad20bb869146ed71017887965388fc1605f0ad910cdbf1c"
 behavior_unverified: 0
 overrides_applied: 0
 re_verification:

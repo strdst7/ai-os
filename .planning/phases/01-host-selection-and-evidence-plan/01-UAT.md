@@ -3,8 +3,9 @@ status: partial
 phase: 01-host-selection-and-evidence-plan
 source:
   - 01-01-SUMMARY.md
+  - 01-VERIFICATION.md
 started: 2026-11-07T06:15:35+08:00
-updated: 2026-11-16T21:03:00.989Z
+updated: 2026-11-23T03:20:00.000Z
 ---
 
 ## Current Test
@@ -14,7 +15,7 @@ updated: 2026-11-16T21:03:00.989Z
 ## Tests
 
 ### 1. Selected-host decision reads as a decision, not an approval
-expected: Read docs/api-host-decision.md. It names Proxmox VE peakybuildr (100.122.194.34) and MIA as operator, states the deployment is not approved, keeps the API private, and marks every host gate Pending. Nothing in it reads as host readiness or permission to deploy.
+expected: Read docs/api-host-decision.md. It names Proxmox VE peakybuildr (100.122.194.34) and MIA as operator, states the deployment is not approved, keeps the API private, and does not read as host readiness or permission to deploy. Gates may be Verified in the ledger, but the record must still say the API stays private and deployment is not approved.
 result: pass
 reported: "pass"
 source: human
@@ -27,49 +28,57 @@ reason: No delegate exists yet. Assigning one is an organisational act; inventin
 
 ### 3. Host volume gate measured on a real guest
 expected: On a guest that actually exists on peakybuildr, the /data mount source, database path, ownership and permissions are recorded, and a write survives a container restart and recreation with identical history and anomaly state.
-result: blocked
-blocked_by: prior-phase
-reason: No guest exists on peakybuildr yet; nothing can be measured.
+result: pass
+reported: "mount /dev/mapper/fourtera-vm--158--data ext4 rw on /fourtera/aios-158-data bound to /data; host 100000:100000 755, guest root:root 755, db 644; restart and recreate both returned identical history, current and anomaly; integrity ok. Recorded in docs/host-gate-evidence-2026-11-17.md"
+source: automated
+evidence: docs/host-gate-evidence-2026-11-17.md
 
-### 4. Backup, restore and disk-alert gates measured on a real guest
-expected: A scheduled off-volume backup completes and is logged, an isolated restore of that backup passes history, anomaly, UUID replay and PRAGMA integrity_check, and a disk threshold alert is delivered with backup-write error reporting.
-result: blocked
-blocked_by: prior-phase
-reason: Depends on the guest and the host volume from test 3.
+### 4. Backup and restore gates measured on a real guest
+expected: A scheduled off-volume backup completes and is logged, an isolated restore of that backup passes history, anomaly, UUID replay and PRAGMA integrity_check without overwriting the only copy.
+result: pass
+reported: "aios-backup.timer daily 02:30, retention 7, destination /srv/aios-backup on pve-root (different device from /data); scheduled run logged; forced write failure logged and exited 1; isolated restore returned history/current/anomaly identical and integrity ok, live source unchanged"
+source: automated
+evidence: docs/host-gate-evidence-2026-11-17.md
 
-### 5. Independent security review before any public exposure
+### 5. Disk threshold alert delivered to a person
+expected: A capacity threshold on the volume holding /data fires and the alert is delivered through a channel a person actually receives; until then the gate stays Partial.
+result: blocked
+blocked_by: third-party
+reason: The threshold and error path are measured, but no delivery channel exists — an alert writes to a local log and reaches nobody. Recorded as Partial at docs/api-host-decision.md gate row Disk monitoring.
+
+### 6. Independent security review before any public exposure
 expected: A named independent reviewer signs a host and image-revision-specific decision; until then the API stays private.
 result: blocked
 blocked_by: third-party
 reason: No reviewer assigned.
 
-### 6. Verification report matches the shipped document
-expected: gsd-tools query verification.status for the phase reports human_needed (not stale), and the report's 8/8 must-haves still describe docs/api-host-decision.md as shipped.
+### 7. Verification report matches the shipped document
+expected: gsd-tools query verification.status for the phase reports human_needed (not stale), and the report's must-have score describes docs/api-host-decision.md as shipped.
 result: pass
 source: automated
-reported: "verification.status = human_needed after the fingerprint restamp; digest computed over the shipped plan, summary and document"
+reported: "verification.status = human_needed, not stale; 4/5 must-haves verified at digest 90dd3448 computed over the five covered files the report declares"
 
-### 7. Independent read of the record's own claims
-expected: A reader who is not the author checks docs/api-host-decision.md, the plan and the verification report, and finds no unverifiable claim presented as established, and no automated check weakened to pass.
+### 8. Independent read of the record's own claims
+expected: A reader who is not the author checks docs/api-host-decision.md, the plan, the verification report and the retained evidence, and finds no unverifiable claim presented as established, and no automated check weakened to pass.
 result: pass
-reported: "pass"
+reported: "pass after two adversarial verification passes; five reported defects fixed, two host-hygiene findings kept open rather than absorbed"
 source: human
 
 ## Summary
 
-total: 7
-passed: 3
+total: 8
+passed: 5
 issues: 0
 pending: 0
 skipped: 0
-blocked: 4
+blocked: 3
 
 ## Gaps
 
-None caused by the phase output. Tests 2 to 5 are prerequisite gates on a host that has no guest yet. The cold-start check is deferred to the first real start, not a phase defect.
+No gap caused by the phase output. Tests 2, 5 and 6 need a third party: a named delegate, an alert delivery channel, and an independent reviewer. Test 4's earlier blocker ("depends on test 3") is resolved because test 3 now passes on real evidence.
 
 ## Deferred Follow-Ups
 
-- test: 8
-  idea: "Cold-start smoke test does not apply to a documentation-only phase; run it once the API image is first started on a peakybuildr guest."
+- test: 9
+  idea: "Cold-start smoke test does not apply to a documentation-only phase; run it once the API image is first started as the API guest, not the drill guest."
   deferred_at: 2026-11-17
