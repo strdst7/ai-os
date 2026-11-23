@@ -100,7 +100,12 @@ class MonitoringService:
                 self.db.commit()
                 return report
             except Exception:
-                self.db.rollback()
+                try:
+                    self.db.rollback()
+                except sqlite3.Error:
+                    # A dead or closed connection cannot roll back. Preserve the
+                    # original failure rather than masking it with a second one.
+                    pass
                 raise
 
     def get_observability(self):
