@@ -165,3 +165,21 @@ None - no external service configuration required.
 
 - Record ready for gate collection on the real guest once MIA names a delegate.
 - No gate evidence exists; the API stays private and no security review has started.
+
+## Post-plan outcome (2026-11-23)
+
+This summary records what the executor shipped on 2026-11-17, when every gate was
+Pending and no guest existed. Later work changed the bearing of two closing statements:
+
+- **Gate evidence now exists.** Host volume, Backup schedule and Restore drill were
+  measured on drill guest 158 and read `Verified 2026-11-17` in
+  `docs/api-host-decision.md`. Raw output is retained in
+  `docs/host-gate-evidence-2026-11-17.md`. The claim above that "no gate evidence
+  exists" was true when written and is no longer true.
+- **Disk monitoring is Partial**, not Pending: the threshold and backup-write error
+  path are shown, but no alert reaches a person.
+- **The API still stays private** and no security review has started. Those statements
+  are unchanged and still true.
+
+The delegate is still unassigned, so "ready for gate collection once MIA names a
+delegate" remains the correct next step even though collection has partly happened.

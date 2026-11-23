@@ -17,7 +17,7 @@ Decide whether an eligible stateful API host exists, then define host-specific e
 **Success Criteria** (what must be TRUE):
   1. The record names the host and operator, or states exactly which decision remains blocked.
   2. The record separates Streamlit from FastAPI/SQLite and accounts for one-host, one-replica topology.
-  3. Four host gates and security review have owners, evidence requirements, and pending status until target-host checks pass.
+  3. Four host gates and security review have owners, evidence requirements, and pending status until target-host checks pass. A gate leaves Pending only on a recorded target-host check, never on CI or reachability evidence.
 **Plans**: 1 plan
 
 Plans:
@@ -27,4 +27,4 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 | --- | --- | --- | --- |
-| 1. Host selection and evidence plan | 1/1 | Awaiting human verification (host gates pending) | - |
+| 1. Host selection and evidence plan | 1/1 | 3 gates verified on drill guest 158, disk monitoring Partial; awaiting delegate, alert channel and security review | - |

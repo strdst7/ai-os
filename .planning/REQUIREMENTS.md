@@ -27,9 +27,9 @@
 
 | Requirement | Phase | Status |
 | --- | --- | --- |
-| HOST-01 | Phase 1 | Pending |
-| HOST-02 | Phase 1 | Pending |
-| GATE-01 | Phase 1 | Pending |
-| GATE-02 | Phase 1 | Pending |
+| HOST-01 | Phase 1 | Complete |
+| HOST-02 | Phase 1 | Complete |
+| GATE-01 | Phase 1 | Partial — 3 gates verified on drill guest 158, alerting unproven |
+| GATE-02 | Phase 1 | Pending — security review unassigned |
 
 **Coverage:** 4 v1 requirements; 4 mapped; 0 unmapped.
