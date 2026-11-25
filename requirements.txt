@@ -10,4 +10,4 @@ matplotlib
 scikit-learn
 nbformat
 streamlit>=1.65,<1.66; python_version < "3.11"
-streamlit>=1.66.1; python_version >= "3.11"
+streamlit>=1.67.0; python_version >= "3.11"
