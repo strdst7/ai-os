@@ -1,5 +1,4 @@
----
-icon: award
+
 ---
 
 # Certified under the Production-Grade Agentic System module in the Agentic AI In Production
