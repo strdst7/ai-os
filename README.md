@@ -1,5 +1,4 @@
 
----
 
 #### Certified under the Production-Grade Agentic System module in the Agentic AI In Production
 
@@ -11,7 +10,7 @@ AI-OS is a stability-centric supervisory architecture for enterprise AI deployme
 
 Explore the [AI-OS dashboard](https://ai-osdev.streamlit.app/).
 
-![coverage](https://img.shields.io/badge/coverage-75%-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue) ![Python](https://img.shields.io/badge/python-3.10+-blue) ![Framework](https://img.shields.io/badge/framework-FastAPI-green) ![Status](https://img.shields.io/badge/status-demo_only-yellow)
+![License](https://img.shields.io/badge/license-MIT-blue) ![Python](https://img.shields.io/badge/python-3.10+-blue) ![Framework](https://img.shields.io/badge/framework-FastAPI-green) ![Status](https://img.shields.io/badge/status-demo_only-yellow)
 
 <div align="center"><img src=".gitbook/assets/cover.png" alt="AI-OS research dashboard" width="850"></div>
 
