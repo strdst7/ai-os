@@ -4,56 +4,54 @@ Thank you for your interest in contributing to AI-OS.
 
 AI-OS is a production-grade AI deployment monitoring system built for enterprise governance and stability evaluation.
 
----
+***
 
-## Contribution Principles
+## Contribution principles
 
 AI-OS prioritizes:
 
-- Architectural clarity
-- Deterministic stability scoring
-- Governance discipline
-- Production-readiness
-- Research-backed modeling
+* Architectural clarity
+* Deterministic stability scoring
+* Governance discipline
+* Production-readiness
+* Research-backed modeling
 
 All contributions must preserve these principles.
 
----
+***
 
-## Development Setup
+## Development setup
 
 1. Clone the repository
 2. Create a virtual environment
-3. Install dependencies:
-   pip install -r requirements.txt
-4. Run tests:
-   pytest
+3. Install dependencies: pip install -r requirements.txt
+4. Run tests: pytest
 
----
+***
 
-## Code Standards
+## Code standards
 
-- Maintain service-layer separation
-- Use typed models (Pydantic)
-- Keep monitoring logic deterministic
-- No experimental hacks
-- Include tests for new logic
+* Maintain service-layer separation
+* Use typed models (Pydantic)
+* Keep monitoring logic deterministic
+* No experimental hacks
+* Include tests for new logic
 
----
+***
 
-## Pull Request Guidelines
+## Pull request guidelines
 
-- Provide clear commit messages
-- Include tests for new features
-- Maintain documentation accuracy
-- Avoid breaking existing APIs
+* Provide clear commit messages
+* Include tests for new features
+* Maintain documentation accuracy
+* Avoid breaking existing APIs
 
----
+***
 
-## Research Contributions
+## Research contributions
 
 If extending monitoring metrics:
 
-- Include mathematical explanation
-- Provide calibration logic
-- Ensure anomaly detection remains explainable
+* Include mathematical explanation
+* Provide calibration logic
+* Ensure anomaly detection remains explainable

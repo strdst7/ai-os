@@ -6,22 +6,20 @@ Decide whether an eligible stateful API host exists, then define the host-specif
 
 ## Phases
 
-- [ ] **Phase 1: Host selection and evidence plan** - Record the host decision and the five approval prerequisites.
+* [ ] **Phase 1: Host selection and evidence plan** — Record the host decision and the five approval prerequisites.
 
-## Phase Details
+## Phase details
 
 ### Phase 1: Host selection and evidence plan
-**Goal**: Produce one decision record naming an eligible host and operator, or a blocked decision, with explicit host evidence criteria and owners.
-**Depends on**: Nothing (first phase)
-**Requirements**: HOST-01, HOST-02, GATE-01, GATE-02
-**Success Criteria** (what must be TRUE):
-  1. The record names the host and operator, or states exactly which decision remains blocked.
-  2. The record separates the Streamlit demo from the FastAPI/SQLite deployment and accounts for one-host, one-replica topology.
-  3. All four host gates and the security review have owners, evidence requirements, and honest pending status until checked on the target host.
-**Plans**: 1 plan — `01-01-PLAN.md` (blocked decision record and five pending evidence gates)
+
+**Goal**: Produce one decision record naming an eligible host and operator, or a blocked decision, with explicit host evidence criteria and owners. **Depends on**: Nothing (first phase) **Requirements**: HOST-01, HOST-02, GATE-01, GATE-02 **Success criteria** (what must be TRUE):
+
+1. The record names the host and operator, or states exactly which decision remains blocked.
+2. The record separates the Streamlit demo from the FastAPI/SQLite deployment and accounts for one-host, one-replica topology.
+3. All four host gates and the security review have owners, evidence requirements, and honest pending status until checked on the target host. **Plans**: 1 plan — `01-01-PLAN.md` (blocked decision record and five pending evidence gates)
 
 ## Progress
 
-| Phase | Plans Complete | Status | Completed |
-| --- | --- | --- | --- |
-| 1. Host selection and evidence plan | 0/1 | Planned | - |
+| Phase                               | Plans Complete | Status  | Completed |
+| ----------------------------------- | -------------- | ------- | --------- |
+| 1. Host selection and evidence plan | 0/1            | Planned | -         |
