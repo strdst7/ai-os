@@ -29,8 +29,8 @@ site:
       children:
         - type: space
           key: space-1
-          title: Imported content
-          path: imported-content
+          title: Agentic AI In Production
+          path: ai-os-layered-monitoring-architecture
           default: true
           draft: true
           content:
