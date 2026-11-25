@@ -3,7 +3,7 @@ icon: award
 layout:
   width: wide
   title:
-    visible: true
+    visible: false
   description:
     visible: false
   tableOfContents:
@@ -24,7 +24,7 @@ layout:
 
 # MI4,Inc.
 
-**Certified under the Production-Grade Agentic System module in the Agentic AI In Production**
+&#x20;**Certified under the Production-Grade Agentic System module in the Agentic AI In Production**
 
 ### AI-OS
 
