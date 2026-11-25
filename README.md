@@ -391,21 +391,42 @@ Run the server
 ---  
 ## Reproducibility
 
-Example telemetry dataset:
+Example telemetry dataset (500 synthetic monitoring cycles across stable, warning, and critical phases):
 
-𝚍𝚊𝚝𝚊/𝚜𝚊𝚖𝚙𝚕𝚎_𝚝𝚎𝚕𝚎𝚖𝚎𝚝𝚛𝚢.𝚓𝚜𝚘𝚗
+`data/sample_telemetry.json`
 
-Experiment notebook:
+Regenerate it deterministically with:
 
-𝚗𝚘𝚝𝚎𝚋𝚘𝚘𝚔𝚜/𝚛𝚎𝚙𝚛𝚘𝚍𝚞𝚌𝚒𝚋𝚒𝚕𝚒𝚝𝚢_𝚊𝚗𝚊𝚕𝚢𝚜𝚒𝚜.𝚒𝚙𝚢𝚗𝚋
+```
+python tools/generate_sample_telemetry.py
+```
+
+Analysis notebook (executed, with stored outputs):
+
+`notebooks/reproducibility_analysis.ipynb`
+
+It validates the dataset against the `Telemetry` schema, computes ADSI per
+cycle, plots the tier transitions and sub-index decomposition, replays the
+rolling z-score detector, and measures guardrail trigger timing for the
+composite score versus each individual metric.
+
+Rebuild it after changing the dataset:
+
+```
+pip install nbformat nbclient ipykernel   # notebook toolchain (not run by CI)
+python tools/build_reproducibility_notebook.py
+```
+
+Note on the lead-time result: on this synthetic series the composite ADSI
+triggers *later* than the drift sub-index (cycle 364 vs 279). The composite
+trades detection latency for robustness and a single interpretable alert; it
+is not an earlier-warning mechanism. See the notebook's Findings section.
 
 Supplementary materials include:
 
 • benchmark charts
 
 • stability timeline visualizations
-
-• reproducibility notebooks
 
 ---
 # Enterprise Impact
