@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Certified under the Production-Grade Agentic System module in the Agentic AI In Production](README.md)
+* [MI4,Inc.](README.md)
 * [Contributing to AI-OS](CONTRIBUTING.md)
 * [Security Policy](SECURITY.md)
 * [.planning](.planning/README.md)

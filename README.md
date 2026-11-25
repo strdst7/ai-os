@@ -1,12 +1,36 @@
+---
+icon: award
+layout:
+  width: wide
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
+  anchors:
+    visible: true
+---
 
+# MI4,Inc.
 
-#### Certified under the Production-Grade Agentic System module in the Agentic AI In Production
+**Certified under the Production-Grade Agentic System module in the Agentic AI In Production**
 
-## AI-OS
+### AI-OS
 
 AI-OS is a stability-centric supervisory architecture for enterprise AI deployments.
 
-### Live demo
+#### Live demo
 
 Explore the [AI-OS dashboard](https://ai-osdev.streamlit.app/).
 
@@ -16,11 +40,11 @@ Explore the [AI-OS dashboard](https://ai-osdev.streamlit.app/).
 
 <p align="center">Research dashboard for exploring instability and operational drift in AI deployments. The Streamlit demo keeps history only in a browser session. The separate FastAPI/SQLite service is not production-approved; see [operational readiness](docs/operational-readiness-005c.md).</p>
 
-### Dashboard preview
+#### Dashboard preview
 
 <img src="https://github.com/user-attachments/assets/6a646c49-a9e8-4c46-aa20-9907c4dae284" alt="AI-OS dashboard interface" height="2520" width="4480">
 
-### User interface
+#### User interface
 
 AI-OS includes an interactive monitoring dashboard built with Streamlit.
 
@@ -40,7 +64,7 @@ streamlit run app.py
 
 ***
 
-### Core capabilities
+#### Core capabilities
 
 | Capability                      | Description                                 |
 | ------------------------------- | ------------------------------------------- |
@@ -52,7 +76,7 @@ streamlit run app.py
 
 ***
 
-### Research visual abstract
+#### Research visual abstract
 
 AI-OS monitors deployed AI systems and coordinates recovery when stability declines.
 
@@ -69,7 +93,7 @@ AI-OS shifts monitoring from metric tracking to deployment-stability supervision
 
 ***
 
-### Overview
+#### Overview
 
 AI-OS monitors deployed AI systems through a stability-centric supervisory architecture.
 
@@ -77,7 +101,7 @@ The AI Deployment Stability Index (ADSI) combines alignment, infrastructure, and
 
 ***
 
-### Contents
+#### Contents
 
 * [Why AI-OS exists](./#why-ai-os-exists)
 * [Research contributions](./#research-contributions)
@@ -97,7 +121,7 @@ The AI Deployment Stability Index (ADSI) combines alignment, infrastructure, and
 
 ***
 
-### Why AI-OS exists
+#### Why AI-OS exists
 
 Enterprise AI deployments can fail gradually and silently.
 
@@ -112,17 +136,17 @@ Many monitoring tools focus on infrastructure metrics or model performance alone
 
 The system evaluates deployment health using a unified stability signal:
 
-### AI Deployment Stability Index (ADSI)
+#### AI Deployment Stability Index (ADSI)
 
 ADSI provides an interpretable signal across alignment, infrastructure, and drift dimensions.
 
 ***
 
-### Research contributions
+#### Research contributions
 
 AI-OS applies stability-centric operations to AI deployments.
 
-#### Unified stability metric
+**Unified stability metric**
 
 The AI Deployment Stability Index (ADSI) aggregates health indicators into one interpretable score.
 
@@ -138,7 +162,7 @@ The score uses three health indexes:
 
 ***
 
-#### Agentic monitoring architecture
+**Agentic monitoring architecture**
 
 AI-OS integrates monitoring agents capable of evaluating deployment health and triggering guardrail responses.
 
@@ -151,7 +175,7 @@ Capabilities include:
 
 ***
 
-#### Deployment-level observability
+**Deployment-level observability**
 
 AI-OS monitors complete AI deployment pipelines, including:
 
@@ -164,13 +188,13 @@ This provides deployment-level monitoring.
 
 ***
 
-### System architecture
+#### System architecture
 
 <div align="center"><img src=".gitbook/assets/architecture.png" alt="AI-OS system architecture" width="900"></div>
 
 AI-OS integrates monitoring, evaluation, and guardrail mechanisms into a unified architecture.
 
-#### Architecture components
+**Architecture components**
 
 The AI-OS architecture consists of several modular components responsible for monitoring deployment stability.
 
@@ -188,11 +212,11 @@ These components provide continuous monitoring, anomaly detection, and recovery 
 
 ***
 
-### Stability model
+#### Stability model
 
 AI-OS evaluates deployment health across three stability dimensions.
 
-#### Alignment Health Index
+**Alignment Health Index**
 
 $$
 \mathrm{AHI} = 1 - K_e
@@ -200,7 +224,7 @@ $$
 
 Where $K\_e$ is the KPI alignment error.
 
-#### Infrastructure Health Index
+**Infrastructure Health Index**
 
 $$
 \mathrm{IHI} = R_s
@@ -208,7 +232,7 @@ $$
 
 Where $R\_s$ is the retrieval-quality score.
 
-#### Drift Health Index
+**Drift Health Index**
 
 $$
 \mathrm{DHI} = 1 - \frac{L_d + E_s}{2}
@@ -216,7 +240,7 @@ $$
 
 Where $L\_d$ is latency deviation and $E\_s$ is embedding drift.
 
-#### AI Deployment Stability Index
+**AI Deployment Stability Index**
 
 $$
 \mathrm{ADSI} = \frac{\mathrm{AHI} + \mathrm{IHI} + \mathrm{DHI}}{3}
@@ -226,7 +250,7 @@ ADSI provides one interpretable stability signal for deployment health.
 
 ***
 
-### AI-OS monitoring pipeline
+#### AI-OS monitoring pipeline
 
 ```mermaid
 flowchart LR
@@ -254,13 +278,13 @@ This loop detects instability early and coordinates automated recovery.
 
 ***
 
-### Deployment failure case study
+#### Deployment failure case study
 
 Enterprise AI deployments degrade gradually rather than failing instantly.
 
 AI-OS detects early instability signals through ADSI monitoring.
 
-#### Failure progression
+**Failure progression**
 
 1. The deployment is stable.
 2. The system detects embedding drift.
@@ -270,7 +294,7 @@ AI-OS detects early instability signals through ADSI monitoring.
 
 ***
 
-#### Example telemetry timeline
+**Example telemetry timeline**
 
 | Cycle | Event                      | ADSI |
 | ----- | -------------------------- | ---- |
@@ -283,7 +307,7 @@ AI-OS detects early instability signals through ADSI monitoring.
 
 ***
 
-### Benchmark comparison
+#### Benchmark comparison
 
 | **System**             | **Monitoring Scope**         | **Drift Detection** | **Stability Metric** | **Infrastructure Monitoring** |
 | ---------------------- | ---------------------------- | ------------------- | -------------------- | ----------------------------- |
@@ -296,7 +320,7 @@ AI-OS provides deployment-level stability monitoring.
 
 ***
 
-### Installation
+#### Installation
 
 To set up the service:
 
@@ -325,7 +349,7 @@ To set up the service:
 
 ***
 
-### Prerequisites
+#### Prerequisites
 
 * Python 3.10 or later
 * FastAPI and Uvicorn
@@ -334,7 +358,7 @@ To set up the service:
 
 ***
 
-### API endpoints
+#### API endpoints
 
 | Endpoint          | Description                          |
 | ----------------- | ------------------------------------ |
@@ -344,7 +368,7 @@ To set up the service:
 
 ***
 
-### Reproducibility
+#### Reproducibility
 
 The example telemetry dataset contains 500 synthetic monitoring cycles across stable, warning, and critical phases:
 
@@ -375,7 +399,7 @@ Supplementary materials include benchmark charts and stability-timeline visualiz
 
 ***
 
-### Enterprise impact
+#### Enterprise impact
 
 AI-OS supports production AI systems in high-reliability environments.
 
@@ -395,7 +419,7 @@ AI-OS can operate alongside existing infrastructure-monitoring platforms.
 
 ***
 
-### System performance benchmarks
+#### System performance benchmarks
 
 The stability evaluation engine is designed for real-time deployment monitoring with minimal computational overhead.
 
@@ -410,7 +434,7 @@ This enables AI-OS to function as a lightweight supervisory layer across multipl
 
 ***
 
-### Future work
+#### Future work
 
 Future development focuses on:
 
@@ -421,7 +445,7 @@ Future development focuses on:
 
 ***
 
-### Key takeaways
+#### Key takeaways
 
 * AI-OS provides a stability-centric supervisory architecture for deployed AI systems.
 * ADSI combines alignment, infrastructure, and drift signals.
@@ -430,13 +454,13 @@ Future development focuses on:
 
 ***
 
-### License
+#### License
 
 AI-OS is available under the MIT License.
 
 ***
 
-### Citation
+#### Citation
 
 If you use AI-OS in research:
 
@@ -444,6 +468,6 @@ Nur Amirah Mohd Kamil. _AI-OS: Stability-Centric Supervisory Architecture for En
 
 ***
 
-### Author
+#### Author
 
 Nur Amirah Mohd Kamil
