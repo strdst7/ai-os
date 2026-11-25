@@ -1,0 +1,18 @@
+{
+  "contract": "1.0.0",
+  "flavor": "core",
+  "milestone": null,
+  "phases": [
+    {
+      "number": "1",
+      "name": "Host selection and evidence plan",
+      "status": "planned"
+    }
+  ],
+  "next": {
+    "command": "/gsd-execute-phase 1",
+    "label": "Execute Phase 1",
+    "reason": "Phase 1 of 1 · one plan reviewed · ready to execute"
+  },
+  "updated_at": "2026-11-25T14:41:20.539Z"
+}
