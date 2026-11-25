@@ -6,6 +6,7 @@ site:
       key: section-ai-os
       title: AI-OS
       path: ai-os
+      description: ""
       default: true
       children:
         - type: space
