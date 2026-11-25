@@ -38,6 +38,5 @@ site:
           key: space-2
           title: AI-OS Framework
           path: aios
-          draft: true
           content:
             directory: ./imported-content/framework
