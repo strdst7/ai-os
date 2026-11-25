@@ -34,3 +34,10 @@ site:
           draft: true
           content:
             directory: ./imported-content
+        - type: space
+          key: space-2
+          title: Framework
+          path: framework
+          draft: true
+          content:
+            directory: ./imported-content/framework
