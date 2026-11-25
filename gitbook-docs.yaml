@@ -32,7 +32,6 @@ site:
           title: Agentic AI In Production
           path: ai-os-layered-monitoring-architecture
           default: true
-          draft: true
           content:
             directory: ./imported-content
         - type: space
