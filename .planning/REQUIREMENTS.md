@@ -7,13 +7,13 @@
 
 ### Host decision
 
-- [ ] **HOST-01**: An operator can select a named stateful API host, or record a blocked decision when none meets the one-host, one-replica SQLite constraint.
-- [ ] **HOST-02**: The decision records the operator, API runtime, persistent mount path, and why Streamlit Community Cloud is not the API host.
+- [x] **HOST-01**: An operator can select a named stateful API host, or record a blocked decision when none meets the one-host, one-replica SQLite constraint.
+- [x] **HOST-02**: The decision records the operator, API runtime, persistent mount path, and why Streamlit Community Cloud is not the API host.
 
 ### Acceptance evidence
 
-- [ ] **GATE-01**: The decision records the host-volume, backup schedule, restore drill, and disk-monitoring checks with an owner and evidence source for each.
-- [ ] **GATE-02**: The decision records security review as a separate prerequisite to public exposure and distinguishes proposed checks from completed host evidence.
+- [x] **GATE-01**: The decision records the host-volume, backup schedule, restore drill, and disk-monitoring checks with an owner and evidence source for each.
+- [x] **GATE-02**: The decision records security review as a separate prerequisite to public exposure and distinguishes proposed checks from completed host evidence.
 
 ## Out of Scope
 
@@ -27,10 +27,10 @@
 
 | Requirement | Phase | Status |
 | --- | --- | --- |
-| HOST-01 | Phase 1 | Pending |
-| HOST-02 | Phase 1 | Pending |
-| GATE-01 | Phase 1 | Pending |
-| GATE-02 | Phase 1 | Pending |
+| HOST-01 | Phase 1 | Complete |
+| HOST-02 | Phase 1 | Complete |
+| GATE-01 | Phase 1 | Complete |
+| GATE-02 | Phase 1 | Complete |
 
 **Coverage:** 4 v1 requirements; 4 mapped; 0 unmapped.
 

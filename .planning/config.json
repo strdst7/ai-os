@@ -5,7 +5,11 @@
   "model_overrides": {
     "gsd-pattern-mapper": "aimiiikd/gpt-6-sol",
     "gsd-planner": "aimiiikd/gpt-6-sol",
-    "gsd-plan-checker": "aimiiikd/gpt-6-sol"
+    "gsd-plan-checker": "aimiiikd/gpt-6-sol",
+    "gsd-verifier": "aimiiikd/gpt-6-sol",
+    "gsd-nyquist-auditor": "aimiiikd/gpt-6-sol",
+    "gsd-security-auditor": "aimiiikd/gpt-6-sol",
+    "gsd-code-reviewer": "aimiiikd/gpt-6-sol"
   },
   "workflow": {
     "research": false,

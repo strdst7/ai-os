@@ -6,13 +6,13 @@
     {
       "number": "1",
       "name": "Host selection and evidence plan",
-      "status": "planned"
+      "status": "complete"
     }
   ],
   "next": {
-    "command": "/gsd-execute-phase 1",
-    "label": "Execute Phase 1",
-    "reason": "Phase 1 of 1 · one plan reviewed · ready to execute"
+    "command": "/gsd-new-milestone",
+    "label": "Start a new milestone",
+    "reason": "All phases complete — start a new milestone"
   },
-  "updated_at": "2026-11-25T14:41:20.539Z"
+  "updated_at": "2026-11-25T15:06:51.762Z"
 }

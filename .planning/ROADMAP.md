@@ -6,7 +6,7 @@ Decide whether an eligible stateful API host exists, then define the host-specif
 
 ## Phases
 
-- [ ] **Phase 1: Host selection and evidence plan** - Record the host decision and the five approval prerequisites.
+- [x] **Phase 1: Host selection and evidence plan** - Record the host decision and the five approval prerequisites. (completed 2026-11-25)
 
 ## Phase Details
 
@@ -18,10 +18,11 @@ Decide whether an eligible stateful API host exists, then define the host-specif
   1. The record names the host and operator, or states exactly which decision remains blocked.
   2. The record separates the Streamlit demo from the FastAPI/SQLite deployment and accounts for one-host, one-replica topology.
   3. All four host gates and the security review have owners, evidence requirements, and honest pending status until checked on the target host.
-**Plans**: 1 plan — `01-01-PLAN.md` (blocked decision record and five pending evidence gates)
+**Plans**: 1/1 plans complete — `01-01-PLAN.md` (blocked decision record and five pending evidence gates)
+- [x] 01-01-PLAN.md
 
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
 | --- | --- | --- | --- |
-| 1. Host selection and evidence plan | 0/1 | Planned | - |
+| 1. Host selection and evidence plan | 1/1 | Complete    | 2026-11-25 |

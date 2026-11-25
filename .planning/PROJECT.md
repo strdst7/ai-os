@@ -13,11 +13,12 @@ Keep the API private until its actual host can satisfy the documented production
 ### Validated
 
 - The disposable CI container lifecycle and full-volume checks passed. These do not establish production readiness.
+- Phase 1 recorded the blocked host decision and five pending evidence gates.
 
 ### Active
 
-- [ ] Choose and document a host and operator for the one-host, one-replica SQLite service.
-- [ ] Define host-specific evidence for persistent volume, scheduled backup, restore drill, disk alerting, and security review.
+- [ ] Name a candidate and operator for the one-host, one-replica SQLite service.
+- [ ] Assign gate owners and gather target-host evidence for volume, backup, restore, disk alerts, and security review.
 
 ### Out of Scope
 
@@ -41,6 +42,7 @@ The Streamlit Community Cloud entrypoint is `app.py` and does not host the Docke
 | --- | --- | --- |
 | Decide host before implementation | The current Streamlit site cannot provide the API's stateful storage | Pending |
 | Keep the API private | Host checks and security review remain open | Active |
+| Record blocked decision | No API host candidate or operator was named | Complete — Phase 1 |
 
 ---
-*Last updated: 2026-11-25 after Phase 1 planning*
+*Last updated: 2026-11-25 after Phase 1 execution*
