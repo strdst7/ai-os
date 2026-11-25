@@ -11,8 +11,8 @@ site:
       children:
         - type: space
           key: space-repository
-          title: Repository
-          path: repository
+          title: "𝗡𝘂𝗿 𝗔𝗺𝗶𝗿𝗮𝗵 𝗠𝗼𝗵𝗱 𝗞𝗮𝗺𝗶𝗹 𝗜𝗻𝗱𝗲𝗽𝗲𝗻𝗱𝗲𝗻𝘁 𝗔𝗜 𝗦𝘆𝘀𝘁𝗲𝗺𝘀 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁 𝗘𝗻𝘁𝗲𝗿𝗽𝗿𝗶𝘀𝗲 𝗔𝗜 "
+          path: ai-os
           default: true
           content:
             directory: ./
