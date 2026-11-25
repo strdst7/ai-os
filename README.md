@@ -1,7 +1,7 @@
 
 ---
 
-# Certified under the Production-Grade Agentic System module in the Agentic AI In Production
+#### Certified under the Production-Grade Agentic System module in the Agentic AI In Production
 
 ## AI-OS
 
