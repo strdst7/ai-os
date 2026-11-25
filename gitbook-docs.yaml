@@ -1,0 +1,23 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+site:
+  title: AI-OS
+  structure:
+    - type: section
+      key: section-ai-os
+      title: AI-OS
+      path: ai-os
+      default: true
+      children:
+        - type: space
+          key: space-repository
+          title: Repository
+          path: repository
+          default: true
+          content:
+            directory: ./
+        - type: space
+          key: space-documentation
+          title: Documentation
+          path: documentation
+          content:
+            directory: ./docs
